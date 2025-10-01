@@ -1,0 +1,107 @@
+/* ===== BASE STYLES AND VARIABLES ===== */
+:root {
+    --primary-green: #60FFA0;
+    --light-gray: #F0F0F0;
+    --dark-gray: #2E3230;
+    --medium-gray: #3A3E3C;
+    --font-family: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.cta-button {
+    background-color: var(--primary-green);
+    color: var(--dark-gray);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #4DE68A;
+    transform: translateY(-2px);
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: var(--light-gray);
+}
+
+/* ===== ANIMATION UTILITIES ===== */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* ===== MOBILE LAYOUT UTILITIES ===== */
+.mobile-layout {
+    /* Mobile-specific global styles can be added here */
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== FOCUS STYLES ===== */
+*:focus {
+    outline: 2px solid var(--primary-green);
+    outline-offset: 2px;
+}
+
+/* ===== SCROLLBAR STYLES ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--medium-gray);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-green);
+}
+
+/* ===== SELECTION STYLES ===== */
+::selection {
+    background-color: var(--primary-green);
+    color: var(--dark-gray);
+}
+
+::-moz-selection {
+    background-color: var(--primary-green);
+    color: var(--dark-gray);
+}

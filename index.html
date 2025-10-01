@@ -1,11 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Way of Visionary - Virtuální svět pro vaše podnikání</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Component CSS Modules -->
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/hero.css">
+    <link rel="stylesheet" href="css/components/services.css">
+    <link rel="stylesheet" href="css/components/statistics.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+
+    <!-- Mobile Styles -->
+    <link rel="stylesheet" href="mobile.css">
+
+    <!-- Meta tags for SEO -->
+    <meta name="description"
+        content="Way of Visionary - Virtuální svět pro vaše podnikání. Street View, webové stránky, Google Ads a další služby pro moderní firmy.">
+    <meta name="keywords" content="virtuální prohlídky, street view, webové stránky, google ads, digitální marketing">
+    <meta name="author" content="Way of Visionary">
+
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Way of Visionary - Virtuální svět pro vaše podnikání">
+    <meta property="og:description"
+        content="Moderní digitální služby pro vaše podnikání. Street View, webové stránky, Google Ads.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wayofvisionary.com">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body>
-    <h1>Hello World</h1>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__content">
+            <div class="header__logo">
+                <img src="assets/img/logo.svg" alt="Way of Visionary Logo">
+            </div>
+            <nav class="header__nav">
+                <ul class="header__nav-links">
+                    <li><a href="#home" data-translate="nav.intro">Úvod</a></li>
+                    <li class="header__dropdown">
+                        <a href="#services" data-translate="nav.services">Služby <i class="fas fa-chevron-down"></i></a>
+                        <div class="header__dropdown-content">
+                            <a href="#street-view" data-translate="nav.street-view">Street View</a>
+                            <a href="#web-design" data-translate="nav.web-design">Webové stránky a design</a>
+                            <a href="#google-ads" data-translate="nav.google-ads">Google Ads</a>
+                        </div>
+                    </li>
+                    <li><a href="#contact" data-translate="nav.contact">Kontakt</a></li>
+                </ul>
+                <div class="header__language-selector">
+                    <span id="current-language">CZ</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <button class="header__cta-button" data-translate="header.cta">Získat konzultaci</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero__content">
+            <div class="hero__tag" data-translate="hero.tag">Way of Visionary</div>
+            <h1 class="hero__title" data-translate="hero.title">VIRTUÁLNÍ SVĚT PRO VAŠE PODNIKÁNÍ<br>BUDOUCNOST JE TADY</h1>
+            <div class="hero__scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services__content">
+            <h2 class="services__title" data-translate="services.title">SLUŽBY</h2>
+            <div class="services__grid">
+                <div class="services__card" data-service="street-view">
+                    <div class="services__card-content">
+                      
+                        <h3 class="services__card-title" data-translate="services.street-view.title">Street View</h3>
+                    </div>
+                </div>
+                <div class="services__card" data-service="web-design">
+                    <div class="services__card-content">
+        
+                        <h3 class="services__card-title" data-translate="services.web-design.title">Webové stránky a design</h3>
+                    </div>
+                </div>
+                <div class="services__card" data-service="google-ads">
+                    <div class="services__card-content">
+              
+                        <h3 class="services__card-title" data-translate="services.google-ads.title">Google Ads</h3>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="statistics">
+        <div class="statistics__content">
+            <div class="statistics__grid">
+            <div class="statistics__item" data-stat="google-maps-users">
+                <div class="statistics__circle">
+                    <span class="statistics__value">70%</span>
+                </div>
+                <p class="statistics__description" data-translate="stats.google-maps.description">UŽIVATELŮ GOOGLE MAPS
+                    využívá službu k vyhledávání firem a služeb</p>
+            </div>
+            <div class="statistics__item" data-stat="360-content-demand">
+                <div class="statistics__circle">
+                    <span class="statistics__value">55%</span>
+                </div>
+                <p class="statistics__description" data-translate="stats.360-content.description">ZÁKAZNÍKŮ chce vidět
+                    více 360° obsahu, který jim pomáhá lépe pochopit firmu a její nabídky</p>
+            </div>
+            <div class="statistics__item" data-stat="double-interest">
+                <div class="statistics__circle">
+                    <span class="statistics__value">x2</span>
+                </div>
+                <p class="statistics__description" data-translate="stats.double-interest.description">DVOJNÁSOBNÝ ZÁJEM
+                    získávají firmy, které mají virtuální prohlídku a kvalitní fotografie</p>
+            </div>
+            <div class="statistics__item" data-stat="more-trust">
+                <div class="statistics__circle">
+                    <span class="statistics__value">+100%</span>
+                </div>
+                <p class="statistics__description" data-translate="stats.more-trust.description">VÍCE DÚVĚRY získávají
+                    společnosti s virtuálnímí prohlídkami oproti těm, které je nemají</p>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer__content">
+            <div class="footer__section">
+                <button class="footer__cta-button" data-translate="footer.cta">Získat konzultaci</button>
+                <div class="footer__logo" data-translate="footer.logo">WAY OF VISIONARY</div>
+            </div>
+            <div class="footer__section">
+                <h3 data-translate="footer.services.title">SLUŽBY</h3>
+                <ul class="footer__links">
+                    <li><a href="#street-view" data-translate="footer.services.street-view">Street view</a></li>
+                    <li><a href="#web-design" data-translate="footer.services.web-design">Webové stránky a design</a>
+                    </li>
+                    <li><a href="#seo" data-translate="footer.services.seo">SEO</a></li>
+                </ul>
+            </div>
+            <div class="footer__section">
+                <h3 data-translate="footer.contact.title">KONTAKT</h3>
+                <div class="footer__contact-info">
+                    <p class="footer__phone">+420 773 729 666</p>
+                    <p class="footer__email">wayofvisionary@gmail.com</p>
+                    <div class="footer__social-icons">
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__bottom-content">
+                <p data-translate="footer.privacy">Zásady ochrany osobních údajů</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Translation Scripts -->
+    <script src="js/translations/cz.js"></script>
+    <script src="js/translations/en.js"></script>
+    <script src="js/language-manager.js"></script>
+
+    <!-- Component Logic Scripts -->
+    <script src="js/components/header.js"></script>
+    <script src="js/components/hero.js"></script>
+    <script src="js/components/services.js"></script>
+    <script src="js/components/statistics.js"></script>
+    <script src="js/components/footer.js"></script>
+
+    <!-- Main App Script -->
+    <script src="app.js"></script>
+
+    <!-- Analytics (Google Analytics example) -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
+
+    <!-- Service Worker for PWA (optional) -->
+    <!-- 
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+    -->
 </body>
+
 </html>
