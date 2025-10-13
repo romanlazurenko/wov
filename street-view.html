@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street View - Way of Visionary</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Component CSS Modules -->
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+    <link rel="stylesheet" href="css/components/street-view.css">
+
+    <!-- Mobile Styles -->
+    <link rel="stylesheet" href="mobile.css">
+
+    <!-- Meta tags for SEO -->
+    <meta name="description"
+        content="Street View služby - Virtuální prohlídky pro vaše podnikání. Zvyšte viditelnost a důvěryhodnost vaší firmy.">
+    <meta name="keywords" content="street view, virtuální prohlídky, google maps, 360° fotografie">
+    <meta name="author" content="Way of Visionary">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__content">
+            <div class="header__logo">
+                <a href="/"><img src="assets/img/logo.svg" alt="Way of Visionary Logo"></a>
+            </div>
+            <nav class="header__nav">
+                <ul class="header__nav-links">
+                    <li><a href="#home" data-translate="nav.intro">Úvod</a></li>
+                    <li class="header__dropdown">
+                    <div class="header__dropdown-trigger">
+                        <a href="#services" data-translate="nav.services">Služby </a>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                        <div class="header__dropdown-content">
+                            <a href="street-view.html" data-translate="nav.street-view">Street View</a>
+                            <a href="web-design.html" data-translate="nav.web-design">Webové stránky a design</a>
+                            <a href="google-ads.html" data-translate="nav.google-ads">Google Ads</a>
+                        </div>
+                    </li>
+                    <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
+                </ul>
+
+            </nav>
+            <div>
+                <div class="header__language-selector">
+                    <div class="header__language-selector-trigger">
+                        <span id="current-language">CZ</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="header__language-dropdown">
+                        <a href="#" data-lang="cz">CZ</a>
+                        <a href="#" data-lang="en">EN</a>
+                    </div>
+                </div>
+                <button class="header__cta-button" data-translate="header.cta">Získat konzultaci</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Street View Section -->
+    <section class="street-view">
+        <div class="street-view__content">
+            <h1 class="street-view__title">STREET VIEW</h1>
+            
+            <!-- Process Steps -->
+            <div class="street-view__process">
+                <!-- Step 01 -->
+                <div class="street-view__step street-view__step--01">
+                    <div class="street-view__step-number">01</div>
+                    <div class="street-view__step-content">
+                        <h3>Začátek vyhledávání</h3>
+                        <p>uživatel otevře Google Maps a zadá vyhledávací dotaz</p>
+                    </div>
+                </div>
+
+                <!-- Step 02 -->
+                <div class="street-view__step street-view__step--02">
+                    <div class="street-view__step-number">02</div>
+                    <div class="street-view__step-content">
+                        <h3>Výsledky vyhledávání</h3>
+                        <p>Google zobrazí seznam firem, které odpovídají dotazu</p>
+                    </div>
+                </div>
+
+                <!-- Central Phone Placeholder -->
+                <div class="street-view__phone">
+                    <video class="street-view__phone-video" autoplay muted loop playsinline>
+                        <source src="assets/img/video.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <!-- Step 03 -->
+                <div class="street-view__step street-view__step--03">
+                    <div class="street-view__step-number">03</div>
+                    <div class="street-view__step-content">
+                        <h3>Prohlížení profilů firem</h3>
+                        <p>uživatel se zaměřuje na:</p>
+                    </div>
+                </div>
+
+                <!-- Step 04 -->
+                <div class="street-view__step street-view__step--04">
+                    <div class="street-view__step-number">04</div>
+                    <div class="street-view__step-content">
+                        <h3>Budování důvěry</h3>
+                        <p>čím více informací je v profilu uvedeno, tím vyšší je důvěryhodnost</p>
+                    </div>
+                </div>
+
+                <!-- Step 05 -->
+                <div class="street-view__step street-view__step--05">
+                    <div class="street-view__step-number">05</div>
+                    <div class="street-view__step-content">
+                        <h3>Výběr firmy</h3>
+                        <p>uživatel si nakonec vybere tu firmu, která:</p>
+                    </div>
+                </div>
+
+                <div class="street-view__step street-view__step--bottom-left">
+                    <div class="street-view__step-content-text">
+                        <ul>
+                            <li>hodnocení a recenze;</li>
+                            <li>fotografie interiéru a exteriéru, umístění na mapě;</li>
+                            <li>virtuální prohlídku - možnost „vstoupit dovnitř" a předem si prohlédnout atmosféru;</li>
+                            <li>otevírací dobu a kontaktní údaje;</li>
+                            <li>speciální nabídky nebo akce.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="street-view__step street-view__step--bottom-right">
+                    <div class="street-view__step-content-text">
+                        <ul>
+                            <li>má nejlepší recenze;</li>
+                            <li>je vizuálně dobře prezentovaná (fotografie/prohlídka);</li>
+                            <li>vzbuzuje důvěru.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects">
+        <div class="projects__content">
+            <div class="projects__gallery">
+                <div class="projects__main-image" id="main-image-container">
+                    <img id="main-image" src="" alt="Main project image">
+                    <div class="projects__loading" id="loading-indicator">
+                        <div class="loading-spinner"></div>
+                        <p>Loading images...</p>
+                    </div>
+                </div>
+                <div class="projects__controls" id="projects-controls">
+                    <button class="projects__button" data-translate="projects.button">Naše projekty</button>
+                    <div class="projects__nav">
+                        <button class="projects__nav-arrow"><i class="fas fa-chevron-left"></i></button>
+                        <span class="projects__title">Název prohlídky</span>
+                        <button class="projects__nav-arrow"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="projects__thumbnail projects__thumbnail--large" id="thumbnail-large">
+                    <!-- Large thumbnail will be dynamically generated -->
+                </div>
+                <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-1">
+                    <!-- Small thumbnail 1 will be dynamically generated -->
+                </div>
+                <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-2">
+                    <!-- Small thumbnail 2 will be dynamically generated -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Preview Modal -->
+    <div class="image-modal" id="image-modal">
+        <div class="image-modal__overlay"></div>
+        <div class="image-modal__content">
+            <button class="image-modal__close" id="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="image-modal__navigation">
+                <button class="image-modal__nav image-modal__nav--prev" id="modal-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="image-modal__nav image-modal__nav--next" id="modal-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="image-modal__image-container">
+                <img id="modal-image" src="" alt="">
+                <div class="image-modal__loading hidden" id="modal-loading">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+            <div class="image-modal__info">
+                <h3 id="modal-title"></h3>
+                <p id="modal-counter"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer footer--street-view" id="contact">
+        <div class="footer__content">
+            <div class="footer__grid">
+                <div class="footer__section">
+                    <button class="footer__cta-button" data-translate="footer.cta">Získat konzultaci</button>
+                    <div class="footer__logo" data-translate="footer.logo">WAY OF VISIONARY</div>
+                </div>
+                <div class="footer__section">
+                    <h3 data-translate="footer.services.title">SLUŽBY</h3>
+                    <ul class="footer__links">
+                        <li><a href="street-view.html" data-translate="footer.services.street-view">Street view</a></li>
+                        <li><a href="#web-design" data-translate="footer.services.web-design">Webové stránky a design</a></li>
+                        <li><a href="#seo" data-translate="footer.services.seo">SEO</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3 data-translate="footer.contact.title">KONTAKT</h3>
+                    <div class="footer__contact-info">
+                        <p class="footer__phone">+420 773 729 666</p>
+                        <p class="footer__email">wayofvisionary@gmail.com</p>
+                        <div class="footer__social-icons">
+                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__bottom-content">
+                <p data-translate="footer.privacy">Zásady ochrany osobních údajů</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Translation Scripts -->
+    <script src="js/translations/cz.js"></script>
+    <script src="js/translations/en.js"></script>
+    <script src="js/language-manager.js"></script>
+
+    <!-- Component Logic Scripts -->
+    <script src="js/components/header.js"></script>
+    <script src="js/components/footer.js"></script>
+    <script src="js/components/projects-slider.js"></script>
+    <script src="js/components/street-view.js"></script>
+
+    <!-- Main App Script -->
+    <script src="app.js"></script>
+</body>
+
+</html>

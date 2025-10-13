@@ -1,14 +1,15 @@
 /* Statistics Component Styles */
 .statistics {
-    padding: 10px;
     padding-top: 0;
 }
 
 .statistics__content {
-    background-color: var(--dark-gray);
-    padding: 6rem 2rem;
+    position: absolute;
+    bottom: -286px;
+    height: 368px;
+    /* padding: 6rem 2rem; */
     border-radius: 10px;
-    width: 100%;
+    width: 98%;
     box-sizing: border-box;
 }
 
@@ -21,37 +22,79 @@
 }
 
 .statistics__item {
-    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.statistics__item::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 0;
+    height: 4px;
+    border-radius: 10px;
+    background: var(--dark-gray);
+    transition: width 0.4s cubic-bezier(0.68, -0.12, 0.25, 1.55);
+}
+
+.statistics__item:hover::after {
+    width: 90%;
+}
+
+.statistics__info {
+    margin-top: 1rem;
+}
+
+.statistics__info-title {
+    font-size: 20px;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 95%;
+    height: 38px;
+}
+
+.statistics__info-description {
+    margin-top: 15px;
+    max-width: 234px;
+    font-size: 22px;
+    line-height: 100%;
 }
 
 .statistics__circle {
     width: 120px;
     height: 120px;
-    background-color: var(--medium-gray);
+    background: linear-gradient(135deg, #2E3230 0%, #242725 20%, #171918 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 2.5rem;
+    font-size: 22px;
     font-weight: 900;
-    color: var(--light-gray);
+    color: var(--primary-green);
+    font-style: italic;
     transition: all 0.3s ease;
+    border: 10px solid var(--light-gray);
+    border-radius: 50%;
 }
 
 .statistics__value {
-    color: var(--light-gray);
+    color: var(--primary-green);
+    font-size: 22px;
+    font-weight: 900;
+    font-style: italic;
 }
 
 .statistics__description {
-    color: var(--light-gray);
+    color: var(--dark-gray);
     font-size: 0.95rem;
     line-height: 1.5;
 }
 
 .statistics__item:hover .statistics__circle {
     transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(96, 255, 160, 0.3);
+    /* box-shadow: 0 0 30px rgba(96, 255, 160, 0.3); */
 }
 
 /* Mobile Statistics Styles */

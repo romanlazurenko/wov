@@ -111,13 +111,31 @@ class Footer {
         modal.innerHTML = `
             <div class="footer__modal-content">
                 <span class="footer__modal-close">&times;</span>
-                <h3 data-translate="contact.form.title">Získat konzultaci</h3>
+                <h3 class="footer__modal-title" data-translate="contact.form.title">Získat konzultaci</h3>
                 <form class="footer__contact-form">
-                    <input type="text" name="name" data-translate="contact.form.name" placeholder="Jméno" required>
-                    <input type="email" name="email" data-translate="contact.form.email" placeholder="Email" required>
-                    <input type="tel" name="phone" data-translate="contact.form.phone" placeholder="Telefon">
-                    <textarea name="message" data-translate="contact.form.message" placeholder="Zpráva" rows="4"></textarea>
-                    <button type="submit" class="cta-button" data-translate="contact.form.submit">Odeslat</button>
+                    <input class="footer__contact-form-input" type="text" name="name" data-translate="contact.form.name" placeholder="Vaše jméno a příjmení" required>
+                    <input class="footer__contact-form-input" type="email" name="email" data-translate="contact.form.email" placeholder="E-mail" required>
+                    <input class="footer__contact-form-input" type="text" name="company" data-translate="contact.form.company" placeholder="Společnost">
+                    <div class="footer__contact-form-select-wrapper">
+                        <div class="footer__custom-select">
+                            <div class="footer__custom-select-trigger">
+                                <span class="footer__custom-select-value">O jakou službu máte zájem?</span>
+                                <span class="footer__custom-select-arrow">▼</span>
+                            </div>
+                            <div class="footer__custom-select-options">
+                                <div class="footer__custom-select-option" data-value="google-ads">Google Ads</div>
+                                <div class="footer__custom-select-option" data-value="web-design">Webové stránky a design</div>
+                                <div class="footer__custom-select-option" data-value="street-view">Street View</div>
+                            </div>
+                            <input type="hidden" name="service" class="footer__custom-select-input" required>
+                        </div>
+                    </div>
+                    <textarea class="footer__contact-form-textarea" name="message" data-translate="contact.form.message" placeholder="Doplňující informace" rows="4"></textarea>
+                    <div class="footer__contact-form-checkbox">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent">Souhlasím se zpracováním mých osobních údajů v souladu se Zásadami ochrany osobních údajů.</label>
+                    </div>
+                    <button type="submit" class="footer__contact-form-submit" data-translate="contact.form.submit">Odeslat</button>
                 </form>
             </div>
         `;
@@ -136,6 +154,9 @@ class Footer {
             }
         });
 
+        // Custom dropdown functionality
+        this.setupCustomDropdown(modal);
+
         // Form submission
         const form = modal.querySelector('.footer__contact-form');
         form.addEventListener('submit', (e) => {
@@ -145,6 +166,56 @@ class Footer {
 
         // Emit custom event
         this.emitEvent('contactFormOpened');
+    }
+
+    setupCustomDropdown(modal) {
+        const customSelect = modal.querySelector('.footer__custom-select');
+        const trigger = customSelect.querySelector('.footer__custom-select-trigger');
+        const options = customSelect.querySelector('.footer__custom-select-options');
+        const optionItems = customSelect.querySelectorAll('.footer__custom-select-option');
+        const valueSpan = customSelect.querySelector('.footer__custom-select-value');
+        const hiddenInput = customSelect.querySelector('.footer__custom-select-input');
+
+        // Toggle dropdown
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelect.classList.toggle('footer__custom-select--open');
+        });
+
+        // Handle option selection
+        optionItems.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const value = option.dataset.value;
+                const text = option.textContent;
+                
+                valueSpan.textContent = text;
+                hiddenInput.value = value;
+                
+                // Remove selected class from all options
+                optionItems.forEach(opt => opt.classList.remove('footer__custom-select-option--selected'));
+                // Add selected class to clicked option
+                option.classList.add('footer__custom-select-option--selected');
+                
+                // Close dropdown
+                customSelect.classList.remove('footer__custom-select--open');
+            });
+
+            // Hover effect
+            option.addEventListener('mouseenter', () => {
+                optionItems.forEach(opt => opt.classList.remove('footer__custom-select-option--hover'));
+                option.classList.add('footer__custom-select-option--hover');
+            });
+
+            option.addEventListener('mouseleave', () => {
+                option.classList.remove('footer__custom-select-option--hover');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            customSelect.classList.remove('footer__custom-select--open');
+        });
     }
 
     closeModal(modal) {

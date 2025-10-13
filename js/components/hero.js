@@ -10,8 +10,15 @@ class Hero {
         this.hero = document.querySelector('.hero');
         if (this.hero) {
             this.scrollIndicator = this.hero.querySelector('.hero__scroll-indicator');
+            this.leftHand = this.hero.querySelector('.hero__left-hand');
+            this.rightHand = this.hero.querySelector('.hero__right-hand');
+            this.rightHandDefaultImg = this.rightHand ? this.rightHand.querySelector('.default-hand') : null;
+            this.rightHandActiveImg = this.rightHand ? this.rightHand.querySelector('.active-hand') : null;
+            this.touchEffect = this.hero.querySelector('.hero__touch-effect');
             this.bindEvents();
             this.setupParallax();
+            this.setupAnimationReplay();
+            this.setupHandSwitchAnimation();
         }
     }
 
@@ -29,6 +36,97 @@ class Hero {
                 this.handleScrollIndicatorClick();
             }
         });
+
+        // Replay animation on click
+        if (this.leftHand) {
+            this.leftHand.addEventListener('click', () => {
+                this.replayAnimation();
+            });
+        }
+
+        if (this.rightHand) {
+            this.rightHand.addEventListener('click', () => {
+                this.replayAnimation();
+            });
+        }
+    }
+
+    setupAnimationReplay() {
+        // Set up Intersection Observer to replay animation when hero comes into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                    // Only replay if user scrolled away and came back
+                    if (this.hasScrolledAway) {
+                        this.replayAnimation();
+                        this.hasScrolledAway = false;
+                    }
+                } else if (!entry.isIntersecting) {
+                    this.hasScrolledAway = true;
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(this.hero);
+    }
+
+    setupHandSwitchAnimation() {
+        // Switch hand image when hands reach their final position (after 2s slideInRight animation)
+        setTimeout(() => {
+            if (this.rightHandDefaultImg && this.rightHandActiveImg && this.rightHand) {
+                // Trigger the crossfade effect
+                this.rightHand.classList.add('hand-activated');
+            }
+            
+            // Trigger left hand click animation
+            if (this.leftHand) {
+                this.leftHand.classList.add('hand-clicking');
+            }
+        }, 2300);
+    }
+
+    replayAnimation() {
+        // Remove and re-add animation classes to trigger replay
+        const elements = [this.leftHand, this.rightHand, this.touchEffect];
+        
+        elements.forEach(el => {
+            if (el) {
+                // Clone and replace to restart animation
+                const newEl = el.cloneNode(true);
+                el.parentNode.replaceChild(newEl, el);
+            }
+        });
+
+        // Re-cache the elements
+        this.leftHand = this.hero.querySelector('.hero__left-hand');
+        this.rightHand = this.hero.querySelector('.hero__right-hand');
+        this.rightHandDefaultImg = this.rightHand ? this.rightHand.querySelector('.default-hand') : null;
+        this.rightHandActiveImg = this.rightHand ? this.rightHand.querySelector('.active-hand') : null;
+        this.touchEffect = this.hero.querySelector('.hero__touch-effect');
+
+        // Reset right hand to default state
+        if (this.rightHand) {
+            this.rightHand.classList.remove('hand-activated');
+        }
+        
+        // Reset left hand to default state
+        if (this.leftHand) {
+            this.leftHand.classList.remove('hand-clicking');
+        }
+
+        // Re-bind click events
+        if (this.leftHand) {
+            this.leftHand.addEventListener('click', () => this.replayAnimation());
+        }
+        if (this.rightHand) {
+            this.rightHand.addEventListener('click', () => this.replayAnimation());
+        }
+
+        // Re-setup hand switch animation
+        this.setupHandSwitchAnimation();
+
+        // Emit custom event
+        this.emitEvent('animationReplayed', { timestamp: Date.now() });
     }
 
     setupParallax() {

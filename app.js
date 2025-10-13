@@ -16,12 +16,47 @@ class App {
         this.components.languageManager = new LanguageManager();
         window.languageManager = this.components.languageManager;
         
-        // Initialize all components (they will bind to existing HTML elements)
-        this.components.header = new Header();
-        this.components.hero = new Hero();
-        this.components.services = new Services();
-        this.components.statistics = new Statistics();
-        this.components.footer = new Footer();
+        // Initialize components conditionally based on what exists on the page
+        if (typeof Header !== 'undefined') {
+            this.components.header = new Header();
+        }
+        
+        if (typeof Hero !== 'undefined') {
+            this.components.hero = new Hero();
+        }
+        
+        if (typeof Services !== 'undefined') {
+            this.components.services = new Services();
+        }
+        
+        if (typeof Statistics !== 'undefined') {
+            this.components.statistics = new Statistics();
+        }
+        
+        if (typeof Footer !== 'undefined') {
+            this.components.footer = new Footer();
+        }
+        
+        // Initialize page-specific components
+        if (typeof ProjectsSlider !== 'undefined') {
+            this.components.projectsSlider = new ProjectsSlider();
+        }
+        
+        if (typeof StreetViewAnimations !== 'undefined') {
+            this.components.streetViewAnimations = new StreetViewAnimations();
+        }
+        
+        if (typeof ContactPage !== 'undefined') {
+            this.components.contactPage = new ContactPage();
+        }
+        
+        if (typeof WebDesignPage !== 'undefined') {
+            this.components.webDesignPage = new WebDesignPage();
+        }
+        
+        if (typeof GoogleAdsPage !== 'undefined') {
+            this.components.googleAdsPage = new GoogleAdsPage();
+        }
         
         // Initialize translations after components are loaded
         this.components.languageManager.initializeTranslations();
@@ -125,7 +160,7 @@ class App {
         this.updateMobileLayout();
         
         // Close mobile menu if open on desktop
-        if (window.innerWidth > 768) {
+        if (window.innerWidth > 768 && this.components.header && typeof this.components.header.closeMobileMenu === 'function') {
             this.components.header.closeMobileMenu();
         }
     }
@@ -278,16 +313,17 @@ class App {
     // Method to initialize animations
     initializeAnimations() {
         // Initialize hero animations
-        if (this.components.hero) {
+        if (this.components.hero && typeof this.components.hero.animateOnScroll === 'function') {
             this.components.hero.animateOnScroll();
         }
 
         // Initialize services animations
-        if (this.components.services) {
+        if (this.components.services && typeof this.components.services.animateOnScroll === 'function') {
             this.components.services.animateOnScroll();
         }
 
         // Statistics animations are handled automatically by the component
+        // Page-specific animations are handled by their respective components
     }
 }
 

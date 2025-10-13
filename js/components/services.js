@@ -57,8 +57,8 @@ class Services {
         const y = e.clientY - rect.top - rect.height / 2;
         
         // Calculate angle from center to mouse position
-        const angle = Math.atan2(y, x) * (180 / Math.PI);
-        const normalizedAngle = (angle + 90 + 360) % 360; // Normalize to 0-360
+        const angle = Math.atan2(y, x) * (100 / Math.PI);
+        const normalizedAngle = (angle + 20 + 60) % 360; // Normalize to 0-360
         
         card.style.setProperty('--gradient-angle', `${normalizedAngle}deg`);
     }

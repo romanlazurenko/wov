@@ -11,23 +11,27 @@ const czTranslations = {
     
     // Hero
     'hero.tag': 'Way of Visionary',
-    'hero.title': 'VIRTUÁLNÍ SVĚT PRO VAŠE PODNIKÁNÍ<br>BUDOUCNOST JE TADY',
+     'hero.title': 'VIRTUÁLNÍ&nbsp;&nbsp;SVĚT&nbsp;&nbsp;PRO&nbsp;&nbsp;VAŠE<br>PODNIKÁNÍ&nbsp;&nbsp;BUDOUCNOST&nbsp;&nbsp;JE&nbsp;&nbsp;TADY',
     
     // Services
     'services.title': 'SLUŽBY',
     'services.street-view.title': 'Street View',
     'services.street-view.description': 'Virtuální prohlídky pro Google Maps a Street View',
-    'services.web-design.title': 'Webové stránky a design',
+    'services.web-design.title': 'Webové stránky <br>a design',
     'services.web-design.description': 'Moderní webové stránky s responsivním designem',
     'services.google-ads.title': 'Google Ads',
     'services.google-ads.description': 'Efektivní reklamní kampaně na Google platformách',
     'services.more-info': 'Více informací',
     
     // Statistics
-    'stats.google-maps.description': 'UŽIVATELŮ GOOGLE MAPS využívá službu k vyhledávání firem a služeb',
-    'stats.360-content.description': 'ZÁKAZNÍKŮ chce vidět více 360° obsahu, který jim pomáhá lépe pochopit firmu a její nabídky',
-    'stats.double-interest.description': 'DVOJNÁSOBNÝ ZÁJEM získávají firmy, které mají virtuální prohlídku a kvalitní fotografie',
-    'stats.more-trust.description': 'VÍCE DÚVĚRY získávají společnosti s virtuálnímí prohlídkami oproti těm, které je nemají',
+    'stats.google-maps.title': 'UŽIVATELŮ <br> GOOGLE MAPS',
+    'stats.360-content.title': 'ZÁKAZNÍKŮ',
+    'stats.double-interest.title': 'DVOJNÁSOBNÝ<br> ZÁJEM',
+    'stats.more-trust.title': 'VÍCE DÚVĚRY',
+    'stats.google-maps.description': 'využívá službu k vyhledávání firem a služeb',
+    'stats.360-content.description': 'chce vidět více 360° obsahu, který jim pomáhá lépe pochopit firmu a její nabídky',
+    'stats.double-interest.description': 'získávají firmy, které mají virtuální prohlídku a kvalitní fotografie',
+    'stats.more-trust.description': 'získávají společnosti s virtuálnímí prohlídkami oproti těm, které je nemají',
     
     // Footer
     'footer.services.title': 'SLUŽBY',
@@ -36,7 +40,7 @@ const czTranslations = {
     'footer.services.seo': 'SEO',
     'footer.contact.title': 'KONTAKT',
     'footer.cta': 'Získat konzultaci',
-    'footer.logo': 'WAY OF VISIONARY',
+    'footer.logo': 'WAY OF <br>VISIONARY',
     'footer.privacy': 'Zásady ochrany osobních údajů',
     
     // Contact Form

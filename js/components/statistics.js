@@ -46,8 +46,7 @@ class Statistics {
     handleItemHover(item, isHovering) {
         const circle = item.querySelector('.statistics__circle');
         if (isHovering) {
-            circle.style.transform = 'scale(1.1)';
-            circle.style.boxShadow = '0 0 30px rgba(96, 255, 160, 0.3)';
+            circle.style.transform = 'scale(1.2)';
         } else {
             circle.style.transform = 'scale(1)';
             circle.style.boxShadow = 'none';
@@ -55,18 +54,32 @@ class Statistics {
     }
 
     animateStat(statItem) {
+        // Check if already animated
+        if (statItem.dataset.animated === 'true') {
+            return;
+        }
+        
         const circle = statItem.querySelector('.statistics__circle');
         const value = statItem.querySelector('.statistics__value');
-        const description = statItem.querySelector('.statistics__description');
+        const description = statItem.querySelector('.statistics__info-description');
         
-        // Animate circle
-        this.animateCircle(circle);
+        // Mark as animated
+        statItem.dataset.animated = 'true';
+        
+        // Animate circle (only if it exists)
+        if (circle) {
+            this.animateCircle(circle);
+        }
 
-        // Animate value with counter effect
-        this.animateCounter(value);
+        // Animate value with counter effect (only if it exists)
+        if (value) {
+            this.animateCounter(value);
+        }
 
-        // Animate description
-        this.animateDescription(description);
+        // Animate description (only if it exists)
+        if (description) {
+            this.animateDescription(description);
+        }
 
         // Emit custom event
         this.emitEvent('statAnimated', { 
@@ -87,22 +100,23 @@ class Statistics {
     }
 
     animateCounter(element) {
-        const text = element.textContent;
-        const isPercentage = text.includes('%');
-        const isMultiplier = text.includes('x');
-        const isPlus = text.includes('+');
+
+        const originalText = element.textContent;
+        const isPercentage = originalText.includes('%');
+        const isMultiplier = originalText.includes('x');
+        const isPlus = originalText.includes('+');
         
         let targetValue = 0;
         let suffix = '';
         
         if (isPercentage) {
-            targetValue = parseInt(text);
+            targetValue = parseInt(originalText.replace('%', ''));
             suffix = '%';
         } else if (isMultiplier) {
-            targetValue = parseInt(text.replace('x', ''));
+            targetValue = parseInt(originalText.replace('x', ''));
             suffix = 'x';
         } else if (isPlus) {
-            targetValue = parseInt(text.replace('+', ''));
+            targetValue = parseInt(originalText.replace('+', ''));
             suffix = '+';
         } else {
             // For other values, just fade in
@@ -114,12 +128,23 @@ class Statistics {
             return;
         }
 
-        this.runCounter(element, targetValue, suffix);
+        // Reset element for animation
+        element.style.opacity = '0';
+        element.style.transition = 'opacity 0.3s ease';
+        
+        setTimeout(() => {
+            element.style.opacity = '1';
+            this.runCounter(element, targetValue, suffix);
+        }, 100);
     }
 
     runCounter(element, targetValue, suffix) {
         let currentValue = 0;
-        const increment = targetValue / 50; // 50 steps
+        const duration = 3000; // 2 seconds
+        const steps = 60; // 60 steps for smooth animation
+        const increment = targetValue / steps;
+        const stepDuration = duration / steps;
+        
         const timer = setInterval(() => {
             currentValue += increment;
             if (currentValue >= targetValue) {
@@ -127,7 +152,7 @@ class Statistics {
                 clearInterval(timer);
             }
             element.textContent = Math.floor(currentValue) + suffix;
-        }, 20);
+        }, stepDuration);
     }
 
     animateDescription(description) {
@@ -159,7 +184,7 @@ class Statistics {
     updateStatDescription(statId, newDescription) {
         const statItem = this.statistics.querySelector(`[data-stat="${statId}"]`);
         if (statItem) {
-            const descriptionElement = statItem.querySelector('.statistics__description');
+            const descriptionElement = statItem.querySelector('.statistics__info-description');
             if (descriptionElement) {
                 descriptionElement.textContent = newDescription;
                 
@@ -174,6 +199,7 @@ class Statistics {
         this.statItems.forEach(item => {
             item.style.opacity = '0';
             item.style.transform = 'translateY(30px)';
+            item.dataset.animated = 'false'; // Reset animated state
         });
 
         setTimeout(() => {
@@ -205,7 +231,7 @@ class Statistics {
     getStatDescription(statId) {
         const statItem = this.getStatById(statId);
         if (statItem) {
-            const descriptionElement = statItem.querySelector('.statistics__description');
+            const descriptionElement = statItem.querySelector('.statistics__info-description');
             return descriptionElement ? descriptionElement.textContent : null;
         }
         return null;

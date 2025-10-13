@@ -8,11 +8,11 @@
     align-items: center;
     text-align: center;
     position: relative;
+    overflow: hidden;
 }
 
 .hero__content {
-    background: linear-gradient(rgba(46, 50, 48, 0.7), rgba(46, 50, 48, 0.7)), 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="mountains" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23404040;stop-opacity:1" /><stop offset="100%" style="stop-color:%23606060;stop-opacity:1" /></linearGradient></defs><polygon points="0,600 200,400 400,500 600,300 800,450 1000,350 1200,500 1200,800 0,800" fill="url(%23mountains)"/><circle cx="600" cy="400" r="80" fill="%2360FFA0" opacity="0.3"/></svg>');
+    background: url('../../assets/img/herobg.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 10px;
@@ -20,21 +20,42 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     text-align: center;
     position: relative;
     box-sizing: border-box;
+    margin-top: 95px;
+    overflow: hidden;
+}
+
+.hero__text-content {
+    position: relative;
+    z-index: 10;
+    animation: fadeInUp 1s ease-out;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
 }
 
 .hero__tag {
+    width: auto;
+    max-width: 255px;
+    margin-top: 30px;
     background-color: var(--dark-gray);
-    color: var(--light-gray);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    color: var(--primary-green);
+    padding: 19px 30px;
+    border-radius: 60px;
     font-size: 0.9rem;
     font-weight: 500;
     margin-bottom: 2rem;
+    font-size: 22px;
+    line-height: 100%;
+    letter-spacing: -0.2px;
+    font-weight: 900;
+    font-style: italic;
 }
 
 .hero__title {
@@ -42,9 +63,193 @@
     font-weight: 900;
     color: var(--light-gray);
     margin-bottom: 2rem;
-    max-width: 1000px;
+    max-width: 1200px;
     line-height: 1.2;
+    font-size: 65px;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-style: italic;
 }
+
+/* Hands Animation Container */
+.hero__animation-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.hero__left-hand {
+    position: absolute;
+    left: -25%;
+    bottom: -410px;
+    width: 60vw;
+    height: auto;
+    animation: slideInLeft 2s ease-out forwards;
+    /* filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3)); */
+    pointer-events: auto;
+    z-index: 5;
+    transition: transform 0.3s ease;
+}
+
+
+.hero__left-hand img {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 6;
+}
+
+.hero__left-hand.hand-clicking {
+    animation: leftHandClick 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    z-index: 6;
+    /* filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3)); */
+}
+
+.hero__right-hand {
+    position: absolute;
+    right: -30%;
+    bottom: 0;
+    width: 50vw;
+    height: auto;
+    animation: slideInRight 2s ease-out forwards;
+    /* filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3)); */
+    pointer-events: auto;
+    transition: transform 0.3s ease;
+}
+
+.hero__right-hand img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.hero__right-hand img.active-hand {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.hero__right-hand img.default-hand {
+    transition: opacity 0.4s ease-in-out;
+}
+
+.hero__right-hand.hand-activated img.active-hand {
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+.hero__right-hand.hand-activated img.default-hand {
+    opacity: 0;
+    transition-delay: 0.3s;
+}
+
+
+/* Touch Effect */
+.hero__touch-effect {
+    position: absolute;
+    top: 65%;
+    left: 59%;
+    transform: translate(-50%, -50%);
+    width: 1500px;
+    height: 1500px;
+    background: radial-gradient(circle, rgba(96, 255, 160, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    animation: touchBurst 1.7s ease-out 2.3s forwards;
+    pointer-events: none;
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        left: -35%;
+        opacity: 0;
+    }
+    100% {
+        left: -10%;
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        right: -30%;
+        opacity: 0;
+    }
+    100% {
+        right: 0;
+        opacity: 1;
+    }
+}
+
+
+
+
+@keyframes touchBurst {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    30% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(3);
+    }
+}
+
+@keyframes leftHandClick {
+    0% {
+        left: -10%;
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+    }
+    15% {
+        left: -7%;
+        transform: translateX(0) translateY(-2px) rotate(-2deg) scale(1.02);
+    }
+    35% {
+        left: -2%;
+        transform: translateX(0) translateY(-5px) rotate(-3deg) scale(1.05);
+    }
+    50% {
+        left: -1%;
+        transform: translateX(0) translateY(-3px) rotate(-2deg) scale(1.03);
+    }
+    70% {
+        left: -4%;
+        transform: translateX(0) translateY(-1px) rotate(-1deg) scale(1.01);
+    }
+    85% {
+        left: -8%;
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1.005);
+    }
+    100% {
+        left: -10%;
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+    }
+}
+
 
 .hero__scroll-indicator {
     position: absolute;
@@ -59,7 +264,18 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border: 1px solid var(--light-gray);
     animation: bounce 2s infinite;
+}
+
+.hero__scroll-indicator i {
+    font-size: 24px;
+    color: var(--light-gray);
+   
+}
+
+.hero__scroll-indicator:hover i {
+    transform: scale(1.1);
 }
 
 @keyframes bounce {
@@ -97,10 +313,78 @@
         height: 40px;
         bottom: 1.5rem;
     }
+
+    .hero__left-hand,
+    .hero__right-hand {
+        width: 55vw;
+    }
+
+    @keyframes slideInLeft {
+        0% {
+            left: -35%;
+            opacity: 0;
+        }
+        100% {
+            left: -8%;
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        0% {
+            right: -35%;
+            opacity: 0;
+        }
+        100% {
+            right: -8%;
+            opacity: 1;
+        }
+    }
+
+
+
+    .hero__touch-effect {
+        width: 70px;
+        height: 70px;
+    }
 }
 
 @media (max-width: 480px) {
     .hero__title {
         font-size: 2rem;
+    }
+
+    .hero__left-hand,
+    .hero__right-hand {
+        width: 60vw;
+    }
+
+    @keyframes slideInLeft {
+        0% {
+            left: -40%;
+            opacity: 0;
+        }
+        100% {
+            left: -12%;
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        0% {
+            right: -40%;
+            opacity: 0;
+        }
+        100% {
+            right: -12%;
+            opacity: 1;
+        }
+    }
+
+
+
+    .hero__touch-effect {
+        width: 50px;
+        height: 50px;
     }
 }

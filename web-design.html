@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webové stránky a design - WOV</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+    <link rel="stylesheet" href="css/components/street-view.css">
+    <link rel="stylesheet" href="css/components/web-design.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__content">
+            <div class="header__logo">
+                <a href="/"><img src="assets/img/logo.svg" alt="Way of Visionary Logo"></a>
+            </div>
+            <nav class="header__nav">
+                <ul class="header__nav-links">
+                    <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
+                    <li class="header__dropdown">
+                        <div class="header__dropdown-trigger">
+                            <a href="#services" data-translate="nav.services">Služby </a>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="header__dropdown-content">
+                            <a href="street-view.html" data-translate="nav.street-view">Street View</a>
+                            <a href="web-design.html" data-translate="nav.web-design">Webové stránky a design</a>
+                            <a href="google-ads.html" data-translate="nav.google-ads">Google Ads</a>
+                        </div>
+                    </li>
+                    <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
+                </ul>
+
+            </nav>
+            <div>
+                <div class="header__language-selector">
+                    <div class="header__language-selector-trigger">
+                        <span id="current-language">CZ</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="header__language-dropdown">
+                        <a href="#" data-lang="cz">CZ</a>
+                        <a href="#" data-lang="en">EN</a>
+                    </div>
+                </div>
+                <button class="header__cta-button" data-translate="header.cta">Získat konzultaci</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="web-design">
+        <div class="web-design__content">
+            <h1 class="web-design__title">WEBOVÉ STRÁNKY A DESIGN</h1>
+
+            <div class="web-design__grid">
+                <!-- Left Block -->
+                <div>
+                    <div class="web-design__main-title">
+                        <h2 class="web-design__block-title">Kdo potřebuje webové stránky a proč my</h2>
+                    </div>
+                    <div class="web-design__block">
+
+                        <h3 class="web-design__block-text">Dnes už web není jen vizitka, ale hlavní nástroj pro získávání zákazníků. <br>Je nezbytný pro:
+                        </h3>
+
+                        <div class="web-design__list">
+                            <div class="web-design__list-item">
+                                <span class="web-design__list-text"><span class="web-design__list-title">Malé podniky</span> - aby vás klienti našli na Googlu a důvěřovali vaší firmě.</span>
+                            </div>
+
+                            <div class="web-design__list-item">
+                                <span class="web-design__list-text"><span class="web-design__list-title">Kadeřnické salony, fitness centra, restaurace</span> - pro prezentaci služeb, cen, jídelního lístku, interiéru a 3D prohlídky.</span>
+                            </div>
+
+                            <div class="web-design__list-item">
+                                <span class="web-design__list-text"><span class="web-design__list-title">E-shopy</span> - pro 24/7 online prodej.</span>
+                            </div>
+
+                            <div class="web-design__list-item">
+                                <span class="web-design__list-text"><span class="web-design__list-title">Velké společnosti</span> - pro posílení značky a online reputace.</span>
+                            </div>
+                        </div>
+
+                        <div class="web-design__image-overlay">
+                            <img src="assets/img/websidecardbg.jpg" alt="mountain"
+                                class="web-design__overlay-image">
+                            <div class="web-design__overlay-text">
+                                <p>Pokud váš podnik není na internetu, pro mnoho klientů prostě neexistujete.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Block -->
+                <div>
+                    <div class="web-design__main-title">
+                        <h2 class="web-design__block-title">Jak to funguje</h2>
+                    </div>
+                    <div class="web-design__block">
+
+                        <h3 class="web-design__block-text text-right">Komu je potřeba web a proč si vybrat právě nás?</h3>
+
+                        <div class="web-design__list">
+                            <div class="web-design__list-item">
+                                <span class="web-design__list-text"><span class="web-design__list-title">Vývoj struktury a prototypu</span> - vytváříme pohodlnou navigaci, stránky a logiku webu tak, aby klient snadno našel, co potřebuje.</span>
+                            </div>
+                            <div class="web-design__list-item">
+                                <span class="web-design__list-text"><span class="web-design__list-title">Design a layout</span> - vytváříme moderní adaptivní design, který vypadá stejně dobře na telefonu i počítači.</span>
+                            </div>
+                            <div class="web-design__list-item">
+                                <span class="web-design__list-text"><span class="web-design__list-title">Naplňování</span> - přidáme na web váš obsah a vytvoříme mu individuální styl.</span>
+                            </div>
+
+                            <div class="web-design__list-item">
+                                <span class="web-design__list-text"><span class="web-design__list-title">Spuštění</span> - odeslání na hosting a připojení k doméně.</span>
+                            </div>
+                        </div>
+
+                        <div class="web-design__image-overlay">
+                            <img src="assets/img/websidecardbg.jpg" alt="mountain"
+                                class="web-design__overlay-image">
+                            <div class="web-design__overlay-text right-text">
+                                <h3 class="web-design__results-title">Výsledek pro klienta:</h3>
+                                <ul class="web-design__overlay-list">
+                                    <li>Web funguje 24/7 a přináší objednávky</li>
+                                    <li>Vaše firma je více vidět na Googlu</li>
+                                    <li>Klienti vám více důvěřují díky profesionálnímu online obrazu</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Projects Section -->
+    <section class="projects web-design__projects">
+        <div class="projects__content">
+            <div class="projects__gallery">
+                <div class="projects__controls" id="projects-controls">
+                    <button class="projects__button" data-translate="projects.button">Naše projekty</button>
+                </div>
+                <div class="projects__nav">
+                    <button class="projects__nav-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <span class="projects__title">Název prohlídky</span>
+                    <button class="projects__nav-arrow"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="projects__main-image" id="main-image-container">
+                    <img id="main-image" src="" alt="Main project image">
+                    <div class="projects__loading" id="loading-indicator">
+                        <div class="loading-spinner"></div>
+                        <p>Loading images...</p>
+                    </div>
+                </div>
+                <div class="projects__thumbnail projects__thumbnail--large" id="thumbnail-large">
+                    <!-- Large thumbnail will be dynamically generated -->
+                </div>
+                <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-1">
+                    <!-- Small thumbnail 1 will be dynamically generated -->
+                </div>
+                <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-2">
+                    <!-- Small thumbnail 2 will be dynamically generated -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Preview Modal -->
+    <div class="image-modal" id="image-modal">
+        <div class="image-modal__overlay"></div>
+        <div class="image-modal__content">
+            <button class="image-modal__close" id="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="image-modal__navigation">
+                <button class="image-modal__nav image-modal__nav--prev" id="modal-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="image-modal__nav image-modal__nav--next" id="modal-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="image-modal__image-container">
+                <img id="modal-image" src="" alt="">
+                <div class="image-modal__loading hidden" id="modal-loading">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+            <div class="image-modal__info">
+                <h3 id="modal-title"></h3>
+                <p id="modal-counter"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer footer--web-design" id="contact">
+        <div class="footer__content">
+            <div class="footer__grid">
+                <div class="footer__section">
+                    <button class="footer__cta-button" data-translate="footer.cta">Získat konzultaci</button>
+                    <div class="footer__logo" data-translate="footer.logo">WAY OF VISIONARY</div>
+                </div>
+                <div class="footer__section">
+                    <h3 data-translate="footer.services.title">SLUŽBY</h3>
+                    <ul class="footer__links">
+                        <li><a href="street-view.html" data-translate="footer.services.street-view">Street view</a></li>
+                        <li><a href="web-design.html" data-translate="footer.services.web-design">Webové stránky a
+                                design</a></li>
+                        <li><a href="#seo" data-translate="footer.services.seo">SEO</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3 data-translate="footer.contact.title">KONTAKT</h3>
+                    <div class="footer__contact-info">
+                        <p class="footer__phone">+420 773 729 666</p>
+                        <p class="footer__email">wayofvisionary@gmail.com</p>
+                        <div class="footer__social-icons">
+                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__bottom-content">
+                <p data-translate="footer.privacy">Zásady ochrany osobních údajů</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Translation Scripts -->
+    <script src="js/translations/cz.js"></script>
+    <script src="js/translations/en.js"></script>
+    <script src="js/language-manager.js"></script>
+
+    <!-- Component Logic Scripts -->
+    <script src="js/components/header.js"></script>
+    <script src="js/components/footer.js"></script>
+    <script src="js/components/projects-slider.js"></script>
+    <script src="js/components/web-design.js"></script>
+
+    <!-- Main App Script -->
+    <script src="app.js"></script>
+</body>
+
+</html>

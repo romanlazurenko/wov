@@ -22,19 +22,56 @@ body {
 
 /* ===== UTILITY CLASSES ===== */
 .cta-button {
-    background-color: var(--primary-green);
+    background: linear-gradient(180deg, #7AFFB3 0%, #4DE68A 100%);
     color: var(--dark-gray);
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 8px;
+    padding: 1rem 2rem;
+    border: 1px solid #60FFA0;
+    border-radius: 100px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 
+        1px 1px 0 rgba(255, 255, 255, 0.8),
+        -1px -1px 0 rgba(255, 255, 255, 0.8),
+        1px -1px 0 rgba(255, 255, 255, 0.8),
+        -1px 1px 0 rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
+    border-radius: 100px;
+    pointer-events: none;
 }
 
 .cta-button:hover {
-    background-color: #4DE68A;
+    background: linear-gradient(180deg, #8AFFC3 0%, #5DFF9A 100%);
+    border-color: #60FFA0;
     transform: translateY(-2px);
+    box-shadow: 
+        0 6px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:active {
+    transform: translateY(-1px);
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .section-title {
@@ -72,10 +109,10 @@ body {
 }
 
 /* ===== FOCUS STYLES ===== */
-*:focus {
+/* *:focus {
     outline: 2px solid var(--primary-green);
     outline-offset: 2px;
-}
+} */
 
 /* ===== SCROLLBAR STYLES ===== */
 ::-webkit-scrollbar {

@@ -48,35 +48,63 @@
     <header class="header">
         <div class="header__content">
             <div class="header__logo">
-                <img src="assets/img/logo.svg" alt="Way of Visionary Logo">
+                <a href="/"><img src="assets/img/logo.svg" alt="Way of Visionary Logo"></a>
             </div>
             <nav class="header__nav">
                 <ul class="header__nav-links">
                     <li><a href="#home" data-translate="nav.intro">Úvod</a></li>
                     <li class="header__dropdown">
-                        <a href="#services" data-translate="nav.services">Služby <i class="fas fa-chevron-down"></i></a>
+                    <div class="header__dropdown-trigger">
+                        <a href="#services" data-translate="nav.services">Služby </a>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                         <div class="header__dropdown-content">
-                            <a href="#street-view" data-translate="nav.street-view">Street View</a>
-                            <a href="#web-design" data-translate="nav.web-design">Webové stránky a design</a>
-                            <a href="#google-ads" data-translate="nav.google-ads">Google Ads</a>
+                            <a href="street-view.html" data-translate="nav.street-view">Street View</a>
+                            <a href="web-design.html" data-translate="nav.web-design">Webové stránky a design</a>
+                            <a href="google-ads.html" data-translate="nav.google-ads">Google Ads</a>
                         </div>
                     </li>
-                    <li><a href="#contact" data-translate="nav.contact">Kontakt</a></li>
+                    <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
                 </ul>
+
+            </nav>
+            <div>
                 <div class="header__language-selector">
-                    <span id="current-language">CZ</span>
-                    <i class="fas fa-chevron-down"></i>
+                    <div class="header__language-selector-trigger">
+                        <span id="current-language">CZ</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="header__language-dropdown">
+                        <a href="#" data-lang="cz">CZ</a>
+                        <a href="#" data-lang="en">EN</a>
+                    </div>
                 </div>
                 <button class="header__cta-button" data-translate="header.cta">Získat konzultaci</button>
-            </nav>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero__content">
-            <div class="hero__tag" data-translate="hero.tag">Way of Visionary</div>
-            <h1 class="hero__title" data-translate="hero.title">VIRTUÁLNÍ SVĚT PRO VAŠE PODNIKÁNÍ<br>BUDOUCNOST JE TADY</h1>
+            <div class="hero__text-content">
+                <h2 class="hero__tag" data-translate="hero.tag">Way of Visionary</h2>
+                <h1 class="hero__title" data-translate="hero.title">VIRTUÁLNÍ SVĚT PRO VAŠE<br>PODNIKÁNÍBUDOUCNOST JE
+                    TADY</h1>
+            </div>
+
+            <!-- Hands Animation Container -->
+            <div class="hero__animation-container">
+                <div class="hero__left-hand">
+                    <img src="assets/img/herolefthand.png" alt="Left Hand">
+                </div>
+                <div class="hero__right-hand">
+                    <img src="assets/img/herorighthandoff.png" alt="Right Hand with Phone" class="default-hand">
+                    <img src="assets/img/herorighthand.png" alt="Right Hand with Active Phone" class="active-hand">
+                </div>
+                <div class="hero__touch-effect"></div>
+            </div>
+
             <div class="hero__scroll-indicator">
                 <i class="fas fa-chevron-down"></i>
             </div>
@@ -90,66 +118,85 @@
             <div class="services__grid">
                 <div class="services__card" data-service="street-view">
                     <div class="services__card-content">
-                      
+
                         <h3 class="services__card-title" data-translate="services.street-view.title">Street View</h3>
                     </div>
                 </div>
                 <div class="services__card" data-service="web-design">
                     <div class="services__card-content">
-        
-                        <h3 class="services__card-title" data-translate="services.web-design.title">Webové stránky a design</h3>
+
+                        <h3 class="services__card-title" data-translate="services.web-design.title">Webové stránky a
+                            design</h3>
                     </div>
                 </div>
                 <div class="services__card" data-service="google-ads">
                     <div class="services__card-content">
-              
+
                         <h3 class="services__card-title" data-translate="services.google-ads.title">Google Ads</h3>
-                       
+
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Statistics Section -->
+        <section class="statistics">
+            <div class="statistics__content">
+                <div class="statistics__grid">
+                    <div class="statistics__item" data-stat="google-maps-users">
+                        <div class="statistics__circle">
+                            <span class="statistics__value">70%</span>
+                        </div>
+                        <div class="statistics__info">
+                            <h4 class="statistics__info-title" data-translate="stats.google-maps.title">UŽIVATELŮ
+                                GOOGLE MAPS</h4>
+                            <p class="statistics__info-description" data-translate="stats.google-maps.description">
+                                využívá službu k vyhledávání firem a služeb</p>
+                        </div>
+                    </div>
+                    <div class="statistics__item" data-stat="360-content-demand">
+                        <div class="statistics__circle">
+                            <span class="statistics__value">55%</span>
+                        </div>
+                        <div class="statistics__info">
+                            <h4 class="statistics__info-title" data-translate="stats.360-content.title">ZÁKAZNÍKŮ</h4>
+                            <p class="statistics__info-description" data-translate="stats.360-content.description">chce
+                                vidět
+                                více 360° obsahu, který jim pomáhá lépe pochopit firmu a její nabídky</p>
+                        </div>
+                    </div>
+                    <div class="statistics__item" data-stat="double-interest">
+                        <div class="statistics__circle">
+                            <span class="statistics__value">x2</span>
+                        </div>
+                        <div class="statistics__info">
+                            <h4 class="statistics__info-title" data-translate="stats.double-interest.title">DVOJNÁSOBNÝ
+                                ZÁJEM</h4>
+                            <p class="statistics__info-description" data-translate="stats.double-interest.description">
+                            DVOJNÁSOBNÝ ZÁJEM
+                                získávají firmy, které mají virtuální prohlídku a kvalitní fotografie</p>
+                        </div>
+                    </div>
+                    <div class="statistics__item" data-stat="more-trust">
+                        <div class="statistics__circle">
+                            <span class="statistics__value">+100%</span>
+                        </div>
+                        <div class="statistics__info">
+                            <h4 class="statistics__info-title" data-translate="stats.more-trust.title">VÍCE DÚVĚRY</h4>
+                            <p class="statistics__info-description" data-translate="stats.more-trust.description">
+                            získávají
+                            společnosti s virtuálnímí prohlídkami oproti těm, které je nemají</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </section>
 
-    <!-- Statistics Section -->
-    <section class="statistics">
-        <div class="statistics__content">
-            <div class="statistics__grid">
-            <div class="statistics__item" data-stat="google-maps-users">
-                <div class="statistics__circle">
-                    <span class="statistics__value">70%</span>
-                </div>
-                <p class="statistics__description" data-translate="stats.google-maps.description">UŽIVATELŮ GOOGLE MAPS
-                    využívá službu k vyhledávání firem a služeb</p>
-            </div>
-            <div class="statistics__item" data-stat="360-content-demand">
-                <div class="statistics__circle">
-                    <span class="statistics__value">55%</span>
-                </div>
-                <p class="statistics__description" data-translate="stats.360-content.description">ZÁKAZNÍKŮ chce vidět
-                    více 360° obsahu, který jim pomáhá lépe pochopit firmu a její nabídky</p>
-            </div>
-            <div class="statistics__item" data-stat="double-interest">
-                <div class="statistics__circle">
-                    <span class="statistics__value">x2</span>
-                </div>
-                <p class="statistics__description" data-translate="stats.double-interest.description">DVOJNÁSOBNÝ ZÁJEM
-                    získávají firmy, které mají virtuální prohlídku a kvalitní fotografie</p>
-            </div>
-            <div class="statistics__item" data-stat="more-trust">
-                <div class="statistics__circle">
-                    <span class="statistics__value">+100%</span>
-                </div>
-                <p class="statistics__description" data-translate="stats.more-trust.description">VÍCE DÚVĚRY získávají
-                    společnosti s virtuálnímí prohlídkami oproti těm, které je nemají</p>
-            </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Footer -->
     <footer class="footer" id="contact">
         <div class="footer__content">
+          <div class="footer__grid">
             <div class="footer__section">
                 <button class="footer__cta-button" data-translate="footer.cta">Získat konzultaci</button>
                 <div class="footer__logo" data-translate="footer.logo">WAY OF VISIONARY</div>
@@ -157,7 +204,7 @@
             <div class="footer__section">
                 <h3 data-translate="footer.services.title">SLUŽBY</h3>
                 <ul class="footer__links">
-                    <li><a href="#street-view" data-translate="footer.services.street-view">Street view</a></li>
+                    <li><a href="street-view.html" data-translate="footer.services.street-view">Street view</a></li>
                     <li><a href="#web-design" data-translate="footer.services.web-design">Webové stránky a design</a>
                     </li>
                     <li><a href="#seo" data-translate="footer.services.seo">SEO</a></li>
@@ -166,8 +213,8 @@
             <div class="footer__section">
                 <h3 data-translate="footer.contact.title">KONTAKT</h3>
                 <div class="footer__contact-info">
-                    <p class="footer__phone">+420 773 729 666</p>
-                    <p class="footer__email">wayofvisionary@gmail.com</p>
+                    <a class="footer__phone" href="tel:+420773729666">+420 773 729 666</a>
+                    <a class="footer__email" href="mailto:wayofvisionary@gmail.com">wayofvisionary@gmail.com</a>
                     <div class="footer__social-icons">
                         <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -176,6 +223,7 @@
                     </div>
                 </div>
             </div>
+          </div>
         </div>
         <div class="footer__bottom">
             <div class="footer__bottom-content">
@@ -188,7 +236,6 @@
     <script src="js/translations/cz.js"></script>
     <script src="js/translations/en.js"></script>
     <script src="js/language-manager.js"></script>
-
     <!-- Component Logic Scripts -->
     <script src="js/components/header.js"></script>
     <script src="js/components/hero.js"></script>

@@ -45,13 +45,21 @@ class Header {
             });
         }
 
-        // Header scroll effects removed - header maintains consistent design
+        // Header scroll effects for glassmorphism
+        window.addEventListener('scroll', () => {
+            this.handleScroll();
+        });
 
-        // Language selector
-        const languageSelector = this.header.querySelector('.header__language-selector');
-        if (languageSelector) {
-            languageSelector.addEventListener('click', () => {
-                this.handleLanguageClick();
+        // Language selector dropdown
+        const languageDropdown = this.header.querySelector('.header__language-dropdown');
+        if (languageDropdown) {
+            const languageLinks = languageDropdown.querySelectorAll('a[data-lang]');
+            languageLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = link.dataset.lang;
+                    this.handleLanguageChange(lang);
+                });
             });
         }
     }
@@ -86,18 +94,20 @@ class Header {
         this.emitEvent('mobileMenuToggled', { isOpen: this.isMobileMenuOpen });
     }
 
-    // Scroll handling removed - header maintains consistent design
+    handleScroll() {
+        if (window.scrollY > 100) {
+            this.header.classList.add('scrolled');
+        } else {
+            this.header.classList.remove('scrolled');
+        }
+    }
 
-    handleLanguageClick() {
-        // Toggle between CZ and EN
+    handleLanguageChange(lang) {
+        // Update current language display
         const languageSpan = this.header.querySelector('#current-language');
         if (languageSpan) {
-            const currentLang = languageSpan.textContent;
-            const newLang = currentLang === 'CZ' ? 'EN' : 'CZ';
-            languageSpan.textContent = newLang;
-            
-            // Emit custom event
-            this.emitEvent('languageChanged', { language: newLang.toLowerCase() });
+            languageSpan.textContent = lang.toUpperCase();
+            this.emitEvent('languageChanged', { language: lang });
         }
     }
 

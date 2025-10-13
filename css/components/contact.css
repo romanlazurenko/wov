@@ -1,0 +1,382 @@
+/* Contact Page Styles */
+.contact {
+    background-color: var(--light-gray);
+    padding: 4rem 2rem;
+    min-height: calc(100vh - 300px);
+    margin-top: 100px;
+}
+
+.contact__content {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.contact__title {
+    font-size: 65px;
+    font-weight: 900;
+    color: var(--dark-gray);
+    text-align: center;
+    margin-bottom: 4rem;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: -0.04em;
+}
+
+.contact__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.contact__map img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Contact Information Cards */
+.contact__info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+.contact__card {
+    background: var(--dark-gray);
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    height: 243px;
+}
+
+.contact__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.contact__icon {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: -50px;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    background: linear-gradient(135deg, #2E3230 0%, #242725 80%, #171918 100%);
+    border: 10px solid var(--light-gray);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.contact__icon.left-icon {
+    left: 30%;
+}
+
+.contact__icon.right-icon {
+    left: 70%;
+}
+
+.contact__icon-img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+.contact__icons {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: -50px;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    background: linear-gradient(135deg, #2E3230 0%, #242725 80%, #171918 100%);
+    border: 10px solid var(--light-gray);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.contact__icons .contact__icon {
+    position: static;
+    width: auto;
+    height: auto;
+    background: none;
+    border: none;
+    border-radius: 0;
+    transform: none;
+    margin-bottom: 0;
+}
+
+.contact__details {
+    width: 100%;
+    margin-top: 75px;
+}
+
+.contact__text {
+    color: var(--primary-green);
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.contact__card:nth-child(2) .contact__details {
+    margin-top: 40px;
+    padding: 0 60px;
+    line-height: 1.2;
+    font-weight: 400;
+}
+
+.footer--street-view {
+    margin-top: 0;
+}
+
+.footer--street-view .footer__content {
+    border-radius: 10px;
+}
+
+.contact__text--green {
+    margin-top: 10px;
+    color: var(--primary-green);
+}
+
+/* Map Mockup */
+.contact__map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.contact__phone-mockup {
+    width: 300px;
+    height: 600px;
+    background: var(--dark-gray);
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.contact__phone-mockup::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+}
+
+.contact__phone-screen {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.contact__phone-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.1);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.contact__phone-status {
+    display: flex;
+    gap: 8px;
+    font-size: 0.8rem;
+}
+
+.contact__map-container {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 60px);
+    background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #90EE90 100%);
+    overflow: hidden;
+}
+
+.contact__map-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(90deg, #333 1px, transparent 1px),
+        linear-gradient(180deg, #333 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.1;
+}
+
+.contact__map-pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.contact__map-pin-icon {
+    width: 40px;
+    height: 40px;
+    background: #ff4444;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+    position: relative;
+}
+
+.contact__map-pin-icon::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transform: rotate(45deg);
+}
+
+.contact__map-pin-img {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    object-fit: cover;
+    transform: rotate(45deg);
+    position: absolute;
+    z-index: 1;
+}
+
+/* Footer Contact Styles */
+.footer--contact {
+    margin-top: 0;
+}
+
+.footer--contact .footer__content {
+    border-radius: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .contact__grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .contact__map {
+        order: -1;
+    }
+    
+    .contact__phone-mockup {
+        width: 250px;
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact {
+        padding: 2rem 1rem;
+    }
+    
+    .contact__title {
+        font-size: 45px;
+        margin-bottom: 2rem;
+    }
+    
+    .contact__card {
+        padding: 1.5rem;
+    }
+    
+    .contact__phone-mockup {
+        width: 200px;
+        height: 400px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact__title {
+        font-size: 35px;
+    }
+    
+    .contact__card {
+        padding: 1rem;
+    }
+    
+    .contact__icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .contact__text {
+        font-size: 1rem;
+    }
+    
+    .contact__phone-mockup {
+        width: 180px;
+        height: 360px;
+        padding: 12px;
+    }
+}
+
+/* Animations */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes phoneAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes profileAppear {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

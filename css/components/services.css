@@ -2,18 +2,21 @@
 .services {
     padding: 10px;
     padding-top: 0;
+    position: relative;
 }
 
 .services__content {
-    background-color: var(--dark-gray);
+    background: linear-gradient(135deg, #2E3230 0%, #242725 50%, #171918 100%);
     padding: 6rem 2rem;
     border-radius: 10px;
     width: 100%;
     box-sizing: border-box;
+    padding-bottom: 200px;
 }
 
 .services__title {
     font-size: 3rem;
+    font-style: italic;
     font-weight: 900;
     text-align: center;
     margin-bottom: 4rem;
@@ -22,10 +25,11 @@
 
 .services__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, 370px);
     gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    justify-content: center;
 }
 
 .services__card {
@@ -40,10 +44,12 @@
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    min-height: 200px;
+    width: 370px;
+    height: 370px;
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 .services__card::after {
@@ -54,11 +60,20 @@
     right: 0;
     bottom: 0;
     background-image: 
+        url('../../assets/img/cardnoise.svg'),
         radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
-    background-size: 20px 20px;
-    opacity: 0.3;
+    background-size: center, 400px 400px;
+    background-repeat: no-repeat, repeat;
+    opacity: 0.8;
+    filter: blur(0.5px);
     pointer-events: none;
     z-index: 1;
+
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(6.2px);
+-webkit-backdrop-filter: blur(6.2px);
+border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .services__card::before {
@@ -84,7 +99,7 @@
 
 .services__card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(96, 255, 160, 0.2);
+    box-shadow: 0 2px 4px rgba(96, 255, 160, 0.2);
     border-color: rgba(96, 255, 160, 0.3);
 }
 
@@ -101,10 +116,12 @@
 .services__card-title {
     font-size: 1.8rem;
     font-weight: 700;
+    font-style: italic;
     color: var(--primary-green);
     margin: 0;
     transition: all 0.3s ease;
     text-align: center;
+    font-weight: 900;
 }
 
 .services__card:hover .services__card-title {
@@ -163,11 +180,15 @@
     .services__grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        justify-content: center;
     }
 
     .services__card {
+        width: 100%;
+        max-width: 370px;
+        height: 300px;
         padding: 2rem 1.5rem;
-        min-height: 150px;
+        margin: 0 auto;
     }
 
     .services__card-title {
