@@ -7,6 +7,7 @@
 
 .footer__content {
     background: linear-gradient(90deg, #2E3230 0%, #242725 50%, #171918 100%);
+    border-radius: 10px;
 }
 
 .footer__grid {
@@ -523,6 +524,10 @@
         grid-template-columns: 1fr;
         gap: 2rem;
         text-align: center;
+    }
+
+    .footer__grid {
+        flex-direction: column;
     }
 
     .footer__section h3 {

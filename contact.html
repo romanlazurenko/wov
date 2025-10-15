@@ -18,9 +18,10 @@
             <div class="header__logo">
                 <a href="/"><img src="assets/img/logo.svg" alt="Way of Visionary Logo"></a>
             </div>
-            <nav class="header__nav">
+            <!-- Desktop Navigation -->
+            <nav class="header__nav header__nav--desktop">
                 <ul class="header__nav-links">
-                    <li><a href="#home" data-translate="nav.intro">Úvod</a></li>
+                    <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
                     <li class="header__dropdown">
                     <div class="header__dropdown-trigger">
                         <a href="#services" data-translate="nav.services">Služby </a>
@@ -34,8 +35,16 @@
                     </li>
                     <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
                 </ul>
-
             </nav>
+
+            <!-- Mobile Burger Menu -->
+            <div class="header__mobile">
+                <button class="header__burger" id="burger-menu">
+                    <span class="header__burger-line"></span>
+                    <span class="header__burger-line"></span>
+                    <span class="header__burger-line"></span>
+                </button>
+            </div>
             <div>
                 <div class="header__language-selector">
                     <div class="header__language-selector-trigger">
@@ -50,6 +59,32 @@
                 <button class="header__cta-button" data-translate="header.cta">Získat konzultaci</button>
             </div>
         </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <nav class="header__nav header__nav--mobile" id="mobile-nav">
+            <div class="header__mobile-language mobile-wrapper language-selector">
+                <div class="header__mobile-language-selector">
+                    <a href="#" class="header__mobile-language-trigger active" data-lang="cz">CZ</a>
+                    <a href="#" class="header__mobile-language-trigger" data-lang="en">ENG</a>
+                </div>
+            </div>
+            <div class="header__mobile-nav-content mobile-wrapper nav-content">
+                <!-- Mobile Language Selectors -->
+                <!-- Mobile Navigation Links -->
+                <ul class="header__mobile-nav-links">
+                    <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
+                    <li><a href="street-view.html" data-translate="nav.street-view">Street view</a></li>
+                    <li><a href="web-design.html" data-translate="nav.web-design">Webové stránky a design</a></li>
+                    <li><a href="google-ads.html" data-translate="nav.google-ads">SEO</a></li>
+                    <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
+                </ul>
+                
+                <!-- Mobile CTA Button -->
+                <div class="header__mobile-cta">
+                    <a href="#" class="header__mobile-cta-button" data-translate="header.cta">Získat konzultaci</a>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <!-- Main Content -->

@@ -37,13 +37,16 @@ class Header {
             });
         }
 
-        // Mobile menu toggle
-        const mobileMenuButton = this.header.querySelector('.header__mobile-menu-button');
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', () => {
+        // Mobile burger menu toggle
+        const burgerButton = this.header.querySelector('.header__burger');
+        if (burgerButton) {
+            burgerButton.addEventListener('click', () => {
                 this.toggleMobileMenu();
             });
         }
+
+        // Mobile dropdown functionality
+        this.setupMobileDropdowns();
 
         // Header scroll effects for glassmorphism
         window.addEventListener('scroll', () => {
@@ -78,16 +81,22 @@ class Header {
 
     toggleMobileMenu() {
         this.isMobileMenuOpen = !this.isMobileMenuOpen;
-        const navLinks = this.header.querySelector('.header__nav-links');
+        const mobileNav = this.header.querySelector('.header__nav--mobile');
+        const burgerButton = this.header.querySelector('.header__burger');
         
-        if (navLinks) {
-            navLinks.classList.toggle('header__nav-links--open');
+        if (mobileNav) {
+            mobileNav.classList.toggle('active');
         }
 
-        // Update button icon
-        const mobileMenuButton = this.header.querySelector('.header__mobile-menu-button i');
-        if (mobileMenuButton) {
-            mobileMenuButton.className = this.isMobileMenuOpen ? 'fas fa-times' : 'fas fa-bars';
+        if (burgerButton) {
+            burgerButton.classList.toggle('active');
+        }
+
+        // Prevent body scroll when menu is open
+        if (this.isMobileMenuOpen) {
+            document.body.classList.add('mobile-menu-open');
+        } else {
+            document.body.classList.remove('mobile-menu-open');
         }
 
         // Emit custom event
@@ -117,6 +126,45 @@ class Header {
         if (languageSpan) {
             languageSpan.textContent = lang.toUpperCase();
         }
+    }
+
+    setupMobileDropdowns() {
+        // Mobile language selectors
+        const mobileLanguageTriggers = this.header.querySelectorAll('.header__mobile-language-trigger[data-lang]');
+        mobileLanguageTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = trigger.getAttribute('data-lang');
+                
+                // Remove active class from all triggers
+                mobileLanguageTriggers.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked trigger
+                trigger.classList.add('active');
+                
+                this.switchLanguage(lang);
+                
+                // Close mobile menu
+                this.closeMobileMenu();
+            });
+        });
+
+        // Mobile CTA button
+        const mobileCTAButton = this.header.querySelector('.header__mobile-cta-button');
+        if (mobileCTAButton) {
+            mobileCTAButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.handleCTAClick();
+                this.closeMobileMenu();
+            });
+        }
+
+        // Close mobile menu when clicking on navigation links
+        const mobileNavLinks = this.header.querySelectorAll('.header__mobile-nav-links a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                this.closeMobileMenu();
+            });
+        });
     }
 
     // Method to close mobile menu

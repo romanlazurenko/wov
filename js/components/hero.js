@@ -135,7 +135,7 @@ class Hero {
             if (this.isInViewport()) {
                 const scrolled = window.pageYOffset;
                 const rate = scrolled * -0.5;
-                this.hero.style.transform = `translateY(${rate}px)`;
+                // this.hero.style.transform = `translateY(${rate}px)`;
             }
         });
     }

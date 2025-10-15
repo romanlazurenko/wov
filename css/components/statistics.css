@@ -103,9 +103,15 @@
         padding: 3rem 1rem;
     }
 
+    .statistics__info {
+        width: 100%;
+    }
+
     .statistics__grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
+        flex-direction: column;
+        width: 100%;
     }
 
     .statistics__circle {

@@ -25,7 +25,7 @@
     text-align: center;
     position: relative;
     box-sizing: border-box;
-    margin-top: 95px;
+    margin-top: 102px;
     overflow: hidden;
 }
 
@@ -294,7 +294,6 @@
 @media (max-width: 768px) {
     .hero {
         padding-top: 120px;
-        min-height: 100vh;
     }
 
     .hero__title {
