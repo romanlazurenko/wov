@@ -516,6 +516,7 @@
 /* Mobile Footer Styles */
 @media (max-width: 768px) {
     .footer {
+        margin-top: 0;
         padding: 8px;
     }
 

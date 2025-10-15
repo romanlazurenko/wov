@@ -103,6 +103,13 @@
         padding: 3rem 1rem;
     }
 
+    .statistics__content {
+        position: relative !important;
+        height: auto !important;
+        min-height: 100% !important;
+        bottom: auto !important;
+    }
+
     .statistics__info {
         width: 100%;
     }

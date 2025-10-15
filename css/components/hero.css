@@ -297,9 +297,15 @@
     }
 
     .hero__title {
-        font-size: 2.2rem;
-        padding: 0 1rem;
-        line-height: 1.3;
+        font-size: 1.8rem;
+        padding: 0 0.5rem;
+        line-height: 1.2;
+        max-width: 100%;
+        width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        letter-spacing: -1px;
+        box-sizing: border-box;
     }
 
     .hero__tag {
@@ -350,7 +356,14 @@
 
 @media (max-width: 480px) {
     .hero__title {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        max-width: 100%;
+        width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        letter-spacing: -0.5px;
+        padding: 0 0.25rem;
+        box-sizing: border-box;
     }
 
     .hero__left-hand,
