@@ -760,16 +760,41 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+    .street-view {
+        padding: 10px;
+        margin-top: 0;
+    }
     .street-view__title {
         font-size: 2.5rem;
         margin-bottom: 2rem;
     }
 
     .street-view__process {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 1.5rem;
-        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 80px;
+    }
+    .street-view__step--03 {
+        margin-top: 0;
+    }
+    .street-view__step--04 {
+        margin-top: 0;
+    }
+    .street-view__step--05 {
+        margin-top: 0;
+    }
+    .street-view__step--bottom-left {
+        margin-top: -70px;
+    }
+    .street-view__step--bottom-right {
+        height: 100%;
+        margin-top: -70px;
+    }
+
+    .street-view__step--bottom-right .street-view__step-content-text {
+        padding-bottom: 10px;
     }
 
     .street-view__phone {
@@ -793,10 +818,21 @@
     .street-view__step--03,
     .street-view__step--04,
     .street-view__step--05 {
-        grid-column: 1;
-        grid-row: auto;
-        justify-self: stretch;
+        width: 100%;
     }
+
+    /* Mobile step ordering */
+    .street-view__phone {
+        order: 1;
+    }
+    .street-view__step--01 { order: 2; }
+    .street-view__step--02 { order: 3; }
+    .street-view__step--03 { order: 4; }
+    .street-view__step--bottom-left { order: 5; } /* After step 03 */
+    .street-view__step--04 { order: 6; }
+    .street-view__step--05 { order: 7; }
+    .street-view__step--bottom-right { order: 8; } /* After step 05 */
+
 
     .projects__header {
         flex-direction: column;
@@ -821,9 +857,6 @@
 }
 
 @media (max-width: 480px) {
-    .street-view {
-        padding: 2rem 1rem;
-    }
 
     .street-view__title {
         font-size: 2rem;

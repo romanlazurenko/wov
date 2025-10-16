@@ -343,7 +343,8 @@
 @media (max-width: 1024px) {
     .web-design__grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 10px;
+        margin-bottom: 20px;
     }
     
     .projects__header {
@@ -360,15 +361,34 @@
 
 @media (max-width: 768px) {
     .web-design {
-        padding: 2rem 1rem;
+        padding: 50px 10px;
     }
     
+    .web-design__block-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1.1;
+        padding: 0 50px;
+        font-size: 22px;
+    }
+    
+    .web-design__overlay-text.right-text {
+        padding-left: 30px;
+    }
+
+    .web-design__overlay-list li {
+        padding-left: 22px;
+    }
     .web-design__title {
         font-size: 45px;
+        line-height: 1.1;
         margin-bottom: 2rem;
+        padding: 0 10px;
     }
     
     .web-design__block {
+        margin-top: 10px;
         padding: 1.5rem;
         min-height: auto;
     }
@@ -389,6 +409,7 @@
 @media (max-width: 480px) {
     .web-design__title {
         font-size: 35px;
+        line-height: 1.1;
     }
     
     .web-design__block {
