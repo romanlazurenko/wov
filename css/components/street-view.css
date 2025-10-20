@@ -12,6 +12,10 @@
     background-attachment: fixed;
 }
 
+.projects .projects__gallery.projects__gallery--mobile {
+    display: none;
+}
+
 .street-view__content {
     max-width: 1170px;
     margin: 0 auto;
