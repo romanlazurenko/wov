@@ -174,6 +174,14 @@ const czTranslations = {
     // Projects
     'projects.button': 'Naše projekty',
     'projects.title': 'Název prohlídky',
+    'projects.1.name': 'Boxerská škola "Jab Junction"',
+    'projects.2.name': 'Vodní zoo "Sea Mysteries"',
+    'projects.3.name': 'Sýrárna "Luminous"',
+    'projects.4.name': 'Verfahrensdokumentation',
+    'projects.5.name': 'Meetyoo',
+    'projects.6.name': 'Český řetězec restaurací "Bistro №1"',
+    'projects.7.name': 'Fanouškovské stránky Twin Peaks',
+    'projects.8.name': 'Speech',
     
     // Meta tags
     'meta.title': 'Way of Visionary - Virtuální svět pro vaše podnikání',

@@ -765,7 +765,7 @@
 @media (max-width: 768px) {
     .street-view {
         padding: 10px;
-        margin-top: 0;
+        margin-top: 100px;
     }
     .street-view__title {
         font-size: 2.5rem;
@@ -798,6 +798,10 @@
 
     .street-view__step--bottom-right .street-view__step-content-text {
         padding-bottom: 10px;
+    }
+
+    .projects .projects__gallery.projects__gallery--mobile {
+        height: 100%;
     }
 
     .street-view__phone {
@@ -857,6 +861,46 @@
     .projects__main-image {
         height: 250px;
     }
+
+    .projects .projects__gallery.projects__gallery--mobile {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        gap: 10px;
+    }
+
+    .projects .projects__gallery.projects__gallery--mobile .projects__button {
+        height: 82px;
+    }
+
+    .projects .projects__gallery.projects__gallery--mobile .projects__title {
+        font-size: 14px;
+    }
+    
+
+    .projects .projects__gallery.projects__gallery--mobile  .projects__main-image {
+        margin-top: unset;
+        flex-shrink: 0;
+    }
+
+    .projects .projects__gallery.projects__gallery--mobile .projects__thumbnail--large {
+        flex-shrink: 0;
+        height: 350px;
+    }
+
+    .projects .projects__gallery.projects__gallery--mobile .projects__thumbnail--small {
+        width: 50%;
+        height: 170px;
+    }
+
+    .projects .projects__gallery.projects__gallery--desktop {
+        display: none;
+    }
+
+    .projects__thumbnail--small-conatiner {
+        display: flex;
+        gap: 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -871,7 +915,7 @@
     }
 
     .projects {
-        padding: 2rem 1rem;
+        padding: 10px;
     }
 
     .projects__thumbnails {

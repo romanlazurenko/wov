@@ -229,6 +229,10 @@
     gap: 30px;
 }
 
+.web-design__projects .projects__gallery.projects__gallery--mobile {
+    display: none;
+}
+
 .web-design__projects .projects__controls {
     grid-area: 1 / 1 / 3 / 6;
     display: flex;
@@ -377,6 +381,7 @@
         padding-left: 30px;
     }
 
+  
     .web-design__overlay-list li {
         padding-left: 22px;
     }
@@ -385,6 +390,9 @@
         line-height: 1.1;
         margin-bottom: 2rem;
         padding: 0 10px;
+        white-space: normal;           /* ensure wrapping is allowed */
+        word-break: break-word;        /* allow long tokens to break */
+        overflow-wrap: anywhere;       /* force wrap even with nbsp */
     }
     
     .web-design__block {
@@ -396,6 +404,11 @@
     .projects {
         padding: 2rem 1rem;
     }
+
+    .web-design__projects {
+        padding: 10px;
+    }
+
     
     .projects__mockup-title {
         font-size: 36px;
@@ -404,12 +417,58 @@
     .projects__thumbnails {
         grid-template-columns: 1fr;
     }
+
+    .web-design__projects .projects__gallery.projects__gallery--mobile {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        gap: 10px;
+    }
+
+    .web-design__projects .projects__gallery.projects__gallery--mobile .projects__button {
+        height: 82px;
+    }
+
+    .web-design__projects .projects__gallery.projects__gallery--mobile .projects__title {
+        font-size: 14px;
+    }
+    
+
+    .web-design__projects .projects__gallery.projects__gallery--mobile  .projects__main-image {
+        margin-top: unset;
+        flex-shrink: 0;
+    }
+
+    .web-design__projects .projects__gallery.projects__gallery--mobile .projects__thumbnail--large {
+        flex-shrink: 0;
+        height: 350px;
+    }
+
+    .web-design__projects .projects__gallery.projects__gallery--mobile .projects__thumbnail--small {
+        width: 50%;
+        height: 170px;
+    }
+
+    .web-design__projects .projects__gallery.projects__gallery--desktop {
+        display: none;
+    }
+
+    .projects__thumbnail--small-conatiner {
+        display: flex;
+        gap: 10px;
+    }
+    
+
+
 }
 
 @media (max-width: 480px) {
     .web-design__title {
         font-size: 35px;
         line-height: 1.1;
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: anywhere;
     }
     
     .web-design__block {

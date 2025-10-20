@@ -174,6 +174,14 @@ const enTranslations = {
     // Projects
     'projects.button': 'Our Projects',
     'projects.title': 'Tour Name',
+    'projects.1.name': 'Boxing School "Jab Junction"',
+    'projects.2.name': 'Aquatic Zoo "Sea Mysteries"',
+    'projects.3.name': 'Cheese Shop "Luminous"',
+    'projects.4.name': 'Verfahrensdokumentation',
+    'projects.5.name': 'Meetyoo',
+    'projects.6.name': 'Czech Restaurant Chain "Bistro №1"',
+    'projects.7.name': 'Twin Peaks Fan Pages',
+    'projects.8.name': 'Speech',
     
     // Meta tags
     'meta.title': 'Way of Visionary - Virtual World for Your Business',

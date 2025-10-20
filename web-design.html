@@ -195,13 +195,14 @@
 
     <section class="projects web-design__projects">
         <div class="projects__content">
-            <div class="projects__gallery">
+            <!-- Desktop Layout -->
+            <div class="projects__gallery projects__gallery--desktop">
                 <div class="projects__controls" id="projects-controls">
                     <button class="projects__button" data-translate="projects.button">Naše projekty</button>
                 </div>
                 <div class="projects__nav">
                     <button class="projects__nav-arrow"><i class="fas fa-chevron-left"></i></button>
-                    <span class="projects__title" data-translate="projects.title">Název prohlídky</span>
+                    <span class="projects__title">Název prohlídky</span>
                     <button class="projects__nav-arrow"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="projects__main-image" id="main-image-container">
@@ -216,6 +217,34 @@
                 <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-1">
                 </div>
                 <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-2">
+                </div>
+            </div>
+
+            <!-- Mobile Layout -->
+            <div class="projects__gallery projects__gallery--mobile">
+                <div class="projects__controls" id="projects-controls-mobile">
+                    <button class="projects__button" data-translate="projects.button">Naše projekty</button>
+                </div>
+                <div class="projects__main-image" id="main-image-container-mobile">
+                    <img id="main-image-mobile" src="" alt="Main project image">
+                    <div class="projects__loading" id="loading-indicator-mobile">
+                        <div class="loading-spinner"></div>
+                        <p>Loading images...</p>
+                    </div>
+                </div>
+                <div class="projects__nav">
+                    <button class="projects__nav-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <span class="projects__title">Název prohlídky</span>
+                    <button class="projects__nav-arrow"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            
+                <div class="projects__thumbnail projects__thumbnail--large" id="thumbnail-large-mobile">
+                </div>
+                <div class="projects__thumbnail--small-conatiner">
+                    <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-1-mobile">
+                    </div>
+                    <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-2-mobile">
+                    </div>
                 </div>
             </div>
         </div>
