@@ -29,6 +29,11 @@
     align-items: start;
 }
 
+/* Hide mobile layout by default */
+.contact__grid--mobile {
+    display: none;
+}
+
 .contact__map img {
     width: 100%;
     height: 100%;
@@ -88,9 +93,8 @@
 }
 
 .contact__icon-img {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+    width: 40px;
+    height: 40px;
 }
 
 .contact__icons {
@@ -290,9 +294,9 @@
         gap: 3rem;
     }
     
-    .contact__map {
+    /* .contact__map {
         order: -1;
-    }
+    } */
     
     .contact__phone-mockup {
         width: 250px;
@@ -303,16 +307,61 @@
 @media (max-width: 768px) {
     .contact {
         margin-top: 0;
-        padding-top: 50px;
+        padding: 132px 10px 50px 10px;
+    }
+
+    .contact__grid--desktop {
+        display: none;
+    }
+
+    .contact__details {
+        margin: 0;
+    }
+
+    .contact__grid--mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        position: relative;
     }
     
     .contact__title {
         font-size: 45px;
-        margin-bottom: 2rem;
+        margin-bottom: 70px;
     }
     
     .contact__card {
         padding: 1.5rem;
+        width: 100%;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .contact__grid--mobile .contact__card:nth-child(1) {
+        margin-bottom: 10px;
+        z-index: 3;
+    }
+    
+    .contact__grid--mobile .contact__map {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 10px;
+    }
+    
+    .contact__grid--mobile .contact__card:nth-child(3) {
+        margin-bottom: 10px;
+        z-index: 3;
+    }
+    
+    .contact__grid--mobile .contact__card:nth-child(4) {
+        z-index: 2;
     }
     
     .contact__phone-mockup {
@@ -320,25 +369,47 @@
         height: 400px;
         padding: 15px;
     }
+    
+    .contact__icon {
+        width: 120px;
+        height: 120px;
+        font-size: 1.2rem;
+        top: -60px;
+        z-index: 4;
+    }
+
+    .email-icon {
+        bottom: -80px;
+        top: unset
+    }
+
+    .left-icon,
+    .right-icon {
+        bottom: -76px;
+        top: unset;
+    }
+
+    .contact__text {
+        font-size: 18px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
 }
 
 @media (max-width: 480px) {
     .contact__title {
-        font-size: 35px;
+        font-size: 32px;
+        font-weight: 900;
     }
     
     .contact__card {
         padding: 1rem;
     }
-    
-    .contact__icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-    }
+
     
     .contact__text {
-        font-size: 1rem;
+        font-size: 18px;
     }
     
     .contact__phone-mockup {
@@ -379,5 +450,16 @@
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }

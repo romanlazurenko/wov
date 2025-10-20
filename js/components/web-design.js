@@ -101,30 +101,5 @@ class WebDesignPage {
         });
     }
 
-    // Method to test if animations are working
-    testAnimations() {
-        console.log('Testing web design animations...');
-        const title = document.querySelector('.web-design__title');
-        const blocks = document.querySelectorAll('.web-design__block');
-        
-        console.log('Title element:', title);
-        console.log('Title opacity:', title ? title.style.opacity : 'not found');
-        console.log('Title animation:', title ? title.style.animation : 'not found');
-        
-        console.log('Blocks found:', blocks.length);
-        blocks.forEach((block, index) => {
-            console.log(`Block ${index} opacity:`, block.style.opacity);
-            console.log(`Block ${index} animation:`, block.style.animation);
-        });
-    }
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    const webDesignPage = new WebDesignPage();
-    
-    // Test animations after a short delay
-    setTimeout(() => {
-        webDesignPage.testAnimations();
-    }, 100);
-});

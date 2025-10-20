@@ -6,7 +6,6 @@ class StreetViewAnimations {
     init() {
         // Animations will work automatically via CSS
         // This class is here for future enhancements if needed
-        console.log('Street View animations initialized');
     }
 
     // Method to replay animations (useful for testing)

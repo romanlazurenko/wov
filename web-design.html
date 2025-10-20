@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webové stránky a design - WOV</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/components/header.css">
     <link rel="stylesheet" href="css/components/footer.css">
@@ -12,16 +15,37 @@
     <link rel="stylesheet" href="css/components/web-design.css">
     <link rel="stylesheet" href="mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        (function() {
+            const savedLanguage = localStorage.getItem('wov-language');
+            const browserLanguage = navigator.language.split('-')[0];
+            
+            let currentLanguage = 'cz';
+            
+            if (savedLanguage && (savedLanguage === 'cz' || savedLanguage === 'en')) {
+                currentLanguage = savedLanguage;
+            } else if (browserLanguage === 'en') {
+                currentLanguage = 'en';
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.classList.add(`lang-${currentLanguage}`);
+            });
+            
+            if (document.body) {
+                document.body.classList.add(`lang-${currentLanguage}`);
+            }
+        })();
+    </script>
 </head>
 
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="header__content">
             <div class="header__logo">
                 <a href="/"><img src="assets/img/logo.svg" alt="Way of Visionary Logo"></a>
             </div>
-            <!-- Desktop Navigation -->
             <nav class="header__nav header__nav--desktop">
                 <ul class="header__nav-links">
                     <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
@@ -40,7 +64,6 @@
                 </ul>
             </nav>
 
-            <!-- Mobile Burger Menu -->
             <div class="header__mobile">
                 <button class="header__burger" id="burger-menu">
                     <span class="header__burger-line"></span>
@@ -63,7 +86,6 @@
             </div>
         </div>
         
-        <!-- Mobile Navigation Menu -->
         <nav class="header__nav header__nav--mobile" id="mobile-nav">
             <div class="header__mobile-language mobile-wrapper language-selector">
                 <div class="header__mobile-language-selector">
@@ -72,8 +94,6 @@
                 </div>
             </div>
             <div class="header__mobile-nav-content mobile-wrapper nav-content">
-                <!-- Mobile Language Selectors -->
-                <!-- Mobile Navigation Links -->
                 <ul class="header__mobile-nav-links">
                     <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
                     <li><a href="street-view.html" data-translate="nav.street-view">Street view</a></li>
@@ -82,7 +102,6 @@
                     <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
                 </ul>
                 
-                <!-- Mobile CTA Button -->
                 <div class="header__mobile-cta">
                     <a href="#" class="header__mobile-cta-button" data-translate="header.cta">Získat konzultaci</a>
                 </div>
@@ -90,37 +109,35 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main class="web-design">
         <div class="web-design__content">
-            <h1 class="web-design__title">WEBOVÉ STRÁNKY A DESIGN</h1>
+            <h1 class="web-design__title" data-translate="web-design.title">WEBOVÉ STRÁNKY A DESIGN</h1>
 
             <div class="web-design__grid">
-                <!-- Left Block -->
                 <div>
                     <div class="web-design__main-title">
-                        <h2 class="web-design__block-title">Kdo potřebuje webové stránky a proč my</h2>
+                        <h2 class="web-design__block-title" data-translate="web-design.left.title">Kdo potřebuje webové stránky a proč my</h2>
                     </div>
                     <div class="web-design__block">
 
-                        <h3 class="web-design__block-text">Dnes už web není jen vizitka, ale hlavní nástroj pro získávání zákazníků. <br>Je nezbytný pro:
+                        <h3 class="web-design__block-text" data-translate="web-design.left.subtitle">Dnes už web není jen vizitka, ale hlavní nástroj pro získávání zákazníků. <br>Je nezbytný pro:
                         </h3>
 
                         <div class="web-design__list">
                             <div class="web-design__list-item">
-                                <span class="web-design__list-text"><span class="web-design__list-title">Malé podniky</span> - aby vás klienti našli na Googlu a důvěřovali vaší firmě.</span>
+                                <span class="web-design__list-text"><span class="web-design__list-title" data-translate="web-design.left.item1.title">Malé podniky</span> - <span data-translate="web-design.left.item1.text">aby vás klienti našli na Googlu a důvěřovali vaší firmě.</span></span>
                             </div>
 
                             <div class="web-design__list-item">
-                                <span class="web-design__list-text"><span class="web-design__list-title">Kadeřnické salony, fitness centra, restaurace</span> - pro prezentaci služeb, cen, jídelního lístku, interiéru a 3D prohlídky.</span>
+                                <span class="web-design__list-text"><span class="web-design__list-title" data-translate="web-design.left.item2.title">Kadeřnické salony, fitness centra, restaurace</span> - <span data-translate="web-design.left.item2.text">pro prezentaci služeb, cen, jídelního lístku, interiéru a 3D prohlídky.</span></span>
                             </div>
 
                             <div class="web-design__list-item">
-                                <span class="web-design__list-text"><span class="web-design__list-title">E-shopy</span> - pro 24/7 online prodej.</span>
+                                <span class="web-design__list-text"><span class="web-design__list-title" data-translate="web-design.left.item3.title">E-shopy</span> - <span data-translate="web-design.left.item3.text">pro 24/7 online prodej.</span></span>
                             </div>
 
                             <div class="web-design__list-item">
-                                <span class="web-design__list-text"><span class="web-design__list-title">Velké společnosti</span> - pro posílení značky a online reputace.</span>
+                                <span class="web-design__list-text"><span class="web-design__list-title" data-translate="web-design.left.item4.title">Velké společnosti</span> - <span data-translate="web-design.left.item4.text">pro posílení značky a online reputace.</span></span>
                             </div>
                         </div>
 
@@ -128,34 +145,33 @@
                             <img src="assets/img/websidecardbg.jpg" alt="mountain"
                                 class="web-design__overlay-image">
                             <div class="web-design__overlay-text">
-                                <p>Pokud váš podnik není na internetu, pro mnoho klientů prostě neexistujete.</p>
+                                <p data-translate="web-design.left.overlay.text">Pokud váš podnik není na internetu, pro mnoho klientů prostě neexistujete.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Block -->
                 <div>
                     <div class="web-design__main-title">
-                        <h2 class="web-design__block-title">Jak to funguje</h2>
+                        <h2 class="web-design__block-title" data-translate="web-design.right.title">Jak to funguje</h2>
                     </div>
                     <div class="web-design__block">
 
-                        <h3 class="web-design__block-text text-right">Komu je potřeba web a proč si vybrat právě nás?</h3>
+                        <h3 class="web-design__block-text text-right" data-translate="web-design.right.subtitle">Komu je potřeba web a proč si vybrat právě nás?</h3>
 
                         <div class="web-design__list">
                             <div class="web-design__list-item">
-                                <span class="web-design__list-text"><span class="web-design__list-title">Vývoj struktury a prototypu</span> - vytváříme pohodlnou navigaci, stránky a logiku webu tak, aby klient snadno našel, co potřebuje.</span>
+                                <span class="web-design__list-text"><span class="web-design__list-title" data-translate="web-design.right.item1.title">Vývoj struktury a prototypu</span> - <span data-translate="web-design.right.item1.text">vytváříme pohodlnou navigaci, stránky a logiku webu tak, aby klient snadno našel, co potřebuje.</span></span>
                             </div>
                             <div class="web-design__list-item">
-                                <span class="web-design__list-text"><span class="web-design__list-title">Design a layout</span> - vytváříme moderní adaptivní design, který vypadá stejně dobře na telefonu i počítači.</span>
+                                <span class="web-design__list-text"><span class="web-design__list-title" data-translate="web-design.right.item2.title">Design a layout</span> - <span data-translate="web-design.right.item2.text">vytváříme moderní adaptivní design, který vypadá stejně dobře na telefonu i počítači.</span></span>
                             </div>
                             <div class="web-design__list-item">
-                                <span class="web-design__list-text"><span class="web-design__list-title">Naplňování</span> - přidáme na web váš obsah a vytvoříme mu individuální styl.</span>
+                                <span class="web-design__list-text"><span class="web-design__list-title" data-translate="web-design.right.item3.title">Naplňování</span> - <span data-translate="web-design.right.item3.text">přidáme na web váš obsah a vytvoříme mu individuální styl.</span></span>
                             </div>
 
                             <div class="web-design__list-item">
-                                <span class="web-design__list-text"><span class="web-design__list-title">Spuštění</span> - odeslání na hosting a připojení k doméně.</span>
+                                <span class="web-design__list-text"><span class="web-design__list-title" data-translate="web-design.right.item4.title">Spuštění</span> - <span data-translate="web-design.right.item4.text">odeslání na hosting a připojení k doméně.</span></span>
                             </div>
                         </div>
 
@@ -163,11 +179,11 @@
                             <img src="assets/img/websidecardbg.jpg" alt="mountain"
                                 class="web-design__overlay-image">
                             <div class="web-design__overlay-text right-text">
-                                <h3 class="web-design__results-title">Výsledek pro klienta:</h3>
+                                <h3 class="web-design__results-title" data-translate="web-design.right.results.title">Výsledek pro klienta:</h3>
                                 <ul class="web-design__overlay-list">
-                                    <li>Web funguje 24/7 a přináší objednávky</li>
-                                    <li>Vaše firma je více vidět na Googlu</li>
-                                    <li>Klienti vám více důvěřují díky profesionálnímu online obrazu</li>
+                                    <li data-translate="web-design.right.results.item1">Web funguje 24/7 a přináší objednávky</li>
+                                    <li data-translate="web-design.right.results.item2">Vaše firma je více vidět na Googlu</li>
+                                    <li data-translate="web-design.right.results.item3">Klienti vám více důvěřují díky profesionálnímu online obrazu</li>
                                 </ul>
                             </div>
                         </div>
@@ -177,7 +193,6 @@
         </div>
     </main>
 
-    <!-- Projects Section -->
     <section class="projects web-design__projects">
         <div class="projects__content">
             <div class="projects__gallery">
@@ -186,7 +201,7 @@
                 </div>
                 <div class="projects__nav">
                     <button class="projects__nav-arrow"><i class="fas fa-chevron-left"></i></button>
-                    <span class="projects__title">Název prohlídky</span>
+                    <span class="projects__title" data-translate="projects.title">Název prohlídky</span>
                     <button class="projects__nav-arrow"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="projects__main-image" id="main-image-container">
@@ -197,19 +212,15 @@
                     </div>
                 </div>
                 <div class="projects__thumbnail projects__thumbnail--large" id="thumbnail-large">
-                    <!-- Large thumbnail will be dynamically generated -->
                 </div>
                 <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-1">
-                    <!-- Small thumbnail 1 will be dynamically generated -->
                 </div>
                 <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-2">
-                    <!-- Small thumbnail 2 will be dynamically generated -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Image Preview Modal -->
     <div class="image-modal" id="image-modal">
         <div class="image-modal__overlay"></div>
         <div class="image-modal__content">
@@ -237,7 +248,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer footer--web-design" id="contact">
         <div class="footer__content">
             <div class="footer__grid">
@@ -277,18 +287,15 @@
         </div>
     </footer>
 
-    <!-- Translation Scripts -->
     <script src="js/translations/cz.js"></script>
     <script src="js/translations/en.js"></script>
     <script src="js/language-manager.js"></script>
 
-    <!-- Component Logic Scripts -->
     <script src="js/components/header.js"></script>
     <script src="js/components/footer.js"></script>
     <script src="js/components/projects-slider.js"></script>
     <script src="js/components/web-design.js"></script>
 
-    <!-- Main App Script -->
     <script src="app.js"></script>
 </body>
 

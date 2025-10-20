@@ -5,22 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Ads - WOV</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/components/header.css">
     <link rel="stylesheet" href="css/components/footer.css">
     <link rel="stylesheet" href="css/components/google-ads.css">
     <link rel="stylesheet" href="mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        (function() {
+            const savedLanguage = localStorage.getItem('wov-language');
+            const browserLanguage = navigator.language.split('-')[0];
+            
+            let currentLanguage = 'cz';
+            
+            if (savedLanguage && (savedLanguage === 'cz' || savedLanguage === 'en')) {
+                currentLanguage = savedLanguage;
+            } else if (browserLanguage === 'en') {
+                currentLanguage = 'en';
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.classList.add(`lang-${currentLanguage}`);
+            });
+            
+            if (document.body) {
+                document.body.classList.add(`lang-${currentLanguage}`);
+            }
+        })();
+    </script>
 </head>
 
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="header__content">
             <div class="header__logo">
                 <a href="/"><img src="assets/img/logo.svg" alt="Way of Visionary Logo"></a>
             </div>
-            <!-- Desktop Navigation -->
             <nav class="header__nav header__nav--desktop">
                 <ul class="header__nav-links">
                     <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
@@ -39,7 +63,6 @@
                 </ul>
             </nav>
 
-            <!-- Mobile Burger Menu -->
             <div class="header__mobile">
                 <button class="header__burger" id="burger-menu">
                     <span class="header__burger-line"></span>
@@ -62,7 +85,6 @@
             </div>
         </div>
         
-        <!-- Mobile Navigation Menu -->
         <nav class="header__nav header__nav--mobile" id="mobile-nav">
             <div class="header__mobile-language mobile-wrapper language-selector">
                 <div class="header__mobile-language-selector">
@@ -71,8 +93,6 @@
                 </div>
             </div>
             <div class="header__mobile-nav-content mobile-wrapper nav-content">
-                <!-- Mobile Language Selectors -->
-                <!-- Mobile Navigation Links -->
                 <ul class="header__mobile-nav-links">
                     <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
                     <li><a href="street-view.html" data-translate="nav.street-view">Street view</a></li>
@@ -81,7 +101,6 @@
                     <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
                 </ul>
                 
-                <!-- Mobile CTA Button -->
                 <div class="header__mobile-cta">
                     <a href="#" class="header__mobile-cta-button" data-translate="header.cta">Získat konzultaci</a>
                 </div>
@@ -89,36 +108,34 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main class="google-ads">
-        <!-- Hero Section -->
         <section class="google-ads__hero">
             <div class="google-ads__hero-bg"></div>
             <div class="google-ads__hero-content">
-                <h1 class="google-ads__title">GOOGLE <span class="google-ads__title-span">Ads</span></h1>
-                <p class="google-ads__subtitle">PROFESIONÁLNÍ REKLAMA V GOOGLE ADS PRO VAŠE PODNIKÁNÍ</p>
+                <h1 class="google-ads__title">GOOGLE <span class="google-ads__title-span"> Ads</span></h1>
+                <p class="google-ads__subtitle" data-translate="google-ads.subtitle">Profesionální reklama v Google Ads pro vaše podnikání</p>
 
                 <div class="google-ads__cards">
                     <div class="google-ads__card">
-                        <h2 class="google-ads__card-title">Proč je Google Ads výhodný?</h2>
-                        <p class="google-ads__card-text">Google Ads je nejrychlejší a nejpředvídatelnější způsob, jak
+                        <h2 class="google-ads__card-title" data-translate="google-ads.card1.title">Proč je Google Ads výhodný?</h2>
+                        <p class="google-ads__card-text" data-translate="google-ads.card1.text">Google Ads je nejrychlejší a nejpředvídatelnější způsob, jak
                             získat zákazníky. Vaše reklamy se zobrazují lidem právě ve chvíli, kdy hledají vaše služby
                             nebo produkty.</p>
                     </div>
 
                     <div class="google-ads__card">
-                        <h2 class="google-ads__card-title">Fakta a čísla:</h2>
+                        <h2 class="google-ads__card-title" data-translate="google-ads.card2.title">Fakta a čísla:</h2>
                         <ul class="google-ads__card-list">
-                            <li>Více než 84 % uživatelů internetu v Česku a 95 % v Evropě vyhledává informace právě na
+                            <li data-translate="google-ads.card2.item1">Více než 84 % uživatelů internetu v Česku a 95 % v Evropě vyhledává informace právě na
                                 Googlu.</li>
-                            <li>70 % zákazníků klikne na reklamu, pokud odpovídá jejich dotazu.</li>
-                            <li>První poptávky a telefonáty získáte už v prvních dnech po spuštění kampaně.</li>
+                            <li data-translate="google-ads.card2.item2">70 % zákazníků klikne na reklamu, pokud odpovídá jejich dotazu.</li>
+                            <li data-translate="google-ads.card2.item3">První poptávky a telefonáty získáte už v prvních dnech po spuštění kampaně.</li>
                         </ul>
                     </div>
 
                     <div class="google-ads__card-oval">
                         <div class="google-ads__floating-note">
-                            <p>Na rozdíl od SEO, kde se výsledky projeví až po několika měsících, funguje PPC reklama
+                            <p data-translate="google-ads.floating.note">Na rozdíl od SEO, kde se výsledky projeví až po několika měsících, funguje PPC reklama
                                 okamžitě.</p>
                         </div>
                     </div>
@@ -126,61 +143,59 @@
 
 
             </div>
+            <div class="google-ads__hero-bg-mobile"></div>
         </section>
 
-        <!-- Middle Section -->
         <section class="google-ads__middle">
-            <h2 class="google-ads__middle-title">KOMU SE HODÍ REKLAMA V GOOGLE ADS</h2>
+            <h2 class="google-ads__middle-title" data-translate="google-ads.middle.title">KOMU SE HODÍ REKLAMA V GOOGLE ADS</h2>
         </section>
 
-        <!-- Bottom Section -->
         <section class="google-ads__bottom">
             <div class="google-ads__bottom-content">
                 <img src="assets/img/googleadsellipse.png" alt="ellipse" class="google-ads__bottom-ellipse">
                 <div class="google-ads__bottom-list">
                     <div class="google-ads__list-item">
-                        <div class="google-ads__list-text"><span class="google-ads__list-text-span">Malým
-                                podnikům</span> - získání nových zákazníků v okolí bez velkých investic. Například
-                            obchod na rohu nebo dílna může získat 10-20 poptávek týdně už od prvního měsíce.</div>
+                        <div class="google-ads__list-text"><span class="google-ads__list-text-span" data-translate="google-ads.bottom.item1.title">Malým
+                                podnikům</span> - <span data-translate="google-ads.bottom.item1.text">získání nových zákazníků v okolí bez velkých investic. Například
+                            obchod na rohu nebo dílna může získat 10-20 poptávek týdně už od prvního měsíce.</span></div>
                     </div>
 
                     <div class="google-ads__list-item">
-                        <div class="google-ads__list-text"><span class="google-ads__list-text-span">Salonům krásy,
-                                fitness centrum, restauracím</span> - přilákání klientů na konkrétní dotazy („salon
-                            krásy Praha", „fitness centrum poblíž", „restaurace na večer").<br> Můžete:</div>
+                        <div class="google-ads__list-text"><span class="google-ads__list-text-span" data-translate="google-ads.bottom.item2.title">Salonům krásy,
+                                fitness centrum, restauracím</span> - <span data-translate="google-ads.bottom.item2.text">přilákání klientů na konkrétní dotazy („salon
+                            krásy Praha", „fitness centrum poblíž", „restaurace na večer").</span><br> <span data-translate="google-ads.bottom.item2.youcan">Můžete:</span></div>
                         <ul class="google-ads__list-text-list">
-                            <li>zobrazovat akce a speciální nabídky</li>
-                            <li>spustit online rezervace či objednávky</li>
-                            <li>získávat stálý přísun zákazníků bez přeplatků za masovou reklamu</li>
+                            <li data-translate="google-ads.bottom.item2.option1">zobrazovat akce a speciální nabídky</li>
+                            <li data-translate="google-ads.bottom.item2.option2">spustit online rezervace či objednávky</li>
+                            <li data-translate="google-ads.bottom.item2.option3">získávat stálý přísun zákazníků bez přeplatků za masovou reklamu</li>
                         </ul>
                     </div>
 
                     <div class="google-ads__list-item">
-                        <div class="google-ads__list-text"><span class="google-ads__list-text-span">Internetovým
-                                obchodům</span> - stabilní online prodeje 24/7. Pomocí Google Shopping lze zvýšit
-                            konverzí o 30-40 % díky přesnému zacílení na dotazy zákazníků</div>
+                        <div class="google-ads__list-text"><span class="google-ads__list-text-span" data-translate="google-ads.bottom.item3.title">Internetovým
+                                obchodům</span> - <span data-translate="google-ads.bottom.item3.text">stabilní online prodeje 24/7. Pomocí Google Shopping lze zvýšit
+                            konverzí o 30-40 % díky přesnému zacílení na dotazy zákazníků</span></div>
                     </div>
                     <div class="google-ads__list-item">
-                        <div class="google-ads__list-text"><span class="google-ads__list-text-span">Velkým firmám</span>
-                            - škálování podnikání, vstup do nových měst a zemí. Google Ads umožňuje řídit reklamu v
-                            různých regionech a přesně kontrolovat rozpočet</div>
+                        <div class="google-ads__list-text"><span class="google-ads__list-text-span" data-translate="google-ads.bottom.item4.title">Velkým firmám</span>
+                            - <span data-translate="google-ads.bottom.item4.text">škálování podnikání, vstup do nových měst a zemí. Google Ads umožňuje řídit reklamu v
+                            různých regionech a přesně kontrolovat rozpočet</span></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Benefits Section -->
         <section class="google-ads__benefits">
             <div class="google-ads__benefits-content">
-                <h2 class="google-ads__benefits-title">NAŠE VÝHODY</h2>
+                <h2 class="google-ads__benefits-title" data-translate="google-ads.benefits.title">NAŠE VÝHODY</h2>
                 <div class="google-ads__benefits-list">
                     <div class="google-ads__benefit-item">
                         <div class="google-ads__benefit-icon">
                             <img src="assets/img/valve.svg" alt="Expert Setup">
                         </div>
                         <div class="google-ads__benefit-text">
-                            <span class="google-ads__benefit-title">Odborné nastavení</span> — používáme pouze ověřené
-                            strategie pro vaši oblast podnikání.
+                            <span class="google-ads__benefit-title" data-translate="google-ads.benefit1.title">Odborné nastavení</span> — <span data-translate="google-ads.benefit1.text">používáme pouze ověřené
+                            strategie pro vaši oblast podnikání.</span>
                         </div>
                     </div>
 
@@ -189,8 +204,8 @@
                             <img src="assets/img/price.svg" alt="Reduced Price">
                         </div>
                         <div class="google-ads__benefit-text">
-                            <span class="google-ads__benefit-title">Snížení ceny za poptávku</span> — optimalizujeme
-                            kampaně tak, aby cena za zákazníka byla nižší než u konkurence.
+                            <span class="google-ads__benefit-title" data-translate="google-ads.benefit2.title">Snížení ceny za poptávku</span> — <span data-translate="google-ads.benefit2.text">optimalizujeme
+                            kampaně tak, aby cena za zákazníka byla nižší než u konkurence.</span>
                         </div>
                     </div>
 
@@ -199,8 +214,8 @@
                             <img src="assets/img/checklist.svg" alt="Transparent Reports">
                         </div>
                         <div class="google-ads__benefit-text">
-                            <span class="google-ads__benefit-title">Transparentní reporty</span> — vidíte skutečná
-                            čísla: kolik bylo utraceno a kolik zákazníků přišlo.
+                            <span class="google-ads__benefit-title" data-translate="google-ads.benefit3.title">Transparentní reporty</span> — <span data-translate="google-ads.benefit3.text">vidíte skutečná
+                            čísla: kolik bylo utraceno a kolik zákazníků přišlo.</span>
                         </div>
                     </div>
 
@@ -209,8 +224,8 @@
                             <img src="assets/img/chart.svg" alt="Complete Service">
                         </div>
                         <div class="google-ads__benefit-text">
-                            <span class="google-ads__benefit-title">Kompletní servis</span> — reklamu nejen spustíme,
-                            ale dovedeme ji k maximální efektivitě.
+                            <span class="google-ads__benefit-title" data-translate="google-ads.benefit4.title">Kompletní servis</span> — <span data-translate="google-ads.benefit4.text">reklamu nejen spustíme,
+                            ale dovedeme ji k maximální efektivitě.</span>
                         </div>
                     </div>
 
@@ -219,8 +234,8 @@
                             <img src="assets/img/smalllogo.svg" alt="Growth">
                         </div>
                         <div class="google-ads__benefit-text last">
-                            V průměru naši klienti získávají nárůst poptávek o <span
-                                class="google-ads__benefit-highlight">40-60%</span> během prvních 2-3 měsíců spolupráce.
+                            <span data-translate="google-ads.benefit5.text">V průměru naši klienti získávají nárůst poptávek o</span> <span
+                                class="google-ads__benefit-highlight" data-translate="google-ads.benefit5.percentage">40-60%</span> <span data-translate="google-ads.benefit5.text2">během prvních 2-3 měsíců spolupráce.</span>
                         </div>
                         <div class="google-ads__benefit-check">
                             <img src="assets/img/check.svg" alt="Check">
@@ -230,53 +245,50 @@
             </div>
         </section>
 
-        <!-- Workflow Section -->
         <section class="google-ads__workflow">
             <div class="google-ads__workflow-content">
-                <h2 class="google-ads__workflow-title">JAK PRACUJEME</h2>
+                <h2 class="google-ads__workflow-title" data-translate="google-ads.workflow.title">JAK PRACUJEME</h2>
                 <div class="google-ads__workflow-grid">
-                    <!-- Left Column -->
                     <div class="google-ads__workflow-column">
                         <div class="google-ads__workflow-card">
                             <div class="google-ads__workflow-number">01</div>
                             <div class="google-ads__workflow-text">
-                                <div><span class="google-ads__workflow-highlight">Analyzujeme podnikání a
-                                        konkurenci</span> – připravíme strategii propagace</div>
+                                <div><span class="google-ads__workflow-highlight" data-translate="google-ads.workflow1.title">Analyzujeme podnikání a
+                                        konkurenci</span> – <span data-translate="google-ads.workflow1.text">připravíme strategii propagace</span></div>
                             </div>
                         </div>
 
                         <div class="google-ads__workflow-card">
                             <div class="google-ads__workflow-number">03</div>
                             <div class="google-ads__workflow-text">
-                                <div><span class="google-ads__workflow-highlight">Vytvoříme kampaně</span> – ve
-                                    vyhledávání Google, obsahové síti, na YouTube a v Google Shopping.</div>
+                                <div><span class="google-ads__workflow-highlight" data-translate="google-ads.workflow3.title">Vytvoříme kampaně</span> – <span data-translate="google-ads.workflow3.text">ve
+                                    vyhledávání Google, obsahové síti, na YouTube a v Google Shopping.</span></div>
                             </div>
                         </div>
 
                         <div class="google-ads__workflow-card">
                             <div class="google-ads__workflow-number">05</div>
                             <div class="google-ads__workflow-text">
-                                <div><span class="google-ads__workflow-highlight">Optimalizujeme</span> – každý týden
-                                    kampaně zlepšujeme, snižujeme cenu za klik a zvyšujeme počet poptávek.</div>
+                                <div><span class="google-ads__workflow-highlight" data-translate="google-ads.workflow5.title">Optimalizujeme</span> – <span data-translate="google-ads.workflow5.text">každý týden
+                                    kampaně zlepšujeme, snižujeme cenu za klik a zvyšujeme počet poptávek.</span></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column -->
                     <div class="google-ads__workflow-column">
                         <div class="google-ads__workflow-card">
                             <div class="google-ads__workflow-number">02</div>
                             <div class="google-ads__workflow-text">
-                                <div><span class="google-ads__workflow-highlight">Vybereme klíčová slova</span> – od 100
-                                    do 1000 dotazů podle vaší oblasti podnikání.</div>
+                                <div><span class="google-ads__workflow-highlight" data-translate="google-ads.workflow2.title">Vybereme klíčová slova</span> – <span data-translate="google-ads.workflow2.text">od 100
+                                    do 1000 dotazů podle vaší oblasti podnikání.</span></div>
                             </div>
                         </div>
 
                         <div class="google-ads__workflow-card">
                             <div class="google-ads__workflow-number">04</div>
                             <div class="google-ads__workflow-text">
-                                <div><span class="google-ads__workflow-highlight">Nastavíme analytiku</span> – uvidíte
-                                    počet hovorů, poptávek a jejich cenu.</div>
+                                <div><span class="google-ads__workflow-highlight" data-translate="google-ads.workflow4.title">Nastavíme analytiku</span> – <span data-translate="google-ads.workflow4.text">uvidíte
+                                    počet hovorů, poptávek a jejich cenu.</span></div>
                             </div>
                         </div>
 
@@ -286,7 +298,7 @@
                             </div>
                             <div class="google-ads__workflow-text">
                                 <div class="google-ads__workflow-cta">
-                                    <button class="google-ads__cta-button">Získat konzultaci</button>
+                                    <button class="google-ads__cta-button" data-translate="google-ads.workflow.cta">Získat konzultaci</button>
                                 </div>
                             </div>
                         </div>
@@ -296,19 +308,16 @@
             </div>
         </section>
 
-        <!-- Results Section -->
         <section class="google-ads__results">
             <div class="google-ads__results-content">
                 <div class="google-ads__results-grid">
-                    <!-- Left Panel -->
                     <div class="google-ads__results-panel google-ads__results-panel--left">
-                        <div class="google-ads__results-title">
+                        <div class="google-ads__results-title" data-translate="google-ads.results.title">
                             <div class="google-ads__results-title-line">VÝSLEDEK PRO</div>
                             <div class="google-ads__results-title-line">VAŠE PODNIKÁNÍ</div>
                         </div>
                     </div>
                     
-                    <!-- Right Panel -->
                     <div class="google-ads__results-panel google-ads__results-panel--right">
                         <div class="google-ads__results-content-text">
                             <ul class="google-ads__results-list">
@@ -330,7 +339,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer footer--google-ads" id="contact">
         <div class="footer__content">
             <div class="footer__grid">
@@ -369,17 +377,14 @@
         </div>
     </footer>
 
-    <!-- Translation Scripts -->
     <script src="js/translations/cz.js"></script>
     <script src="js/translations/en.js"></script>
     <script src="js/language-manager.js"></script>
 
-    <!-- Component Logic Scripts -->
     <script src="js/components/header.js"></script>
     <script src="js/components/footer.js"></script>
     <script src="js/components/google-ads.js"></script>
 
-    <!-- Main App Script -->
     <script src="app.js"></script>
 </body>
 

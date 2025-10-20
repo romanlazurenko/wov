@@ -378,8 +378,8 @@
     }
 
     .footer__contact-info p {
-        font-size: 0.95rem;
-        margin-bottom: 0.75rem;
+        font-size: 18px;
+        margin-bottom: 45px;
     }
 }
 
@@ -389,7 +389,10 @@
     .footer__modal-content {
         width: 95%;
         padding: 1.5rem;
-        margin: 1rem;
+        margin: 10px;
+        border-radius: 10px;
+        height: calc(100vh - 92px);
+        
     }
 
     .services__modal-close,
@@ -402,8 +405,7 @@
     .footer__contact-form input,
     .footer__contact-form textarea {
         width: 100%;
-        padding: 0.75rem;
-        margin-bottom: 1rem;
+        /* margin-bottom: 1rem; */
         font-size: 1rem;
     }
 
@@ -515,6 +517,16 @@
     .footer__modal-content {
         background-color: var(--dark-gray);
         border: 1px solid var(--medium-gray);
+        border-radius: 20px;
+        max-width: 500px;
+        width: 90%;
+        position: relative;
+        background: rgba(237, 255, 246, 0.281);
+        border: 1px solid rgba(196, 170, 170, 0.226);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
     }
 }
 

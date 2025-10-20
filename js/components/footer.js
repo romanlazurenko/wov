@@ -1,4 +1,4 @@
-// Footer Component Logic
+
 class Footer {
     constructor() {
         this.footer = null;
@@ -13,15 +13,14 @@ class Footer {
     }
 
     bindEvents() {
-        // CTA button functionality
         const ctaButton = this.footer.querySelector('.footer__cta-button');
         if (ctaButton) {
-            ctaButton.addEventListener('click', () => {
+            ctaButton.addEventListener('click', (e) => {
                 this.handleCTAClick();
+                this.animateButtonPress(ctaButton);
             });
         }
 
-        // Service links
         const serviceLinks = this.footer.querySelectorAll('.footer__links a');
         serviceLinks.forEach(link => {
             link.addEventListener('click', (e) => {
@@ -30,7 +29,6 @@ class Footer {
             });
         });
 
-        // Social media links
         const socialLinks = this.footer.querySelectorAll('.footer__social-icons a');
         socialLinks.forEach(link => {
             link.addEventListener('click', (e) => {
@@ -39,7 +37,6 @@ class Footer {
             });
         });
 
-        // Contact info interactions
         this.setupContactInteractions();
     }
 
@@ -47,7 +44,6 @@ class Footer {
         const phoneElement = this.footer.querySelector('.footer__phone');
         const emailElement = this.footer.querySelector('.footer__email');
 
-        // Phone click to copy
         if (phoneElement) {
             phoneElement.style.cursor = 'pointer';
             phoneElement.addEventListener('click', () => {
@@ -58,7 +54,6 @@ class Footer {
             });
         }
 
-        // Email click to copy
         if (emailElement) {
             emailElement.style.cursor = 'pointer';
             emailElement.addEventListener('click', () => {
@@ -71,11 +66,17 @@ class Footer {
     }
 
     handleCTAClick() {
-        // Emit custom event for other components to listen
         this.emitEvent('ctaClicked', { source: 'footer' });
 
-        // Open contact form modal
         this.openContactForm();
+    }
+
+    animateButtonPress(button) {
+        button.classList.add('button-pressed');
+        
+        setTimeout(() => {
+            button.classList.remove('button-pressed');
+        }, 150);
     }
 
     handleServiceLinkClick(link) {
@@ -89,7 +90,6 @@ class Footer {
             });
         }
 
-        // Emit custom event
         this.emitEvent('serviceLinkClicked', { href, text: link.textContent });
     }
 
@@ -97,15 +97,12 @@ class Footer {
         const platform = link.getAttribute('aria-label');
         const href = link.getAttribute('href');
 
-        // Emit custom event
         this.emitEvent('socialClicked', { platform, href });
 
-        // Open social media link in new tab
         window.open(href, '_blank');
     }
 
     openContactForm() {
-        // Create contact form modal
         const modal = document.createElement('div');
         modal.className = 'footer__contact-modal';
         modal.innerHTML = `
@@ -142,7 +139,6 @@ class Footer {
 
         document.body.appendChild(modal);
 
-        // Close modal functionality
         const closeBtn = modal.querySelector('.footer__modal-close');
         closeBtn.addEventListener('click', () => {
             this.closeModal(modal);
@@ -154,17 +150,22 @@ class Footer {
             }
         });
 
-        // Custom dropdown functionality
         this.setupCustomDropdown(modal);
 
-        // Form submission
         const form = modal.querySelector('.footer__contact-form');
+        const submitButton = form.querySelector('.footer__contact-form-submit');
+        
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             this.handleFormSubmission(form);
         });
 
-        // Emit custom event
+        if (submitButton) {
+            submitButton.addEventListener('click', (e) => {
+                this.animateButtonPress(submitButton);
+            });
+        }
+
         this.emitEvent('contactFormOpened');
     }
 
@@ -176,13 +177,11 @@ class Footer {
         const valueSpan = customSelect.querySelector('.footer__custom-select-value');
         const hiddenInput = customSelect.querySelector('.footer__custom-select-input');
 
-        // Toggle dropdown
         trigger.addEventListener('click', (e) => {
             e.stopPropagation();
             customSelect.classList.toggle('footer__custom-select--open');
         });
 
-        // Handle option selection
         optionItems.forEach(option => {
             option.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -192,16 +191,12 @@ class Footer {
                 valueSpan.textContent = text;
                 hiddenInput.value = value;
                 
-                // Remove selected class from all options
                 optionItems.forEach(opt => opt.classList.remove('footer__custom-select-option--selected'));
-                // Add selected class to clicked option
                 option.classList.add('footer__custom-select-option--selected');
                 
-                // Close dropdown
                 customSelect.classList.remove('footer__custom-select--open');
             });
 
-            // Hover effect
             option.addEventListener('mouseenter', () => {
                 optionItems.forEach(opt => opt.classList.remove('footer__custom-select-option--hover'));
                 option.classList.add('footer__custom-select-option--hover');
@@ -212,7 +207,6 @@ class Footer {
             });
         });
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', () => {
             customSelect.classList.remove('footer__custom-select--open');
         });
@@ -228,18 +222,12 @@ class Footer {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         
-        // Here you would typically send the data to your server
-        console.log('Form submitted:', data);
-        
-        // Show success message
         const successMessage = window.languageManager ? 
             window.languageManager.getTranslation('contact.form.success') : 'Zpráva odeslána!';
         this.showCopyNotification(successMessage);
         
-        // Emit custom event
         this.emitEvent('contactFormSubmitted', { data });
         
-        // Close modal
         const modal = form.closest('.footer__contact-modal');
         this.closeModal(modal);
     }
@@ -276,7 +264,6 @@ class Footer {
         }, 3000);
     }
 
-    // Method to update contact information
     updateContactInfo(phone, email) {
         const phoneElement = this.footer.querySelector('.footer__phone');
         const emailElement = this.footer.querySelector('.footer__email');
@@ -289,22 +276,18 @@ class Footer {
             emailElement.textContent = email;
         }
 
-        // Emit custom event
         this.emitEvent('contactInfoUpdated', { phone, email });
     }
 
-    // Method to update social media links
     updateSocialLink(platform, newHref) {
         const socialLink = this.footer.querySelector(`[aria-label="${platform}"]`);
         if (socialLink) {
             socialLink.setAttribute('href', newHref);
             
-            // Emit custom event
             this.emitEvent('socialLinkUpdated', { platform, newHref });
         }
     }
 
-    // Method to add new social media link
     addSocialLink(platform, href, iconClass) {
         const socialIcons = this.footer.querySelector('.footer__social-icons');
         if (socialIcons) {
@@ -313,7 +296,6 @@ class Footer {
             newLink.setAttribute('aria-label', platform);
             newLink.innerHTML = `<i class="${iconClass}"></i>`;
             
-            // Bind click event
             newLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.handleSocialClick(newLink);
@@ -321,23 +303,19 @@ class Footer {
             
             socialIcons.appendChild(newLink);
             
-            // Emit custom event
             this.emitEvent('socialLinkAdded', { platform, href, iconClass });
         }
     }
 
-    // Method to remove social media link
     removeSocialLink(platform) {
         const socialLink = this.footer.querySelector(`[aria-label="${platform}"]`);
         if (socialLink) {
             socialLink.remove();
             
-            // Emit custom event
             this.emitEvent('socialLinkRemoved', { platform });
         }
     }
 
-    // Method to update CTA button text
     updateCTAText(text) {
         const ctaButton = this.footer.querySelector('.footer__cta-button');
         if (ctaButton) {
@@ -345,7 +323,13 @@ class Footer {
         }
     }
 
-    // Method to get contact information
+    testButtonPress() {
+        const ctaButton = this.footer.querySelector('.footer__cta-button');
+        if (ctaButton) {
+            this.animateButtonPress(ctaButton);
+        }
+    }
+
     getContactInfo() {
         const phoneElement = this.footer.querySelector('.footer__phone');
         const emailElement = this.footer.querySelector('.footer__email');
@@ -356,7 +340,6 @@ class Footer {
         };
     }
 
-    // Method to get all social media links
     getSocialLinks() {
         const socialLinks = this.footer.querySelectorAll('.footer__social-icons a');
         return Array.from(socialLinks).map(link => ({
@@ -365,14 +348,12 @@ class Footer {
         }));
     }
 
-    // Method to emit custom events
     emitEvent(eventName, detail) {
         const event = new CustomEvent(eventName, { detail });
         document.dispatchEvent(event);
     }
 }
 
-// Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Footer;
 } else {

@@ -6,42 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Street View - Way of Visionary</title>
 
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        (function() {
+            const savedLanguage = localStorage.getItem('wov-language');
+            const browserLanguage = navigator.language.split('-')[0];
+            
+            let currentLanguage = 'cz';
+            
+            if (savedLanguage && (savedLanguage === 'cz' || savedLanguage === 'en')) {
+                currentLanguage = savedLanguage;
+            } else if (browserLanguage === 'en') {
+                currentLanguage = 'en';
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.classList.add(`lang-${currentLanguage}`);
+            });
+            
+            if (document.body) {
+                document.body.classList.add(`lang-${currentLanguage}`);
+            }
+        })();
+    </script>
 
-    <!-- Base Styles -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Component CSS Modules -->
     <link rel="stylesheet" href="css/components/header.css">
     <link rel="stylesheet" href="css/components/footer.css">
     <link rel="stylesheet" href="css/components/street-view.css">
 
-    <!-- Mobile Styles -->
     <link rel="stylesheet" href="mobile.css">
 
-    <!-- Meta tags for SEO -->
     <meta name="description"
         content="Street View služby - Virtuální prohlídky pro vaše podnikání. Zvyšte viditelnost a důvěryhodnost vaší firmy.">
     <meta name="keywords" content="street view, virtuální prohlídky, google maps, 360° fotografie">
     <meta name="author" content="Way of Visionary">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="header__content">
             <div class="header__logo">
                 <a href="/"><img src="assets/img/logo.svg" alt="Way of Visionary Logo"></a>
             </div>
-            <!-- Desktop Navigation -->
             <nav class="header__nav header__nav--desktop">
                 <ul class="header__nav-links">
                     <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
@@ -60,7 +74,6 @@
                 </ul>
             </nav>
 
-            <!-- Mobile Burger Menu -->
             <div class="header__mobile">
                 <button class="header__burger" id="burger-menu">
                     <span class="header__burger-line"></span>
@@ -83,7 +96,6 @@
             </div>
         </div>
         
-        <!-- Mobile Navigation Menu -->
         <nav class="header__nav header__nav--mobile" id="mobile-nav">
             <div class="header__mobile-language mobile-wrapper language-selector">
                 <div class="header__mobile-language-selector">
@@ -92,8 +104,6 @@
                 </div>
             </div>
             <div class="header__mobile-nav-content mobile-wrapper nav-content">
-                <!-- Mobile Language Selectors -->
-                <!-- Mobile Navigation Links -->
                 <ul class="header__mobile-nav-links">
                     <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
                     <li><a href="street-view.html" data-translate="nav.street-view">Street view</a></li>
@@ -102,7 +112,6 @@
                     <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
                 </ul>
                 
-                <!-- Mobile CTA Button -->
                 <div class="header__mobile-cta">
                     <a href="#" class="header__mobile-cta-button" data-translate="header.cta">Získat konzultaci</a>
                 </div>
@@ -110,74 +119,66 @@
         </nav>
     </header>
 
-    <!-- Street View Section -->
     <section class="street-view">
         <div class="street-view__content">
-            <h1 class="street-view__title">STREET VIEW</h1>
+            <h1 class="street-view__title" data-translate="street-view.title">STREET VIEW</h1>
             
-            <!-- Process Steps -->
             <div class="street-view__process">
-                <!-- Step 01 -->
                 <div class="street-view__step street-view__step--01">
                     <div class="street-view__step-number">01</div>
                     <div class="street-view__step-content">
-                        <h3>Začátek vyhledávání</h3>
-                        <p>uživatel otevře Google Maps a zadá vyhledávací dotaz</p>
+                        <h3 data-translate="street-view.step01.title">Začátek vyhledávání</h3>
+                        <p data-translate="street-view.step01.description">uživatel otevře Google Maps a zadá vyhledávací dotaz</p>
                     </div>
                 </div>
 
-                <!-- Step 02 -->
                 <div class="street-view__step street-view__step--02">
                     <div class="street-view__step-number">02</div>
                     <div class="street-view__step-content">
-                        <h3>Výsledky vyhledávání</h3>
-                        <p>Google zobrazí seznam firem, které odpovídají dotazu</p>
+                        <h3 data-translate="street-view.step02.title">Výsledky vyhledávání</h3>
+                        <p data-translate="street-view.step02.description">Google zobrazí seznam firem, které odpovídají dotazu</p>
                     </div>
                 </div>
 
-                <!-- Central Phone Placeholder -->
                 <div class="street-view__phone">
                     <video class="street-view__phone-video" autoplay muted loop playsinline>
-                        <source src="assets/img/video.webm" type="video/webm">
+                        <source src="assets/img/video_phone_transparent.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
                 </div>
 
-                <!-- Step 03 -->
                 <div class="street-view__step street-view__step--03">
                     <div class="street-view__step-number">03</div>
                     <div class="street-view__step-content">
-                        <h3>Prohlížení profilů firem</h3>
-                        <p>uživatel se zaměřuje na:</p>
+                        <h3 data-translate="street-view.step03.title">Prohlížení profilů firem</h3>
+                        <p data-translate="street-view.step03.description">uživatel se zaměřuje na:</p>
                     </div>
                 </div>
 
-                <!-- Step 04 -->
                 <div class="street-view__step street-view__step--04">
                     <div class="street-view__step-number">04</div>
                     <div class="street-view__step-content">
-                        <h3>Budování důvěry</h3>
-                        <p>čím více informací je v profilu uvedeno, tím vyšší je důvěryhodnost</p>
+                        <h3 data-translate="street-view.step04.title">Budování důvěry</h3>
+                        <p data-translate="street-view.step04.description">čím více informací je v profilu uvedeno, tím vyšší je důvěryhodnost</p>
                     </div>
                 </div>
 
-                <!-- Step 05 -->
                 <div class="street-view__step street-view__step--05">
                     <div class="street-view__step-number">05</div>
                     <div class="street-view__step-content">
-                        <h3>Výběr firmy</h3>
-                        <p>uživatel si nakonec vybere tu firmu, která:</p>
+                        <h3 data-translate="street-view.step05.title">Výběr firmy</h3>
+                        <p data-translate="street-view.step05.description">uživatel si nakonec vybere tu firmu, která:</p>
                     </div>
                 </div>
 
                 <div class="street-view__step street-view__step--bottom-left">
                     <div class="street-view__step-content-text">
                         <ul>
-                            <li>hodnocení a recenze;</li>
-                            <li>fotografie interiéru a exteriéru, umístění na mapě;</li>
-                            <li>virtuální prohlídku - možnost „vstoupit dovnitř" a předem si prohlédnout atmosféru;</li>
-                            <li>otevírací dobu a kontaktní údaje;</li>
-                            <li>speciální nabídky nebo akce.</li>
+                            <li data-translate="street-view.list.left.item1">hodnocení a recenze;</li>
+                            <li data-translate="street-view.list.left.item2">fotografie interiéru a exteriéru, umístění na mapě;</li>
+                            <li data-translate="street-view.list.left.item3">virtuální prohlídku - možnost „vstoupit dovnitř" a předem si prohlédnout atmosféru;</li>
+                            <li data-translate="street-view.list.left.item4">otevírací dobu a kontaktní údaje;</li>
+                            <li data-translate="street-view.list.left.item5">speciální nabídky nebo akce.</li>
                         </ul>
                     </div>
                 </div>
@@ -185,9 +186,9 @@
                 <div class="street-view__step street-view__step--bottom-right">
                     <div class="street-view__step-content-text">
                         <ul>
-                            <li>má nejlepší recenze;</li>
-                            <li>je vizuálně dobře prezentovaná (fotografie/prohlídka);</li>
-                            <li>vzbuzuje důvěru.</li>
+                            <li data-translate="street-view.list.right.item1">má nejlepší recenze;</li>
+                            <li data-translate="street-view.list.right.item2">je vizuálně dobře prezentovaná (fotografie/prohlídka);</li>
+                            <li data-translate="street-view.list.right.item3">vzbuzuje důvěru.</li>
                         </ul>
                     </div>
                 </div>
@@ -196,7 +197,6 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section class="projects">
         <div class="projects__content">
             <div class="projects__gallery">
@@ -211,24 +211,20 @@
                     <button class="projects__button" data-translate="projects.button">Naše projekty</button>
                     <div class="projects__nav">
                         <button class="projects__nav-arrow"><i class="fas fa-chevron-left"></i></button>
-                        <span class="projects__title">Název prohlídky</span>
+                        <span class="projects__title" data-translate="projects.title">Název prohlídky</span>
                         <button class="projects__nav-arrow"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
                 <div class="projects__thumbnail projects__thumbnail--large" id="thumbnail-large">
-                    <!-- Large thumbnail will be dynamically generated -->
                 </div>
                 <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-1">
-                    <!-- Small thumbnail 1 will be dynamically generated -->
                 </div>
                 <div class="projects__thumbnail projects__thumbnail--small" id="thumbnail-small-2">
-                    <!-- Small thumbnail 2 will be dynamically generated -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Image Preview Modal -->
     <div class="image-modal" id="image-modal">
         <div class="image-modal__overlay"></div>
         <div class="image-modal__content">
@@ -256,7 +252,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer footer--street-view" id="contact">
         <div class="footer__content">
             <div class="footer__grid">
@@ -295,18 +290,15 @@
         </div>
     </footer>
 
-    <!-- Translation Scripts -->
     <script src="js/translations/cz.js"></script>
     <script src="js/translations/en.js"></script>
     <script src="js/language-manager.js"></script>
 
-    <!-- Component Logic Scripts -->
     <script src="js/components/header.js"></script>
     <script src="js/components/footer.js"></script>
     <script src="js/components/projects-slider.js"></script>
     <script src="js/components/street-view.js"></script>
 
-    <!-- Main App Script -->
     <script src="app.js"></script>
 </body>
 

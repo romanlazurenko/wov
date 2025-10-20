@@ -20,6 +20,16 @@ body {
     line-height: 1.6;
 }
 
+/* Language flash prevention - hide content until language is set */
+body:not(.lang-cz):not(.lang-en) {
+    visibility: hidden;
+}
+
+body.lang-cz,
+body.lang-en {
+    visibility: visible;
+}
+
 /* ===== UTILITY CLASSES ===== */
 .cta-button {
     background: linear-gradient(180deg, #7AFFB3 0%, #4DE68A 100%);

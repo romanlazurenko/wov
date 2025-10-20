@@ -1,4 +1,3 @@
-// Main Application Module
 class App {
     constructor() {
         this.components = {};
@@ -12,11 +11,9 @@ class App {
     }
 
     loadComponents() {
-        // Initialize language manager first
         this.components.languageManager = new LanguageManager();
         window.languageManager = this.components.languageManager;
         
-        // Initialize components conditionally based on what exists on the page
         if (typeof Header !== 'undefined') {
             this.components.header = new Header();
         }
@@ -37,7 +34,6 @@ class App {
             this.components.footer = new Footer();
         }
         
-        // Initialize page-specific components
         if (typeof ProjectsSlider !== 'undefined') {
             this.components.projectsSlider = new ProjectsSlider();
         }
@@ -58,12 +54,10 @@ class App {
             this.components.googleAdsPage = new GoogleAdsPage();
         }
         
-        // Initialize translations after components are loaded
         this.components.languageManager.initializeTranslations();
     }
 
     bindGlobalEvents() {
-        // Listen for custom events from components
         document.addEventListener('serviceSelected', (e) => {
             this.handleServiceSelected(e.detail);
         });
@@ -84,68 +78,54 @@ class App {
             this.handleMobileMenuToggled(e.detail);
         });
 
-        // Global keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             this.handleKeyboardShortcuts(e);
         });
 
-        // Window resize handler
         window.addEventListener('resize', () => {
             this.handleWindowResize();
         });
     }
 
     handleServiceSelected(detail) {
-        console.log('Service selected:', detail);
         this.trackEvent('service_selected', detail.serviceId);
         
-        // You can add additional logic here, like analytics tracking
-        // or updating other components based on service selection
     }
 
     handleCTAClicked(detail) {
-        console.log('CTA clicked from:', detail.source);
         this.trackEvent('cta_clicked', detail.source);
     }
 
     handleSocialClicked(detail) {
-        console.log('Social link clicked:', detail.platform);
         this.trackEvent('social_clicked', detail.platform);
     }
 
     handleLanguageChanged(detail) {
-        console.log('Language changed to:', detail.language);
         this.trackEvent('language_changed', detail.language);
         
-        // Update header language display
         if (this.components.header) {
             this.components.header.updateLanguage(detail.language);
         }
         
-        // Re-translate the page (but don't emit another event)
         if (this.components.languageManager) {
             this.components.languageManager.setLanguageSilent(detail.language);
         }
     }
 
     handleMobileMenuToggled(detail) {
-        console.log('Mobile menu toggled:', detail.isOpen);
         this.trackEvent('mobile_menu_toggled', detail.isOpen);
     }
 
     handleKeyboardShortcuts(e) {
-        // ESC key to close any open modals
         if (e.key === 'Escape') {
             this.closeAllModals();
         }
 
-        // Ctrl/Cmd + K for search (future feature)
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
             this.openSearch();
         }
 
-        // Arrow keys for navigation
         if (e.key === 'ArrowDown' && !e.ctrlKey && !e.metaKey) {
             this.navigateToNextSection();
         }
@@ -156,17 +136,14 @@ class App {
     }
 
     handleWindowResize() {
-        // Handle responsive changes
         this.updateMobileLayout();
         
-        // Close mobile menu if open on desktop
         if (window.innerWidth > 768 && this.components.header && typeof this.components.header.closeMobileMenu === 'function') {
             this.components.header.closeMobileMenu();
         }
     }
 
     setupIntersectionObserver() {
-        // Global intersection observer for animations
         this.observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -175,7 +152,6 @@ class App {
             });
         }, { threshold: 0.1 });
 
-        // Observe elements that should animate
         const animatedElements = document.querySelectorAll('.animate-on-scroll');
         animatedElements.forEach(el => this.observer.observe(el));
     }
@@ -183,7 +159,6 @@ class App {
     updateMobileLayout() {
         const isMobile = window.innerWidth <= 768;
         
-        // Update components for mobile if needed
         if (isMobile) {
             document.body.classList.add('mobile-layout');
         } else {
@@ -201,8 +176,6 @@ class App {
     }
 
     openSearch() {
-        // Future search functionality
-        console.log('Search opened');
         this.trackEvent('search_opened');
     }
 
@@ -247,7 +220,6 @@ class App {
     }
 
     trackEvent(eventName, eventData) {
-        // Analytics tracking
         if (typeof gtag !== 'undefined') {
             gtag('event', eventName, {
                 event_category: 'user_interaction',
@@ -255,16 +227,12 @@ class App {
             });
         }
         
-        // Console log for development
-        console.log(`Event tracked: ${eventName}`, eventData);
     }
 
-    // Method to get component by name
     getComponent(name) {
         return this.components[name];
     }
 
-    // Method to update component data
     updateComponent(componentName, data) {
         const component = this.components[componentName];
         if (component && typeof component.updateData === 'function') {
@@ -272,7 +240,6 @@ class App {
         }
     }
 
-    // Method to refresh all components
     refreshComponents() {
         Object.values(this.components).forEach(component => {
             if (typeof component.refresh === 'function') {
@@ -281,7 +248,6 @@ class App {
         });
     }
 
-    // Method to export app data
     exportData() {
         const data = {};
         Object.keys(this.components).forEach(key => {
@@ -293,7 +259,6 @@ class App {
         return JSON.stringify(data, null, 2);
     }
 
-    // Method to import app data
     importData(jsonData) {
         try {
             const data = JSON.parse(jsonData);
@@ -310,34 +275,32 @@ class App {
         }
     }
 
-    // Method to initialize animations
     initializeAnimations() {
-        // Initialize hero animations
         if (this.components.hero && typeof this.components.hero.animateOnScroll === 'function') {
             this.components.hero.animateOnScroll();
         }
 
-        // Initialize services animations
         if (this.components.services && typeof this.components.services.animateOnScroll === 'function') {
             this.components.services.animateOnScroll();
         }
 
-        // Statistics animations are handled automatically by the component
-        // Page-specific animations are handled by their respective components
+    }
+
+    testGoogleAdsButtonPress() {
+        if (this.components.googleAdsPage) {
+            this.components.googleAdsPage.testButtonPress();
+        }
     }
 }
 
-// Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.app = new App();
     
-    // Initialize animations after a short delay to ensure everything is loaded
     setTimeout(() => {
         window.app.initializeAnimations();
     }, 100);
 });
 
-// Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = App;
 } else {

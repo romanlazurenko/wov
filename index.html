@@ -6,51 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Way of Visionary - Virtuální svět pro vaše podnikání</title>
 
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        (function() {
+            const savedLanguage = localStorage.getItem('wov-language');
+            const browserLanguage = navigator.language.split('-')[0];
+            
+            let currentLanguage = 'cz';
+            
+            if (savedLanguage && (savedLanguage === 'cz' || savedLanguage === 'en')) {
+                currentLanguage = savedLanguage;
+            } else if (browserLanguage === 'en') {
+                currentLanguage = 'en';
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.classList.add(`lang-${currentLanguage}`);
+            });
+            
+            if (document.body) {
+                document.body.classList.add(`lang-${currentLanguage}`);
+            }
+        })();
+    </script>
 
-    <!-- Base Styles -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Component CSS Modules -->
     <link rel="stylesheet" href="css/components/header.css">
     <link rel="stylesheet" href="css/components/hero.css">
     <link rel="stylesheet" href="css/components/services.css">
     <link rel="stylesheet" href="css/components/statistics.css">
     <link rel="stylesheet" href="css/components/footer.css">
 
-    <!-- Mobile Styles -->
     <link rel="stylesheet" href="mobile.css">
 
-    <!-- Meta tags for SEO -->
     <meta name="description"
         content="Way of Visionary - Virtuální svět pro vaše podnikání. Street View, webové stránky, Google Ads a další služby pro moderní firmy.">
     <meta name="keywords" content="virtuální prohlídky, street view, webové stránky, google ads, digitální marketing">
     <meta name="author" content="Way of Visionary">
 
-    <!-- Open Graph tags -->
     <meta property="og:title" content="Way of Visionary - Virtuální svět pro vaše podnikání">
     <meta property="og:description"
         content="Moderní digitální služby pro vaše podnikání. Street View, webové stránky, Google Ads.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wayofvisionary.com">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="header__content">
             <div class="header__logo">
                 <a href="/"><img src="assets/img/logo.svg" alt="Way of Visionary Logo"></a>
             </div>
-            <!-- Desktop Navigation -->
             <nav class="header__nav header__nav--desktop">
                 <ul class="header__nav-links">
                     <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
@@ -69,7 +82,6 @@
                 </ul>
             </nav>
 
-            <!-- Mobile Burger Menu -->
             <div class="header__mobile">
                 <button class="header__burger" id="burger-menu">
                     <span class="header__burger-line"></span>
@@ -92,7 +104,6 @@
             </div>
         </div>
         
-        <!-- Mobile Navigation Menu -->
         <nav class="header__nav header__nav--mobile" id="mobile-nav">
             <div class="header__mobile-language mobile-wrapper language-selector">
                 <div class="header__mobile-language-selector">
@@ -101,8 +112,6 @@
                 </div>
             </div>
             <div class="header__mobile-nav-content mobile-wrapper nav-content">
-                <!-- Mobile Language Selectors -->
-                <!-- Mobile Navigation Links -->
                 <ul class="header__mobile-nav-links">
                     <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
                     <li><a href="street-view.html" data-translate="nav.street-view">Street view</a></li>
@@ -111,7 +120,6 @@
                     <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
                 </ul>
                 
-                <!-- Mobile CTA Button -->
                 <div class="header__mobile-cta">
                     <a href="#" class="header__mobile-cta-button" data-translate="header.cta">Získat konzultaci</a>
                 </div>
@@ -119,7 +127,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero__content">
             <div class="hero__text-content">
@@ -128,7 +135,6 @@
                     TADY</h1>
             </div>
 
-            <!-- Hands Animation Container -->
             <div class="hero__animation-container">
                 <div class="hero__left-hand">
                     <img src="assets/img/herolefthand.png" alt="Left Hand">
@@ -146,7 +152,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section class="services" id="services">
         <div class="services__content">
             <h2 class="services__title" data-translate="services.title">SLUŽBY</h2>
@@ -173,7 +178,6 @@
                 </div>
             </div>
         </div>
-        <!-- Statistics Section -->
         <section class="statistics">
             <div class="statistics__content">
                 <div class="statistics__grid">
@@ -228,7 +232,6 @@
 
 
 
-    <!-- Footer -->
     <footer class="footer" id="contact">
         <div class="footer__content">
           <div class="footer__grid">
@@ -267,33 +270,17 @@
         </div>
     </footer>
 
-    <!-- Translation Scripts -->
     <script src="js/translations/cz.js"></script>
     <script src="js/translations/en.js"></script>
     <script src="js/language-manager.js"></script>
-    <!-- Component Logic Scripts -->
     <script src="js/components/header.js"></script>
     <script src="js/components/hero.js"></script>
     <script src="js/components/services.js"></script>
     <script src="js/components/statistics.js"></script>
     <script src="js/components/footer.js"></script>
 
-    <!-- Main App Script -->
     <script src="app.js"></script>
 
-    <!-- Analytics (Google Analytics example) -->
-    <!-- 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-    -->
-
-    <!-- Service Worker for PWA (optional) -->
-    <!-- 
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -307,7 +294,6 @@
             });
         }
     </script>
-    -->
 </body>
 
 </html>
