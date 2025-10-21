@@ -4,55 +4,70 @@ class GoogleAdsPage {
     }
 
     init() {
-        this.setupAnimations();
+        this.setupHeroAnimation();
         this.setupInteractions();
         this.setupBenefitsAnimation();
         this.setupWorkflowAnimation();
         this.setupResultsAnimation();
+        this.setupMiddleAnimation();
     }
 
-    setupAnimations() {
-        // Add entrance animations for content elements
+    setupHeroAnimation() {
+        const heroBg = document.querySelector('.google-ads__hero-bg');
+        const cards = document.querySelector('.google-ads__cards');
         const title = document.querySelector('.google-ads__title');
         const subtitle = document.querySelector('.google-ads__subtitle');
-        const cards = document.querySelector('.google-ads__cards');
-        const cardOvals = document.querySelectorAll('.google-ads__card-oval');
-        const floatingNote = document.querySelector('.google-ads__floating-note');
+
+        if (!heroBg) return;
+
+        // Check if mobile - skip animation on mobile devices
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            // On mobile, just show cards immediately and set dark colors
+            if (cards) {
+                cards.classList.add('visible');
+            }
+            if (title) {
+                title.classList.add('dark');
+            }
+            if (subtitle) {
+                subtitle.classList.add('dark');
+            }
+            return;
+        }
+
+        // Set initial state - background at full height
+        heroBg.classList.add('initial');
+
+        // Title and subtitle will animate via CSS automatically with light color
+
+        // After delay, cut the background and reveal cards
+        setTimeout(() => {
+            // Cut the background
+            heroBg.classList.remove('initial');
+            heroBg.classList.add('cut');
+
+            // Change title and subtitle color to dark
+            if (title) {
+                title.classList.add('dark');
+            }
+            if (subtitle) {
+                subtitle.classList.add('dark');
+            }
+
+            // Show cards after a brief moment
+            setTimeout(() => {
+                if (cards) {
+                    cards.classList.add('visible');
+                }
+            }, 400); // Cards appear 400ms after background starts cutting
+        }, 2200); // Wait 2.2 seconds before cutting (allows title/subtitle to finish)
+    }
+
+    setupMiddleAnimation() {
         const middleTitle = document.querySelector('.google-ads__middle-title');
         const bottomList = document.querySelector('.google-ads__bottom-list');
-        const bottomImage = document.querySelector('.google-ads__bottom::before');
-
-        // Animate title
-        if (title) {
-            title.style.opacity = '0';
-            title.style.transform = 'translateY(30px)';
-            title.style.animation = 'slideInUp 0.8s ease forwards';
-            title.style.animationDelay = '0.2s';
-        }
-
-        // Animate subtitle
-        if (subtitle) {
-            subtitle.style.opacity = '0';
-            subtitle.style.transform = 'translateY(30px)';
-            subtitle.style.animation = 'slideInUp 0.8s ease forwards';
-            subtitle.style.animationDelay = '0.4s';
-        }
-
-        // Animate cards
-        if (cards) {
-            cards.style.opacity = '0';
-            cards.style.transform = 'translateY(30px)';
-            cards.style.animation = 'slideInUp 0.8s ease forwards';
-            cards.style.animationDelay = '0.6s';
-        }
-
-        // Animate floating note
-        if (floatingNote) {
-            floatingNote.style.opacity = '0';
-            floatingNote.style.transform = 'translateY(-50%) scale(0.8)';
-            floatingNote.style.animation = 'slideInUp 0.8s ease forwards';
-            floatingNote.style.animationDelay = '0.8s';
-        }
 
         // Animate middle title
         if (middleTitle) {
@@ -125,12 +140,12 @@ class GoogleAdsPage {
         const floatingNote = document.querySelector('.google-ads__floating-note');
         if (floatingNote) {
             floatingNote.addEventListener('mouseenter', () => {
-                floatingNote.style.transform = 'translateY(-50%) scale(1.1)';
+                floatingNote.style.transform = 'scale(1.1)';
                 floatingNote.style.transition = 'all 0.3s ease';
             });
             
             floatingNote.addEventListener('mouseleave', () => {
-                floatingNote.style.transform = 'translateY(-50%) scale(1)';
+                floatingNote.style.transform = 'scale(1)';
             });
         }
 
@@ -182,16 +197,43 @@ class GoogleAdsPage {
 
     // Method to replay animations (useful for testing)
     replayAnimations() {
-        const elements = document.querySelectorAll('.google-ads__title, .google-ads__subtitle, .google-ads__cards, .google-ads__floating-note, .google-ads__middle-title, .google-ads__bottom-list');
-        
-        elements.forEach((element, index) => {
-            element.style.animation = 'none';
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
-            element.offsetHeight; // Force reflow
-            element.style.animation = 'slideInUp 0.6s ease forwards';
-            element.style.animationDelay = `${index * 0.1}s`;
-        });
+        const heroBg = document.querySelector('.google-ads__hero-bg');
+        const cards = document.querySelector('.google-ads__cards');
+        const title = document.querySelector('.google-ads__title');
+        const subtitle = document.querySelector('.google-ads__subtitle');
+
+        // Reset hero background
+        if (heroBg) {
+            heroBg.classList.remove('cut');
+            heroBg.classList.add('initial');
+        }
+
+        // Reset cards
+        if (cards) {
+            cards.classList.remove('visible');
+        }
+
+        // Reset title and subtitle animations and colors
+        if (title) {
+            title.classList.remove('dark'); // Reset to light color
+            title.style.animation = 'none';
+            title.offsetHeight; // Force reflow
+            title.style.animation = 'slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+            title.style.animationDelay = '0.3s';
+        }
+
+        if (subtitle) {
+            subtitle.classList.remove('dark'); // Reset to light color
+            subtitle.style.animation = 'none';
+            subtitle.offsetHeight; // Force reflow
+            subtitle.style.animation = 'slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+            subtitle.style.animationDelay = '0.6s';
+        }
+
+        // Replay the sequence
+        setTimeout(() => {
+            this.setupHeroAnimation();
+        }, 100);
 
         // Replay list items
         this.animateListItems();
