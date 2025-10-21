@@ -351,7 +351,6 @@
     border-radius: 8px;
     font-size: 22px;
     font-weight: 900;
-    cursor: pointer;
     font-style: italic;
     letter-spacing: -1px;
     transition: all 0.3s ease;
@@ -362,7 +361,7 @@
 
 .projects__button:hover {
     background: var(--primary-green);
-    color: white;
+    color: var(--dark-gray);
     transform: translateY(-2px);
 }
 
@@ -395,8 +394,10 @@
 }
 
 .projects__nav-arrow:hover {
+    background: rgba(122, 255, 179, 0.1);
     border-color: var(--primary-green);
     color: var(--primary-green);
+    transform: scale(1.1);
 }
 
 .projects__nav-arrow:disabled {
@@ -405,8 +406,10 @@
 }
 
 .projects__nav-arrow:disabled:hover {
+    background: transparent;
     border-color: var(--light-gray);
     color: var(--light-gray);
+    transform: none;
 }
 
 .projects__title {
@@ -488,7 +491,7 @@
 }
 
 .projects__thumbnail:hover {
-    border-color: var(--primary-green);
+    /* border-color: var(--primary-green); */
     transform: scale(1.02);
 }
 
@@ -772,7 +775,7 @@
         margin-top: 100px;
     }
     .street-view__title {
-        font-size: 2.5rem;
+        font-size: 32px;
         margin-bottom: 2rem;
     }
 
@@ -910,7 +913,7 @@
 @media (max-width: 480px) {
 
     .street-view__title {
-        font-size: 2rem;
+        font-size: 32px;
     }
 
     .street-view__phone-placeholder {

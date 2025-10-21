@@ -166,6 +166,7 @@
 
     .services__card {
         padding: 2rem 1.5rem;
+        text-decoration: none;
     }
 
     .services__card-title {

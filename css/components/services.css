@@ -48,7 +48,10 @@
     height: 370px;
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: inherit;
     justify-content: center;
+    text-decoration: none;
     
 }
 
@@ -122,6 +125,10 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
     text-align: center;
     font-weight: 900;
+}
+
+.services__card:nth-child(2) .services__card-title {
+    line-height: 1.1;
 }
 
 .services__card:hover .services__card-title {

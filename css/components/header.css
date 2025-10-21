@@ -133,7 +133,7 @@
     display: none;
     position: absolute;
     background-color: var(--dark-gray);
-    min-width: 320px;
+    min-width: 340px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border-radius: 8px;
@@ -225,11 +225,11 @@
     background: linear-gradient(180deg, #7AFFB3 0%, #4DE68A 100%);
     color: var(--dark-gray);
     padding: 1rem 2rem;
-    border: 1px solid #60FFA0;
-    border-radius: 100px;
+    border: none;
+    border-radius: 50px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.2),
@@ -247,28 +247,32 @@
     text-rendering: optimizeLegibility;
     font-smooth: always;
     -webkit-backface-visibility: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     backface-visibility: hidden;
     transform: translateZ(0);
 }
 
 .header__cta-button:hover {
     background: linear-gradient(180deg, #8AFFC3 0%, #5DFF9A 100%);
-    border-color: #60FFA0;
-    transform: translateY(-2px);
+    transform: translateY(-4px) scale(1.05);
     box-shadow: 
         0 6px 12px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.5),
         inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1) saturate(1.2);
 }
 
+.header__cta-button:active,
 .header__cta-button.button-pressed {
-    transform: translateY(1px) scale(0.98);
+    transform: translateY(2px) scale(0.95);
     background: linear-gradient(180deg, #6AFFA3 0%, #3DE67A 100%);
     box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(0, 0, 0, 0.1),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.1s ease;
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.9) saturate(1.1);
 }
 
 /* CTA Button Jump Animation */
@@ -278,19 +282,19 @@
 
 @keyframes ctaJump {
     0%, 90%, 100% {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
     94% {
-        transform: translateY(-1px);
+        transform: translateY(-2px) scale(1.02);
     }
     97% {
-        transform: translateY(-6px);
+        transform: translateY(-6px) scale(1.05);
     }
     98% {
-        transform: translateY(-1px);
+        transform: translateY(-2px) scale(1.02);
     }
     100% {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 

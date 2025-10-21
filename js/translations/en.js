@@ -54,6 +54,15 @@ const enTranslations = {
     'contact.copy.phone': 'Phone copied',
     'contact.copy.email': 'Email copied',
     
+    // Contact Notifications
+    'contact.notifications.phone.copied': 'Phone number copied!',
+    'contact.notifications.phone.fallback': 'Phone',
+    'contact.notifications.email.copied': 'Email copied!',
+    'contact.notifications.email.fallback': 'Email',
+    'contact.notifications.chat.copied': 'Chat address copied!',
+    'contact.notifications.chat.fallback': 'Chat',
+    'contact.notifications.message': 'Open chat application...',
+    
     // Street View Page
     'street-view.title': 'STREET&nbsp;&nbsp;VIEW',
     'street-view.step01.title': 'Search Start',

@@ -48,6 +48,15 @@ const czTranslations = {
     'contact.form.name': 'Jméno',
     'contact.form.email': 'Email',
     'contact.form.phone': 'Telefon',
+    
+    // Contact Notifications
+    'contact.notifications.phone.copied': 'Telefonní číslo zkopírováno!',
+    'contact.notifications.phone.fallback': 'Telefon',
+    'contact.notifications.email.copied': 'Email zkopírován!',
+    'contact.notifications.email.fallback': 'Email',
+    'contact.notifications.chat.copied': 'Chat adresa zkopírována!',
+    'contact.notifications.chat.fallback': 'Chat',
+    'contact.notifications.message': 'Otevřít chat aplikaci...',
     'contact.form.message': 'Zpráva',
     'contact.form.submit': 'Odeslat',
     'contact.form.success': 'Zpráva odeslána!',

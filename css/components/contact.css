@@ -43,6 +43,7 @@
 
 /* Contact Information Cards */
 .contact__info {
+    z-index: 2;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -57,14 +58,14 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease scale 0.3s ease;
     position: relative;
     height: 243px;
+    scale: 1.0;
 }
 
 .contact__card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px) scale(1.02);
 }
 
 .contact__icon {

@@ -310,7 +310,7 @@
 }
 
 .web-design__projects .projects__thumbnail:hover {
-    border-color: var(--primary-green);
+    /* border-color: var(--primary-green); */
     transform: scale(1.02);
 }
 

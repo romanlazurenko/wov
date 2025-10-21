@@ -1,5 +1,7 @@
 class ContactPage {
     constructor() {
+        this.currentNotification = null;
+        this.notificationTimeout = null;
         this.init();
     }
 
@@ -79,36 +81,82 @@ class ContactPage {
     handlePhoneClick() {
         const phoneNumber = '+420 773 729 666';
         navigator.clipboard.writeText(phoneNumber).then(() => {
-            this.showNotification('Telefonní číslo zkopírováno!');
+            const message = window.languageManager ? 
+                window.languageManager.getTranslation('contact.notifications.phone.copied') : 
+                'Telefonní číslo zkopírováno!';
+            this.showNotification(message);
         }).catch(() => {
-            this.showNotification('Telefon: ' + phoneNumber);
+            const message = window.languageManager ? 
+                window.languageManager.getTranslation('contact.notifications.phone.fallback') + ': ' + phoneNumber : 
+                'Telefon: ' + phoneNumber;
+            this.showNotification(message);
         });
     }
 
     handleEmailClick() {
         const email = 'wayofvisionary@gmail.com';
         navigator.clipboard.writeText(email).then(() => {
-            this.showNotification('Email zkopírován!');
+            const message = window.languageManager ? 
+                window.languageManager.getTranslation('contact.notifications.email.copied') : 
+                'Email zkopírován!';
+            this.showNotification(message);
         }).catch(() => {
-            this.showNotification('Email: ' + email);
+            const message = window.languageManager ? 
+                window.languageManager.getTranslation('contact.notifications.email.fallback') + ': ' + email : 
+                'Email: ' + email;
+            this.showNotification(message);
         });
     }
 
     handleMessageClick() {
-        this.showNotification('Otevřít chat aplikaci...');
+        // Get the chat application URL from the clicked element
+        const iconImgs = document.querySelectorAll('.contact__icon-img');
+        let chatUrl = '';
+        
+        iconImgs.forEach(img => {
+            if (img.src.includes('telegram.svg')) {
+                chatUrl = 'https://t.me/wayofvisionary';
+            } else if (img.src.includes('whatsapp.svg')) {
+                chatUrl = 'https://wa.me/420773729666';
+            }
+        });
+        
+        if (chatUrl) {
+            navigator.clipboard.writeText(chatUrl).then(() => {
+                const message = window.languageManager ? 
+                    window.languageManager.getTranslation('contact.notifications.chat.copied') : 
+                    'Chat adresa zkopírována!';
+                this.showNotification(message);
+            }).catch(() => {
+                const message = window.languageManager ? 
+                    window.languageManager.getTranslation('contact.notifications.chat.fallback') + ': ' + chatUrl : 
+                    'Chat: ' + chatUrl;
+                this.showNotification(message);
+            });
+        } else {
+            const message = window.languageManager ? 
+                window.languageManager.getTranslation('contact.notifications.message') : 
+                'Otevřít chat aplikaci...';
+            this.showNotification(message);
+        }
     }
 
     showNotification(message) {
+        // Immediately remove existing notification if any
+        if (this.currentNotification) {
+            this.removeNotificationImmediately();
+        }
+        
         const notification = document.createElement('div');
         notification.className = 'contact__notification';
         notification.textContent = message;
         
         notification.style.cssText = `
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
             background: var(--primary-green);
-            color: white;
+            color: var(--dark-gray);
             padding: 1rem 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -119,17 +167,53 @@ class ContactPage {
         `;
         
         document.body.appendChild(notification);
+        this.currentNotification = notification;
         
         setTimeout(() => {
             notification.style.transform = 'translateX(0)';
         }, 100);
         
-        setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
+        // Clear any existing timeout and set new one
+        if (this.notificationTimeout) {
+            clearTimeout(this.notificationTimeout);
+        }
+        this.notificationTimeout = setTimeout(() => {
+            this.removeNotification();
         }, 3000);
+    }
+
+    removeNotificationImmediately() {
+        if (this.currentNotification) {
+            // Clear any pending timeout
+            if (this.notificationTimeout) {
+                clearTimeout(this.notificationTimeout);
+                this.notificationTimeout = null;
+            }
+            
+            // Remove immediately without animation
+            if (this.currentNotification.parentNode) {
+                document.body.removeChild(this.currentNotification);
+            }
+            this.currentNotification = null;
+        }
+    }
+
+    removeNotification() {
+        if (this.currentNotification) {
+            // Clear any pending timeout
+            if (this.notificationTimeout) {
+                clearTimeout(this.notificationTimeout);
+                this.notificationTimeout = null;
+            }
+            
+            this.currentNotification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                if (this.currentNotification && this.currentNotification.parentNode) {
+                    document.body.removeChild(this.currentNotification);
+                }
+                this.currentNotification = null;
+            }, 300);
+        }
     }
 
     replayAnimations() {

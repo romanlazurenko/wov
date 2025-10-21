@@ -16,6 +16,7 @@ class GoogleAdsPage {
         const title = document.querySelector('.google-ads__title');
         const subtitle = document.querySelector('.google-ads__subtitle');
         const cards = document.querySelector('.google-ads__cards');
+        const cardOvals = document.querySelectorAll('.google-ads__card-oval');
         const floatingNote = document.querySelector('.google-ads__floating-note');
         const middleTitle = document.querySelector('.google-ads__middle-title');
         const bottomList = document.querySelector('.google-ads__bottom-list');
@@ -103,6 +104,20 @@ class GoogleAdsPage {
             
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add hover effects for card ovals
+        const cardOvals = document.querySelectorAll('.google-ads__card-oval');
+        cardOvals.forEach(oval => {
+            oval.addEventListener('mouseenter', () => {
+                oval.style.transform = 'translateY(-5px) scale(1.02)';
+                oval.style.transition = 'all 0.3s ease';
+            });
+        });
+        cardOvals.forEach(oval => {
+            oval.addEventListener('mouseleave', () => {
+                oval.style.transform = 'translateY(0) scale(1)';
             });
         });
 

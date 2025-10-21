@@ -68,6 +68,7 @@
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 20px;
+    padding: 10px 10px 10px 0px;
 }
 
 .footer__links a:hover {
@@ -179,14 +180,16 @@ ease;
         inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
+.footer__cta-button:active,
 .footer__cta-button.button-pressed {
-    transform: translateY(1px) scale(0.98);
+    transform: translateY(2px) scale(0.95);
     background: linear-gradient(180deg, #6AFFA3 0%, #3DE67A 100%);
     box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(0, 0, 0, 0.1),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.1s ease;
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.9) saturate(1.1);
 }
 
 /* Footer Modal */
@@ -437,6 +440,7 @@ ease;
     justify-content: center;
     gap: 0.75rem;
     margin-bottom: 2rem;
+    padding-left: 4px;
 }
 
 .footer__contact-form-checkbox input[type="checkbox"] {
