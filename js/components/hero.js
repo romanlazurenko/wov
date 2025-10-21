@@ -15,6 +15,10 @@ class Hero {
             this.rightHandDefaultImg = this.rightHand ? this.rightHand.querySelector('.default-hand') : null;
             this.rightHandActiveImg = this.rightHand ? this.rightHand.querySelector('.active-hand') : null;
             this.touchEffect = this.hero.querySelector('.hero__touch-effect');
+            this.phoneScreenAnimation = this.hero.querySelector('.hero__phone-screen-animation');
+            this.phoneScreenOverlay = this.hero.querySelector('.hero__phone-screen-overlay');
+            this.phoneClickPoint = this.hero.querySelector('.hero__phone-click-point');
+            this.phoneExpandingCircle = this.hero.querySelector('.hero__phone-expanding-circle');
             this.bindEvents();
             this.setupParallax();
             this.setupAnimationReplay();
@@ -87,7 +91,7 @@ class Hero {
 
     replayAnimation() {
         // Remove and re-add animation classes to trigger replay
-        const elements = [this.leftHand, this.rightHand, this.touchEffect];
+        const elements = [this.leftHand, this.rightHand, this.touchEffect, this.phoneScreenOverlay, this.phoneClickPoint, this.phoneExpandingCircle];
         
         elements.forEach(el => {
             if (el) {
@@ -103,6 +107,10 @@ class Hero {
         this.rightHandDefaultImg = this.rightHand ? this.rightHand.querySelector('.default-hand') : null;
         this.rightHandActiveImg = this.rightHand ? this.rightHand.querySelector('.active-hand') : null;
         this.touchEffect = this.hero.querySelector('.hero__touch-effect');
+        this.phoneScreenAnimation = this.hero.querySelector('.hero__phone-screen-animation');
+        this.phoneScreenOverlay = this.hero.querySelector('.hero__phone-screen-overlay');
+        this.phoneClickPoint = this.hero.querySelector('.hero__phone-click-point');
+        this.phoneExpandingCircle = this.hero.querySelector('.hero__phone-expanding-circle');
 
         // Reset right hand to default state
         if (this.rightHand) {

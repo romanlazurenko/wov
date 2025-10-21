@@ -58,7 +58,7 @@ class WebDesignPage {
         const thumbnails = document.querySelectorAll('.projects__thumbnail');
         thumbnails.forEach(thumbnail => {
             thumbnail.addEventListener('mouseenter', () => {
-                thumbnail.style.transform = 'translateY(-10px) scale(1.02)';
+                thumbnail.style.transform = 'translateY(-10px) scale(1.01)';
             });
             
             thumbnail.addEventListener('mouseleave', () => {

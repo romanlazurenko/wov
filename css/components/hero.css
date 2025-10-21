@@ -163,8 +163,65 @@
     background: radial-gradient(circle, rgba(96, 255, 160, 0.4) 0%, transparent 70%);
     border-radius: 50%;
     opacity: 0;
-    animation: touchBurst 1.7s ease-out 2.3s forwards;
+    animation: touchBurst 1.7s ease-out 4s forwards;
     pointer-events: none;
+}
+
+/* Phone Screen Animation Container */
+.hero__phone-screen-animation {
+    position: absolute;
+    top: 11%;
+    left: 8%;
+    width: 21%;
+    height: 68%;
+    overflow: hidden;
+    clip-path: inset(0 0 0 0 round 8px);
+    pointer-events: none;
+    transform: rotate3d(72, -8, 2, 5deg);
+    z-index: 2;
+}
+
+/* Screen Overlay - Dark screen before turning on */
+.hero__phone-screen-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    opacity: 1;
+    z-index: 3;
+    clip-path: circle(0% at 8% 36%);
+    animation: screenTurnOnSmooth 1.5s ease-out 2.5s forwards;
+}
+
+/* Click Point Animation */
+.hero__phone-click-point {
+    position: absolute;
+    top: 36%;
+    left: 8%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: rgba(96, 255, 160, 0.8);
+    border-radius: 50%;
+    opacity: 0;
+    animation: clickPoint 3s ease-out 2.5s forwards;
+    box-shadow: 0 0 20px rgba(96, 255, 160, 0.6);
+}
+
+/* Expanding Circle Animation */
+.hero__phone-expanding-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border: 3px solid var(--primary-green);
+    border-radius: 50%;
+    opacity: 0;
+    animation: expandCircle 1.2s ease-out 2.5s forwards;
 }
 
 /* Keyframe Animations */
@@ -210,7 +267,7 @@
         transform: translate(-50%, -50%) scale(0);
     }
     30% {
-        opacity: 1;
+        opacity: 0.3;
         transform: translate(-50%, -50%) scale(1);
     }
     100% {
@@ -225,28 +282,76 @@
         transform: translateX(0) translateY(0) rotate(0deg) scale(1);
     }
     15% {
-        left: -7%;
+        left: -11%;
         transform: translateX(0) translateY(-2px) rotate(-2deg) scale(1.02);
     }
     35% {
-        left: -2%;
+        left: -9%;
         transform: translateX(0) translateY(-5px) rotate(-3deg) scale(1.05);
     }
     50% {
-        left: -1%;
+        left: -7%;
         transform: translateX(0) translateY(-3px) rotate(-2deg) scale(1.03);
     }
     70% {
-        left: -4%;
+        left: -9%;
         transform: translateX(0) translateY(-1px) rotate(-1deg) scale(1.01);
     }
     85% {
-        left: -8%;
+        left: -10%;
         transform: translateX(0) translateY(0) rotate(0deg) scale(1.005);
     }
     100% {
-        left: -10%;
+        left: -12%;
         transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+    }
+}
+
+@keyframes clickPoint {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    30% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+}
+
+@keyframes expandCircle {
+    0% {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        border-width: 3px;
+    }
+    10% {
+        opacity: 0.1;
+    }
+    100% {
+        opacity: 0;
+        width: 300%;
+        height: 300%;
+        border-width: 2px;
+    }
+}
+
+@keyframes screenTurnOnSmooth {
+    0% {
+        clip-path: circle(0% at 8% 36%);
+        opacity: 1;
+    }
+    100% {
+        clip-path: circle(150% at 8% 36%);
+        opacity: 0;
     }
 }
 
@@ -352,6 +457,33 @@
         width: 70px;
         height: 70px;
     }
+
+    .hero__phone-screen-animation {
+        top: 15%;
+        left: 35%;
+        width: 20%;
+        height: 35%;
+    }
+
+    .hero__phone-click-point {
+        width: 12px;
+        height: 12px;
+    }
+
+    .hero__phone-screen-overlay {
+        animation: screenTurnOnSmoothMobile 1.5s ease-out 2.5s forwards;
+    }
+}
+
+@keyframes screenTurnOnSmoothMobile {
+    0% {
+        clip-path: circle(0% at 8% 36%);
+        opacity: 1;
+    }
+    100% {
+        clip-path: circle(150% at 8% 36%);
+        opacity: 0;
+    }
 }
 
 @media (max-width: 480px) {
@@ -398,5 +530,21 @@
     .hero__touch-effect {
         width: 50px;
         height: 50px;
+    }
+
+    .hero__phone-screen-animation {
+        top: 14%;
+        left: 32%;
+        width: 22%;
+        height: 36%;
+    }
+
+    .hero__phone-click-point {
+        width: 10px;
+        height: 10px;
+    }
+
+    .hero__phone-screen-overlay {
+        animation: screenTurnOnSmoothMobile 1.5s ease-out 2.5s forwards;
     }
 }

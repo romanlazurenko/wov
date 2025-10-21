@@ -62,7 +62,7 @@ class GoogleAdsPage {
                     cards.classList.add('visible');
                 }
             }, 400); // Cards appear 400ms after background starts cutting
-        }, 2200); // Wait 2.2 seconds before cutting (allows title/subtitle to finish)
+        }, 1300); // Wait 2.2 seconds before cutting (allows title/subtitle to finish)
     }
 
     setupMiddleAnimation() {
@@ -126,7 +126,7 @@ class GoogleAdsPage {
         const cardOvals = document.querySelectorAll('.google-ads__card-oval');
         cardOvals.forEach(oval => {
             oval.addEventListener('mouseenter', () => {
-                oval.style.transform = 'translateY(-5px) scale(1.02)';
+                oval.style.transform = 'translateY(-5px)';
                 oval.style.transition = 'all 0.3s ease';
             });
         });
@@ -140,7 +140,6 @@ class GoogleAdsPage {
         const floatingNote = document.querySelector('.google-ads__floating-note');
         if (floatingNote) {
             floatingNote.addEventListener('mouseenter', () => {
-                floatingNote.style.transform = 'scale(1.1)';
                 floatingNote.style.transition = 'all 0.3s ease';
             });
             

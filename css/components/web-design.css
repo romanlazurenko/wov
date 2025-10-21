@@ -311,7 +311,7 @@
 
 .web-design__projects .projects__thumbnail:hover {
     /* border-color: var(--primary-green); */
-    transform: scale(1.02);
+    transform: scale(1.01);
 }
 
 .web-design__projects .projects__thumbnail:hover img {
