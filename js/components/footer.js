@@ -43,26 +43,6 @@ class Footer {
     setupContactInteractions() {
         const phoneElement = this.footer.querySelector('.footer__phone');
         const emailElement = this.footer.querySelector('.footer__email');
-
-        if (phoneElement) {
-            phoneElement.style.cursor = 'pointer';
-            phoneElement.addEventListener('click', () => {
-                this.copyToClipboard(phoneElement.textContent);
-                const message = window.languageManager ? 
-                    window.languageManager.getTranslation('contact.copy.phone') : 'Telefon zkopírován';
-                this.showCopyNotification(message);
-            });
-        }
-
-        if (emailElement) {
-            emailElement.style.cursor = 'pointer';
-            emailElement.addEventListener('click', () => {
-                this.copyToClipboard(emailElement.textContent);
-                const message = window.languageManager ? 
-                    window.languageManager.getTranslation('contact.copy.email') : 'Email zkopírován';
-                this.showCopyNotification(message);
-            });
-        }
     }
 
     handleCTAClick() {
