@@ -75,6 +75,11 @@ class Hero {
     }
 
     setupHandSwitchAnimation() {
+        // Start screen fade-in animation 200ms before the click
+        setTimeout(() => {
+            this.startScreenFadeInAnimation();
+        }, 2300);
+
         // Switch hand image when hands reach their final position (after 2s slideInRight animation)
         setTimeout(() => {
             if (this.rightHandDefaultImg && this.rightHandActiveImg && this.rightHand) {
@@ -86,7 +91,85 @@ class Hero {
             if (this.leftHand) {
                 this.leftHand.classList.add('hand-clicking');
             }
+
+            // Start smooth screen turn-on animation
+            this.startScreenTurnOnAnimation();
         }, 2300);
+    }
+
+    startScreenTurnOnAnimation() {
+        if (!this.phoneScreenOverlay) return;
+
+        const startTime = Date.now();
+        const duration = 1500; // 1.5 seconds
+        const clickPointX = 8; // 8% from left
+        const clickPointY = 36; // 36% from top
+
+        const animate = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Smooth easing function (ease-out)
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            
+            // Calculate the radius of the transparent area
+            // Start from 0% and expand to cover the entire screen
+            const maxRadius = Math.sqrt(2) * 100; // Diagonal distance to cover entire screen
+            const currentRadius = easedProgress * maxRadius;
+            
+            // Calculate opacity based on distance from click point
+            const opacity = Math.max(0, 0.95 - (easedProgress * 0.95));
+            
+            // Calculate border radius (slightly smaller than transparent area)
+            const borderRadius = Math.max(0, currentRadius - 2);
+            const borderOpacity = Math.max(0, 0.8 - (easedProgress * 0.8));
+            
+            // Create smooth radial gradient with green border
+            const gradient = `radial-gradient(circle at ${clickPointX}% ${clickPointY}%, 
+                transparent ${borderRadius}%, 
+                rgba(96, 255, 160, ${borderOpacity}) ${borderRadius + 1}%, 
+                rgba(96, 255, 160, ${borderOpacity}) ${borderRadius + 2}%, 
+                transparent ${borderRadius + 3}%, 
+                rgba(0, 0, 0, ${opacity}) ${currentRadius + 5}%)`;
+            
+            this.phoneScreenOverlay.style.background = gradient;
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                // Animation complete - hide overlay
+                this.phoneScreenOverlay.style.opacity = '0';
+            }
+        };
+
+        requestAnimationFrame(animate);
+    }
+
+    startScreenFadeInAnimation() {
+        if (!this.phoneScreenOverlay) return;
+
+        // Start fade-in animation 200ms before the click (at 2.1s)
+        const startTime = Date.now();
+        const duration = 400; // 0.4 seconds fade-in
+        const initialOpacity = 0;
+        const targetOpacity = 1;
+
+        const animate = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Smooth ease-out for fade-in
+            const easedProgress = 1 - Math.pow(1 - progress, 2);
+            const currentOpacity = initialOpacity + (targetOpacity - initialOpacity) * easedProgress;
+            
+            this.phoneScreenOverlay.style.opacity = currentOpacity;
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+
+        requestAnimationFrame(animate);
     }
 
     replayAnimation() {

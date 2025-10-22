@@ -170,15 +170,18 @@
 /* Phone Screen Animation Container */
 .hero__phone-screen-animation {
     position: absolute;
-    top: 11%;
-    left: 8%;
+    top: 9%;
+    left: 7%;
     width: 21%;
-    height: 68%;
+    height: 71%;
     overflow: hidden;
     clip-path: inset(0 0 0 0 round 8px);
     pointer-events: none;
-    transform: rotate3d(72, -8, 2, 5deg);
+    transform: rotate3d(21, -4, 25, 4deg);
     z-index: 2;
+    border-radius: 20px;
+    transform-style: preserve-3d;
+    transform: perspective(1015px) rotateX(2deg) rotateY(-9deg) rotateZ(3deg) translateZ(-14px);
 }
 
 /* Screen Overlay - Dark screen before turning on */
@@ -188,11 +191,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    opacity: 1;
+    background: radial-gradient(circle at 8% 36%, transparent 0%, rgba(0, 0, 0, 0.95) 0%);
+    opacity: 0; /* Start invisible - will fade in before click */
     z-index: 3;
-    clip-path: circle(0% at 8% 36%);
-    animation: screenTurnOnSmooth 1.5s ease-out 2.5s forwards;
+    /* CSS animation removed - now handled by JavaScript for smooth 60fps */
 }
 
 /* Click Point Animation */
@@ -344,13 +346,33 @@
     }
 }
 
-@keyframes screenTurnOnSmooth {
+@keyframes screenTurnOn {
     0% {
-        clip-path: circle(0% at 8% 36%);
+        background: radial-gradient(circle at 8% 36%, transparent 0%, rgba(0, 0, 0, 0.95) 0%);
+        opacity: 1;
+    }
+    10% {
+        background: radial-gradient(circle at 8% 36%, transparent 5%, rgba(0, 0, 0, 0.95) 10%);
+        opacity: 1;
+    }
+    30% {
+        background: radial-gradient(circle at 8% 36%, transparent 15%, rgba(0, 0, 0, 0.9) 25%);
+        opacity: 1;
+    }
+    50% {
+        background: radial-gradient(circle at 8% 36%, transparent 30%, rgba(0, 0, 0, 0.7) 45%);
+        opacity: 1;
+    }
+    70% {
+        background: radial-gradient(circle at 8% 36%, transparent 50%, rgba(0, 0, 0, 0.4) 70%);
+        opacity: 1;
+    }
+    90% {
+        background: radial-gradient(circle at 8% 36%, transparent 80%, rgba(0, 0, 0, 0.1) 100%);
         opacity: 1;
     }
     100% {
-        clip-path: circle(150% at 8% 36%);
+        background: radial-gradient(circle at 8% 36%, transparent 100%, rgba(0, 0, 0, 0) 100%);
         opacity: 0;
     }
 }
@@ -471,17 +493,37 @@
     }
 
     .hero__phone-screen-overlay {
-        animation: screenTurnOnSmoothMobile 1.5s ease-out 2.5s forwards;
+        animation: screenTurnOnMobile 1.5s ease-out 2.5s forwards;
     }
 }
 
-@keyframes screenTurnOnSmoothMobile {
+@keyframes screenTurnOnMobile {
     0% {
-        clip-path: circle(0% at 8% 36%);
+        background: radial-gradient(circle at 8% 36%, transparent 0%, rgba(0, 0, 0, 0.95) 0%);
+        opacity: 1;
+    }
+    10% {
+        background: radial-gradient(circle at 8% 36%, transparent 8%, rgba(0, 0, 0, 0.95) 15%);
+        opacity: 1;
+    }
+    30% {
+        background: radial-gradient(circle at 8% 36%, transparent 20%, rgba(0, 0, 0, 0.9) 35%);
+        opacity: 1;
+    }
+    50% {
+        background: radial-gradient(circle at 8% 36%, transparent 40%, rgba(0, 0, 0, 0.7) 55%);
+        opacity: 1;
+    }
+    70% {
+        background: radial-gradient(circle at 8% 36%, transparent 60%, rgba(0, 0, 0, 0.4) 80%);
+        opacity: 1;
+    }
+    90% {
+        background: radial-gradient(circle at 8% 36%, transparent 85%, rgba(0, 0, 0, 0.1) 100%);
         opacity: 1;
     }
     100% {
-        clip-path: circle(150% at 8% 36%);
+        background: radial-gradient(circle at 8% 36%, transparent 100%, rgba(0, 0, 0, 0) 100%);
         opacity: 0;
     }
 }
@@ -545,6 +587,6 @@
     }
 
     .hero__phone-screen-overlay {
-        animation: screenTurnOnSmoothMobile 1.5s ease-out 2.5s forwards;
+        animation: screenTurnOnMobile 1.5s ease-out 2.5s forwards;
     }
 }
