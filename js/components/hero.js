@@ -127,10 +127,10 @@ class Hero {
             // Create smooth radial gradient with green border
             const gradient = `radial-gradient(circle at ${clickPointX}% ${clickPointY}%, 
                 transparent ${borderRadius}%, 
-                rgba(96, 255, 160, ${borderOpacity}) ${borderRadius + 1}%, 
-                rgba(96, 255, 160, ${borderOpacity}) ${borderRadius + 2}%, 
-                transparent ${borderRadius + 3}%, 
-                rgba(0, 0, 0, ${opacity}) ${currentRadius + 5}%)`;
+                rgba(96, 255, 160, ${borderOpacity}) ${borderRadius + 10}%, 
+                rgba(96, 255, 160, ${borderOpacity}) ${borderRadius + 20}%, 
+                transparent ${borderRadius + 33}%, 
+                rgba(0, 0, 0, ${opacity}) ${currentRadius + 53}%)`;
             
             this.phoneScreenOverlay.style.background = gradient;
             
