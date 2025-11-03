@@ -82,42 +82,49 @@ class Footer {
         window.open(href, '_blank');
     }
 
+    getTranslation(key) {
+        return window.languageManager ? window.languageManager.getTranslation(key) : key;
+    }
+
     openContactForm() {
         const modal = document.createElement('div');
         modal.className = 'footer__contact-modal';
         modal.innerHTML = `
             <div class="footer__modal-content">
                 <span class="footer__modal-close">&times;</span>
-                <h3 class="footer__modal-title" data-translate="contact.form.title">Získat konzultaci</h3>
+                <h3 class="footer__modal-title" data-translate="contact.form.title">${this.getTranslation('contact.form.title')}</h3>
                 <form class="footer__contact-form">
-                    <input class="footer__contact-form-input" type="text" name="name" data-translate="contact.form.name" placeholder="Vaše jméno a příjmení" required>
-                    <input class="footer__contact-form-input" type="email" name="email" data-translate="contact.form.email" placeholder="E-mail" required>
-                    <input class="footer__contact-form-input" type="text" name="company" data-translate="contact.form.company" placeholder="Společnost">
+                    <input class="footer__contact-form-input" type="text" name="name" data-translate="contact.form.name" data-translate-placeholder="contact.form.name.placeholder" placeholder="${this.getTranslation('contact.form.name.placeholder')}" required>
+                    <input class="footer__contact-form-input" type="email" name="email" data-translate="contact.form.email" data-translate-placeholder="contact.form.email.placeholder" placeholder="${this.getTranslation('contact.form.email.placeholder')}" required>
+                    <input class="footer__contact-form-input" type="text" name="company" data-translate="contact.form.company" data-translate-placeholder="contact.form.company.placeholder" placeholder="${this.getTranslation('contact.form.company.placeholder')}">
                     <div class="footer__contact-form-select-wrapper">
                         <div class="footer__custom-select">
                             <div class="footer__custom-select-trigger">
-                                <span class="footer__custom-select-value">O jakou službu máte zájem?</span>
+                                <span class="footer__custom-select-value" data-translate="contact.form.service.placeholder">${this.getTranslation('contact.form.service.placeholder')}</span>
                                 <span class="footer__custom-select-arrow">▼</span>
                             </div>
                             <div class="footer__custom-select-options">
-                                <div class="footer__custom-select-option" data-value="google-ads">Google Ads</div>
-                                <div class="footer__custom-select-option" data-value="web-design">Webové stránky a design</div>
-                                <div class="footer__custom-select-option" data-value="street-view">Street View</div>
+                                <div class="footer__custom-select-option" data-value="google-ads" data-translate="contact.form.service.google-ads">${this.getTranslation('contact.form.service.google-ads')}</div>
+                                <div class="footer__custom-select-option" data-value="web-design" data-translate="contact.form.service.web-design">${this.getTranslation('contact.form.service.web-design')}</div>
+                                <div class="footer__custom-select-option" data-value="street-view" data-translate="contact.form.service.street-view">${this.getTranslation('contact.form.service.street-view')}</div>
                             </div>
                             <input type="hidden" name="service" class="footer__custom-select-input" required>
                         </div>
                     </div>
-                    <textarea class="footer__contact-form-textarea" name="message" data-translate="contact.form.message" placeholder="Doplňující informace" rows="4"></textarea>
+                    <textarea class="footer__contact-form-textarea" name="message" data-translate="contact.form.message" data-translate-placeholder="contact.form.message.placeholder" placeholder="${this.getTranslation('contact.form.message.placeholder')}" rows="4"></textarea>
                     <div class="footer__contact-form-checkbox">
-                        <input type="checkbox" id="consent" name="consent" required>
-                        <label for="consent">Souhlasím se zpracováním mých osobních údajů v souladu se Zásadami ochrany osobních údajů.</label>
+                        <input type="checkbox" id="consent-${Date.now()}" name="consent" required>
+                        <label for="consent-${Date.now()}" data-translate="contact.form.consent">${this.getTranslation('contact.form.consent')}</label>
                     </div>
-                    <button type="submit" class="footer__contact-form-submit" data-translate="contact.form.submit">Odeslat</button>
+                    <button type="submit" class="footer__contact-form-submit" data-translate="contact.form.submit">${this.getTranslation('contact.form.submit')}</button>
                 </form>
             </div>
         `;
 
         document.body.appendChild(modal);
+
+        // Store modal reference for language updates
+        this.currentModal = modal;
 
         const closeBtn = modal.querySelector('.footer__modal-close');
         closeBtn.addEventListener('click', () => {
@@ -146,7 +153,42 @@ class Footer {
             });
         }
 
+        // Listen for language changes
+        this.setupLanguageListener(modal);
+
+        // Translate the form immediately
+        if (window.languageManager) {
+            window.languageManager.translatePage();
+        }
+
         this.emitEvent('contactFormOpened');
+    }
+
+    setupLanguageListener(modal) {
+        const languageChangeHandler = () => {
+            if (window.languageManager) {
+                window.languageManager.translatePage();
+                // Update placeholders manually since translatePage doesn't handle data-translate-placeholder
+                const inputs = modal.querySelectorAll('[data-translate-placeholder]');
+                inputs.forEach(input => {
+                    const key = input.getAttribute('data-translate-placeholder');
+                    input.placeholder = window.languageManager.getTranslation(key);
+                });
+                // Update selected dropdown value if an option is selected
+                const hiddenInput = modal.querySelector('.footer__custom-select-input');
+                const valueSpan = modal.querySelector('.footer__custom-select-value');
+                if (hiddenInput && hiddenInput.value && valueSpan) {
+                    const selectedOption = modal.querySelector(`[data-value="${hiddenInput.value}"]`);
+                    if (selectedOption) {
+                        valueSpan.textContent = window.languageManager.getTranslation(selectedOption.getAttribute('data-translate'));
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('languageChanged', languageChangeHandler);
+        // Store handler for cleanup
+        modal.dataset.languageHandler = 'active';
     }
 
     setupCustomDropdown(modal) {
@@ -196,20 +238,56 @@ class Footer {
         if (modal && modal.parentNode) {
             document.body.removeChild(modal);
         }
+        if (this.currentModal === modal) {
+            this.currentModal = null;
+        }
     }
 
-    handleFormSubmission(form) {
+    async handleFormSubmission(form) {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         
-        const successMessage = window.languageManager ? 
-            window.languageManager.getTranslation('contact.form.success') : 'Zpráva odeslána!';
-        this.showCopyNotification(successMessage);
+        // Show loading state
+        const submitButton = form.querySelector('.footer__contact-form-submit');
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = window.languageManager ? 
+            window.languageManager.getTranslation('contact.form.submit.loading') : 'Odesílám...';
         
-        this.emitEvent('contactFormSubmitted', { data });
-        
-        const modal = form.closest('.footer__contact-modal');
-        this.closeModal(modal);
+        try {
+            // Send email via PHP script
+            const response = await fetch('send-email.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                const successMessage = window.languageManager ? 
+                    window.languageManager.getTranslation('contact.form.success') : 'Zpráva odeslána!';
+                this.showCopyNotification(successMessage);
+                
+                this.emitEvent('contactFormSubmitted', { data });
+                
+                const modal = form.closest('.footer__contact-modal');
+                this.closeModal(modal);
+            } else {
+                throw new Error(result.error || 'Failed to send email');
+            }
+        } catch (error) {
+            console.error('Error sending email:', error);
+            const errorMessage = window.languageManager ? 
+                window.languageManager.getTranslation('contact.form.error') : 'Chyba při odesílání. Zkuste to prosím znovu.';
+            this.showCopyNotification(errorMessage);
+        } finally {
+            // Reset button state
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        }
     }
 
     copyToClipboard(text) {

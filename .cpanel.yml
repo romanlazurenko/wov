@@ -24,6 +24,9 @@ deployment:
     - /bin/cp privacy-policy.html $DEPLOYPATH
     - /bin/cp README.md $DEPLOYPATH
     
+    # Deploy PHP files
+    - /bin/cp send-email.php $DEPLOYPATH
+    
     # Deploy root CSS files
     - /bin/cp styles.css $DEPLOYPATH
     - /bin/cp mobile.css $DEPLOYPATH
