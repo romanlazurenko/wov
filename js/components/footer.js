@@ -329,7 +329,7 @@ class Footer {
         notification.textContent = message;
         notification.style.cssText = `
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
             background-color: var(--primary-green);
             color: var(--dark-gray);
