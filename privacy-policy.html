@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zásady ochrany osobních údajů - Way of Visionary</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+    <link rel="stylesheet" href="css/components/privacy-policy.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        (function() {
+            const savedLanguage = localStorage.getItem('wov-language');
+            const browserLanguage = navigator.language.split('-')[0];
+            
+            let currentLanguage = 'cz';
+            
+            if (savedLanguage && (savedLanguage === 'cz' || savedLanguage === 'en')) {
+                currentLanguage = savedLanguage;
+            } else if (browserLanguage === 'en') {
+                currentLanguage = 'en';
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.classList.add(`lang-${currentLanguage}`);
+            });
+            
+            if (document.body) {
+                document.body.classList.add(`lang-${currentLanguage}`);
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header__content">
+            <div class="header__logo">
+                <a href="/"><img src="assets/img/logo.svg" alt="Way of Visionary Logo"></a>
+            </div>
+            <nav class="header__nav header__nav--desktop">
+                <ul class="header__nav-links">
+                    <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
+                    <li class="header__dropdown">
+                    <div class="header__dropdown-trigger">
+                        <a href="#services" data-translate="nav.services">Služby </a>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                        <div class="header__dropdown-content">
+                            <a href="street-view.html" data-translate="nav.street-view">Street View</a>
+                            <a href="web-design.html" data-translate="nav.web-design">Webové stránky a design</a>
+                            <a href="google-ads.html" data-translate="nav.google-ads">Google Ads</a>
+                        </div>
+                    </li>
+                    <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__mobile">
+                <button class="header__burger" id="burger-menu">
+                    <span class="header__burger-line"></span>
+                    <span class="header__burger-line"></span>
+                    <span class="header__burger-line"></span>
+                </button>
+            </div>
+            <div>
+                <div class="header__language-selector">
+                    <div class="header__language-selector-trigger">
+                        <span id="current-language">CZ</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="header__language-dropdown">
+                        <a href="#" data-lang="cz">CZ</a>
+                        <a href="#" data-lang="en">EN</a>
+                    </div>
+                </div>
+                <button class="header__cta-button" data-translate="header.cta">Získat konzultaci</button>
+            </div>
+        </div>
+        
+        <nav class="header__nav header__nav--mobile" id="mobile-nav">
+            <div class="header__mobile-language mobile-wrapper language-selector">
+                <div class="header__mobile-language-selector">
+                    <a href="#" class="header__mobile-language-trigger active" data-lang="cz">CZ</a>
+                    <a href="#" class="header__mobile-language-trigger" data-lang="en">ENG</a>
+                </div>
+            </div>
+            <div class="header__mobile-nav-content mobile-wrapper nav-content">
+                <ul class="header__mobile-nav-links">
+                    <li><a href="index.html" data-translate="nav.intro">Úvod</a></li>
+                    <li><a href="street-view.html" data-translate="nav.street-view">Street view</a></li>
+                    <li><a href="web-design.html" data-translate="nav.web-design">Webové stránky a design</a></li>
+                    <li><a href="google-ads.html" data-translate="nav.google-ads">SEO</a></li>
+                    <li><a href="contact.html" data-translate="nav.contact">Kontakt</a></li>
+                </ul>
+                
+                <div class="header__mobile-cta">
+                    <a href="#" class="header__mobile-cta-button" data-translate="header.cta">Získat konzultaci</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="privacy-policy">
+        <div class="privacy-policy__content">
+            <h1 class="privacy-policy__title" data-translate="privacy.title">Zásady ochrany osobních údajů</h1>
+            
+            <div class="privacy-policy__section">
+                <p class="privacy-policy__text" data-translate="privacy.intro">
+                    Společnost Way of Visionary (dále jen "správce" nebo "my") se zavazuje chránit vaše osobní údaje v souladu s Nařízením Evropského parlamentu a Rady (EU) 2016/679 ze dne 27. dubna 2016 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů (GDPR) a zákonem č. 110/2019 Sb., o zpracování osobních údajů.
+                </p>
+            </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.data-controller.title">1. Správce osobních údajů</h2>
+            <p class="privacy-policy__text">
+                <strong>Správce:</strong> Way of Visionary<br>
+                <strong>Sídlo:</strong> Karlovo nám. 313/8, 120 00 Nové Město<br>
+                <strong>IČO:</strong> 21786925<br>
+                <strong>E-mail:</strong> wayofvisionary@gmail.com<br>
+                <strong>Telefon:</strong> +420 773 729 666
+            </p>
+        </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.data-types.title">2. Jaké osobní údaje zpracováváme</h2>
+            <p class="privacy-policy__text" data-translate="privacy.data-types.text">
+                Zpracováváme následující kategorie osobních údajů:
+            </p>
+            <ul class="privacy-policy__list">
+                <li class="privacy-policy__list-item" data-translate="privacy.data-types.item1">Identifikační údaje: jméno, příjmení</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.data-types.item2">Kontaktní údaje: e-mailová adresa, telefonní číslo</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.data-types.item3">Údaje o komunikaci: obsah zpráv a dotazů zaslaných prostřednictvím kontaktního formuláře</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.data-types.item4">Technické údaje: IP adresa, cookies, informace o prohlížeči a zařízení</li>
+            </ul>
+        </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.purpose.title">3. Účel zpracování osobních údajů</h2>
+            <p class="privacy-policy__text" data-translate="privacy.purpose.text">
+                Vaše osobní údaje zpracováváme za následujícími účely:
+            </p>
+            <ul class="privacy-policy__list">
+                <li class="privacy-policy__list-item" data-translate="privacy.purpose.item1">Zpracování a odpověď na vaše dotazy a žádosti zaslané prostřednictvím kontaktního formuláře</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.purpose.item2">Poskytování našich služeb (Street View, webové stránky, Google Ads)</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.purpose.item3">Komunikace s vámi v souvislosti s našimi službami</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.purpose.item4">Zajištění technického provozu webových stránek</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.purpose.item5">Plnění zákonných povinností</li>
+            </ul>
+        </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.legal-basis.title">4. Právní základ zpracování</h2>
+            <p class="privacy-policy__text" data-translate="privacy.legal-basis.text">
+                Zpracování osobních údajů probíhá na základě:
+            </p>
+            <ul class="privacy-policy__list">
+                <li class="privacy-policy__list-item" data-translate="privacy.legal-basis.item1">Váš souhlas se zpracováním osobních údajů (čl. 6 odst. 1 písm. a) GDPR)</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.legal-basis.item2">Plnění smlouvy nebo opatření před uzavřením smlouvy (čl. 6 odst. 1 písm. b) GDPR)</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.legal-basis.item3">Splnění zákonné povinnosti (čl. 6 odst. 1 písm. c) GDPR)</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.legal-basis.item4">Oprávněný zájem správce (čl. 6 odst. 1 písm. f) GDPR)</li>
+            </ul>
+        </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.storage.title">5. Doba uchování osobních údajů</h2>
+            <p class="privacy-policy__text" data-translate="privacy.storage.text">
+                Osobní údaje uchováváme pouze po dobu nezbytnou pro naplnění účelu jejich zpracování:
+            </p>
+            <ul class="privacy-policy__list">
+                <li class="privacy-policy__list-item" data-translate="privacy.storage.item1">Po dobu trvání obchodního vztahu a nejdéle 3 roky po jeho ukončení</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.storage.item2">V případě souhlasu se zpracováním po dobu platnosti souhlasu, nejdéle však 3 roky</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.storage.item3">Údaje nezbytné pro plnění zákonných povinností po dobu stanovenou zákonem</li>
+            </ul>
+        </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.recipients.title">6. Příjemci osobních údajů</h2>
+            <p class="privacy-policy__text" data-translate="privacy.recipients.text">
+                Vaše osobní údaje mohou být předány následujícím příjemcům:
+            </p>
+            <ul class="privacy-policy__list">
+                <li class="privacy-policy__list-item" data-translate="privacy.recipients.item1">Poskytovatelům hostingových služeb a IT služeb</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.recipients.item2">Účetním a daňovým poradcům</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.recipients.item3">Státním orgánům v případě, že to vyžaduje zákon</li>
+            </ul>
+        </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.rights.title">7. Vaše práva</h2>
+            <p class="privacy-policy__text" data-translate="privacy.rights.text">
+                V souvislosti se zpracováním osobních údajů máte následující práva:
+            </p>
+            <ul class="privacy-policy__list">
+                <li class="privacy-policy__list-item" data-translate="privacy.rights.item1">Právo na přístup k osobním údajům</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.rights.item2">Právo na opravu nepřesných osobních údajů</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.rights.item3">Právo na výmaz osobních údajů ("právo být zapomenut")</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.rights.item4">Právo na omezení zpracování</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.rights.item5">Právo na přenositelnost údajů</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.rights.item6">Právo vznést námitku proti zpracování</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.rights.item7">Právo odvolat souhlas se zpracováním osobních údajů</li>
+                <li class="privacy-policy__list-item" data-translate="privacy.rights.item8">Právo podat stížnost u Úřadu pro ochranu osobních údajů</li>
+            </ul>
+        </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.cookies.title">8. Cookies</h2>
+            <p class="privacy-policy__text" data-translate="privacy.cookies.text">
+                Naše webové stránky používají cookies pro zajištění správného fungování a zlepšení uživatelského zážitku. Cookies jsou malé textové soubory ukládané ve vašem prohlížeči. Můžete cookies odmítnout nebo jejich použití omezit v nastavení vašeho prohlížeče.
+            </p>
+        </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.security.title">9. Zabezpečení osobních údajů</h2>
+            <p class="privacy-policy__text" data-translate="privacy.security.text">
+                Přijímáme technická a organizační opatření k zajištění ochrany vašich osobních údajů proti neoprávněnému přístupu, ztrátě, zničení nebo změně. Vaše osobní údaje jsou zpracovávány pouze oprávněnými osobami a pouze v rozsahu nezbytném pro naplnění účelu zpracování.
+            </p>
+        </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.contact.title">10. Kontakt</h2>
+            <p class="privacy-policy__text" data-translate="privacy.contact.text">
+                Pokud máte jakékoli dotazy týkající se zpracování vašich osobních údajů nebo chcete uplatnit svá práva, kontaktujte nás prosím:
+            </p>
+            <div class="privacy-policy__contact-info">
+                <p><strong>E-mail:</strong> wayofvisionary@gmail.com</p>
+                <p><strong>Telefon:</strong> +420 773 729 666</p>
+                <p><strong>Adresa:</strong> Karlovo nám. 313/8, 120 00 Nové Město</p>
+            </div>
+        </div>
+
+        <div class="privacy-policy__section">
+            <h2 class="privacy-policy__section-title" data-translate="privacy.changes.title">11. Změny zásad ochrany osobních údajů</h2>
+            <p class="privacy-policy__text" data-translate="privacy.changes.text">
+                Tyto zásady ochrany osobních údajů můžeme pravidelně aktualizovat. O významných změnách vás budeme informovat prostřednictvím našich webových stránek nebo e-mailem. Aktualizované zásady jsou k dispozici na této stránce s uvedením data poslední aktualizace.
+            </p>
+            <p class="privacy-policy__text">
+                <strong data-translate="privacy.last-updated">Poslední aktualizace:</strong> 1. 11.2025
+            </p>
+        </div>
+        </div>
+    </main>
+
+    <footer class="footer footer--street-view" id="contact">
+        <div class="footer__content">
+            <div class="footer__grid">
+                <div class="footer__section">
+                    <button class="footer__cta-button" data-translate="footer.cta">Získat konzultaci</button>
+                    <div class="footer__logo" data-translate="footer.logo">WAY OF VISIONARY</div>
+                </div>
+                <div class="footer__section">
+                    <h3 data-translate="footer.services.title">SLUŽBY</h3>
+                    <ul class="footer__links">
+                        <li><a href="street-view.html" data-translate="footer.services.street-view">Street view</a></li>
+                        <li><a href="#web-design" data-translate="footer.services.web-design">Webové stránky a design</a></li>
+                        <li><a href="#seo" data-translate="footer.services.seo">SEO</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3 data-translate="footer.contact.title">KONTAKT</h3>
+                    <div class="footer__contact-info">
+                        <a class="footer__phone" href="tel:+420773729666">+420 773 729 666</a>
+                        <a class="footer__email" href="mailto:wayofvisionary@gmail.com">wayofvisionary@gmail.com</a>
+                        <div class="footer__social-icons">
+                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://www.instagram.com/wayofvisionary" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://t.me/wayofvisionary" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__bottom-content">
+                <p><a href="privacy-policy.html" data-translate="footer.privacy">Zásady ochrany osobních údajů</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/translations/cz.js"></script>
+    <script src="js/translations/en.js"></script>
+    <script src="js/language-manager.js"></script>
+    <script src="js/components/header.js"></script>
+    <script src="js/components/footer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+

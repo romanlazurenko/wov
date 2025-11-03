@@ -146,6 +146,17 @@
     font-size: 22px;
 }
 
+.footer__bottom-content a {
+    color: var(--primary-green);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.footer__bottom-content a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
 .footer__cta-button {
     background: linear-gradient(180deg, #7AFFB3 0%, #4DE68A 100%);
     color: var(--dark-gray);
