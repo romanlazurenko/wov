@@ -12,8 +12,10 @@ class Hero {
             this.scrollIndicator = this.hero.querySelector('.hero__scroll-indicator');
             this.leftHand = this.hero.querySelector('.hero__left-hand');
             this.rightHand = this.hero.querySelector('.hero__right-hand');
-            this.rightHandDefaultImg = this.rightHand ? this.rightHand.querySelector('.default-hand') : null;
-            this.rightHandActiveImg = this.rightHand ? this.rightHand.querySelector('.active-hand') : null;
+            this.rightHandDefaultImg = this.rightHand ? this.rightHand.querySelector('.default-hand.desktop-hand') : null;
+            this.rightHandActiveImg = this.rightHand ? this.rightHand.querySelector('.active-hand.desktop-hand') : null;
+            this.rightHandDefaultImgMobile = this.rightHand ? this.rightHand.querySelector('.default-hand.mobile-hand') : null;
+            this.rightHandActiveImgMobile = this.rightHand ? this.rightHand.querySelector('.active-hand.mobile-hand') : null;
             this.touchEffect = this.hero.querySelector('.hero__touch-effect');
             this.phoneScreenAnimation = this.hero.querySelector('.hero__phone-screen-animation');
             this.phoneScreenOverlay = this.hero.querySelector('.hero__phone-screen-overlay');
@@ -23,6 +25,7 @@ class Hero {
             this.setupParallax();
             this.setupAnimationReplay();
             this.setupHandSwitchAnimation();
+            this.optimizeForMobile();
         }
     }
 
@@ -41,8 +44,9 @@ class Hero {
             }
         });
 
-        // Replay animation on click
-        if (this.leftHand) {
+        // Replay animation on click (only left hand on desktop)
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile && this.leftHand) {
             this.leftHand.addEventListener('click', () => {
                 this.replayAnimation();
             });
@@ -75,56 +79,66 @@ class Hero {
     }
 
     setupHandSwitchAnimation() {
+        const isMobile = window.innerWidth <= 768;
+        
         // Start screen fade-in animation 200ms before the click
         setTimeout(() => {
             this.startScreenFadeInAnimation();
-        }, 2300);
+        }, 2400);
 
         // Switch hand image when hands reach their final position (after 2s slideInRight animation)
         setTimeout(() => {
-            if (this.rightHandDefaultImg && this.rightHandActiveImg && this.rightHand) {
-                // Trigger the crossfade effect
-                this.rightHand.classList.add('hand-activated');
+            if (this.rightHand) {
+                // Use mobile or desktop images based on device
+                const defaultImg = isMobile ? this.rightHandDefaultImgMobile : this.rightHandDefaultImg;
+                const activeImg = isMobile ? this.rightHandActiveImgMobile : this.rightHandActiveImg;
+                
+                if (defaultImg && activeImg) {
+                    // Trigger the crossfade effect
+                    this.rightHand.classList.add('hand-activated');
+                }
             }
             
-            // Trigger left hand click animation
-            if (this.leftHand) {
+            // Only trigger left hand click animation on desktop
+            if (!isMobile && this.leftHand) {
                 this.leftHand.classList.add('hand-clicking');
             }
 
             // Start smooth screen turn-on animation
             this.startScreenTurnOnAnimation();
-        }, 2300);
+        }, 2400);
     }
 
     startScreenTurnOnAnimation() {
         if (!this.phoneScreenOverlay) return;
 
         const startTime = Date.now();
-        const duration = 1500; // 1.5 seconds
-        const clickPointX = 8; // 8% from left
-        const clickPointY = 36; // 36% from top
-
+        const duration = 1500; // Same duration as desktop for consistent timing
+        const isMobile = window.innerWidth <= 768;
+        
+        // Adjust click point coordinates based on mobile screen positioning
+        const clickPointX = isMobile ? 8 : 8; // Same relative position
+        const clickPointY = isMobile ? 36 : 36; // Same relative position
+        
         const animate = () => {
             const elapsed = Date.now() - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Smooth easing function (ease-out)
+            // Use same cubic easing as desktop for consistent animation feel
             const easedProgress = 1 - Math.pow(1 - progress, 3);
             
             // Calculate the radius of the transparent area
-            // Start from 0% and expand to cover the entire screen
-            const maxRadius = Math.sqrt(2) * 100; // Diagonal distance to cover entire screen
+            const maxRadius = Math.sqrt(2) * 100;
             const currentRadius = easedProgress * maxRadius;
             
             // Calculate opacity based on distance from click point
             const opacity = Math.max(0, 0.95 - (easedProgress * 0.95));
             
-            // Calculate border radius (slightly smaller than transparent area)
+            // Calculate border (same as desktop)
             const borderRadius = Math.max(0, currentRadius - 2);
             const borderOpacity = Math.max(0, 0.8 - (easedProgress * 0.8));
             
-            // Create smooth radial gradient with green border
+            // Use same gradient with green border on both desktop and mobile
             const gradient = `radial-gradient(circle at ${clickPointX}% ${clickPointY}%, 
                 transparent ${borderRadius}%, 
                 rgba(96, 255, 160, ${borderOpacity}) ${borderRadius + 10}%, 
@@ -148,9 +162,9 @@ class Hero {
     startScreenFadeInAnimation() {
         if (!this.phoneScreenOverlay) return;
 
-        // Start fade-in animation 200ms before the click (at 2.1s)
+        // Start fade-in animation 200ms before the click (at 2.2s)
         const startTime = Date.now();
-        const duration = 400; // 0.4 seconds fade-in
+        const duration = 400; // Same duration as desktop for consistent timing
         const initialOpacity = 0;
         const targetOpacity = 1;
 
@@ -158,7 +172,7 @@ class Hero {
             const elapsed = Date.now() - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Smooth ease-out for fade-in
+            // Use same easing as desktop for consistent animation feel
             const easedProgress = 1 - Math.pow(1 - progress, 2);
             const currentOpacity = initialOpacity + (targetOpacity - initialOpacity) * easedProgress;
             
@@ -170,6 +184,21 @@ class Hero {
         };
 
         requestAnimationFrame(animate);
+    }
+
+    // Mobile-specific optimizations
+    optimizeForMobile() {
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            // Optimize for performance while maintaining visual consistency
+            if (this.phoneScreenOverlay) {
+                this.phoneScreenOverlay.style.willChange = 'opacity, background';
+            }
+            
+            // Keep touch effect for visual consistency (but it's lighter on mobile)
+            // Touch effect timing is handled in CSS
+        }
     }
 
     replayAnimation() {
@@ -187,8 +216,10 @@ class Hero {
         // Re-cache the elements
         this.leftHand = this.hero.querySelector('.hero__left-hand');
         this.rightHand = this.hero.querySelector('.hero__right-hand');
-        this.rightHandDefaultImg = this.rightHand ? this.rightHand.querySelector('.default-hand') : null;
-        this.rightHandActiveImg = this.rightHand ? this.rightHand.querySelector('.active-hand') : null;
+        this.rightHandDefaultImg = this.rightHand ? this.rightHand.querySelector('.default-hand.desktop-hand') : null;
+        this.rightHandActiveImg = this.rightHand ? this.rightHand.querySelector('.active-hand.desktop-hand') : null;
+        this.rightHandDefaultImgMobile = this.rightHand ? this.rightHand.querySelector('.default-hand.mobile-hand') : null;
+        this.rightHandActiveImgMobile = this.rightHand ? this.rightHand.querySelector('.active-hand.mobile-hand') : null;
         this.touchEffect = this.hero.querySelector('.hero__touch-effect');
         this.phoneScreenAnimation = this.hero.querySelector('.hero__phone-screen-animation');
         this.phoneScreenOverlay = this.hero.querySelector('.hero__phone-screen-overlay');
@@ -205,8 +236,9 @@ class Hero {
             this.leftHand.classList.remove('hand-clicking');
         }
 
-        // Re-bind click events
-        if (this.leftHand) {
+        // Re-bind click events (only left hand on desktop)
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile && this.leftHand) {
             this.leftHand.addEventListener('click', () => this.replayAnimation());
         }
         if (this.rightHand) {

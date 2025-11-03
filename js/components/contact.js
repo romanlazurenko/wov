@@ -41,7 +41,19 @@ class ContactPage {
     setupInteractions() {
         const cards = document.querySelectorAll('.contact__card');
         cards.forEach(card => {
-            card.addEventListener('click', () => {
+            // Prevent card click when clicking on icon links
+            const iconLinks = card.querySelectorAll('.contact__icon a');
+            iconLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent card click handler
+                });
+            });
+
+            card.addEventListener('click', (e) => {
+                // Don't handle card click if clicking on a link
+                if (e.target.closest('a')) {
+                    return;
+                }
                 this.handleCardClick(card);
             });
         });
@@ -65,6 +77,28 @@ class ContactPage {
         }, 150);
 
         const iconImgs = card.querySelectorAll('.contact__icon-img');
+        const contactDetails = card.querySelector('.contact__details');
+        
+        // Handle address/ICO card
+        if (contactDetails && contactDetails.querySelector('.contact__text--green')) {
+            const addressText = contactDetails.querySelectorAll('.contact__text--green');
+            let textToCopy = '';
+            addressText.forEach((text, index) => {
+                if (index > 0) textToCopy += '\n';
+                textToCopy += text.textContent.trim();
+            });
+            
+            if (textToCopy) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const message = 'Address copied!';
+                    this.showNotification(message);
+                }).catch(() => {
+                    this.showNotification('Address: ' + textToCopy);
+                });
+            }
+            return;
+        }
+        
         if (iconImgs.length > 0) {
             const firstIconSrc = iconImgs[0].src;
             
@@ -72,8 +106,6 @@ class ContactPage {
                 this.handlePhoneClick();
             } else if (firstIconSrc.includes('mail.svg')) {
                 this.handleEmailClick();
-            } else if (firstIconSrc.includes('telegram.svg') || firstIconSrc.includes('whatsapp.svg')) {
-                this.handleMessageClick();
             }
         }
     }

@@ -28,10 +28,10 @@ const enTranslations = {
     'stats.360-content.title': 'CUSTOMERS',
     'stats.double-interest.title': 'DOUBLE INTEREST',
     'stats.more-trust.title': 'MORE TRUST',
-    'stats.google-maps.description': 'OF GOOGLE MAPS USERS use the service to search for businesses and services',
-    'stats.360-content.description': 'OF CUSTOMERS want to see more 360° content that helps them better understand the company and its offerings',
-    'stats.double-interest.description': 'DOUBLE INTEREST companies with virtual tours and quality photos get',
-    'stats.more-trust.description': 'MORE TRUST companies with virtual tours get compared to those without them',
+    'stats.google-maps.description': 'of Google Maps users use the service to search for businesses and services',
+    'stats.360-content.description': 'of customers want to see more 360° content that helps them better understand the company and its offerings',
+    'stats.double-interest.description': 'is what companies with virtual tours and quality photos get',
+    'stats.more-trust.description': 'is what companies with virtual tours get compared to those without them',
     
     // Footer
     'footer.services.title': 'SERVICES',
