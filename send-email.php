@@ -16,9 +16,24 @@ $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
 // Validate required fields
-if (empty($data['name']) || empty($data['email']) || empty($data['service'])) {
+$missingFields = [];
+if (empty($data['name'])) {
+    $missingFields[] = 'name';
+}
+if (empty($data['email'])) {
+    $missingFields[] = 'email';
+}
+if (empty($data['service'])) {
+    $missingFields[] = 'service';
+}
+
+if (!empty($missingFields)) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'Missing required fields']);
+    echo json_encode([
+        'success' => false, 
+        'error' => 'Missing required fields: ' . implode(', ', $missingFields),
+        'missing_fields' => $missingFields
+    ]);
     exit;
 }
 

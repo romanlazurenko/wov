@@ -158,6 +158,11 @@ class Header {
         
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            // Check HTML5 validation first
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
             this.handleFormSubmission(form);
         });
 
@@ -270,6 +275,14 @@ class Header {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         
+        // Validate required fields before sending
+        if (!data.name || !data.email || !data.service) {
+            const errorMessage = window.languageManager ? 
+                window.languageManager.getTranslation('contact.form.error') : 'Vyplňte prosím všechna povinná pole.';
+            this.showCopyNotification(errorMessage);
+            return;
+        }
+        
         // Show loading state
         const submitButton = form.querySelector('.footer__contact-form-submit');
         const originalButtonText = submitButton.textContent;
@@ -286,6 +299,18 @@ class Header {
                 },
                 body: JSON.stringify(data)
             });
+            
+            // Check if response is ok
+            if (!response.ok) {
+                let errorText = await response.text();
+                let errorData;
+                try {
+                    errorData = JSON.parse(errorText);
+                } catch (e) {
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+                throw new Error(errorData.error || 'Failed to send email');
+            }
             
             const result = await response.json();
             
@@ -305,6 +330,7 @@ class Header {
             }
         } catch (error) {
             console.error('Error sending email:', error);
+            console.error('Form data sent:', data);
             const errorMessage = window.languageManager ? 
                 window.languageManager.getTranslation('contact.form.error') : 'Chyba při odesílání. Zkuste to prosím znovu.';
             this.showCopyNotification(errorMessage);
