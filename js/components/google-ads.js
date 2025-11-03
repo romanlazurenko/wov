@@ -430,7 +430,7 @@ class GoogleAdsPage {
                                 <div class="footer__custom-select-option" data-value="web-design" data-translate="contact.form.service.web-design">${this.getTranslation('contact.form.service.web-design')}</div>
                                 <div class="footer__custom-select-option" data-value="street-view" data-translate="contact.form.service.street-view">${this.getTranslation('contact.form.service.street-view')}</div>
                             </div>
-                            <input type="hidden" name="service" class="footer__custom-select-input" required>
+                            <input type="hidden" name="service" class="footer__custom-select-input">
                         </div>
                     </div>
                     <textarea class="footer__contact-form-textarea" name="message" data-translate="contact.form.message" data-translate-placeholder="contact.form.message.placeholder" placeholder="${this.getTranslation('contact.form.message.placeholder')}" rows="4"></textarea>
@@ -574,8 +574,8 @@ class GoogleAdsPage {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         
-        // Validate required fields before sending
-        if (!data.name || !data.email || !data.service) {
+        // Validate required fields before sending (only name and email are required)
+        if (!data.name || !data.email) {
             const errorMessage = window.languageManager ? 
                 window.languageManager.getTranslation('contact.form.error') : 'Vyplňte prosím všechna povinná pole.';
             this.showCopyNotification(errorMessage);
