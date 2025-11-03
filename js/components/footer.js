@@ -337,14 +337,26 @@ class Footer {
             border-radius: 8px;
             z-index: 3000;
             font-weight: 600;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         `;
 
         document.body.appendChild(notification);
 
+        // Slide in animation
         setTimeout(() => {
-            if (notification.parentNode) {
-                document.body.removeChild(notification);
-            }
+            notification.style.transform = 'translateY(0)';
+        }, 100);
+
+        // Slide out and remove after 3 seconds
+        setTimeout(() => {
+            notification.style.transform = 'translateY(100%)';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    document.body.removeChild(notification);
+                }
+            }, 300); // Wait for animation to complete
         }, 3000);
     }
 
