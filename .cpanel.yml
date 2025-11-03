@@ -1,0 +1,71 @@
+---
+# cPanel Deployment Configuration
+# This file deploys the Way of Visionary website to production
+# Update DEPLOYPATH with your actual cPanel username
+
+deployment:
+  tasks:
+    # Set the deployment path (update 'username' with your actual cPanel username)
+    - export DEPLOYPATH=/home/username/public_html/
+    
+    # Create necessary directories
+    - mkdir -p $DEPLOYPATH/css/components
+    - mkdir -p $DEPLOYPATH/js/components
+    - mkdir -p $DEPLOYPATH/js/translations
+    - mkdir -p $DEPLOYPATH/assets/img
+    - mkdir -p $DEPLOYPATH/assets/projects
+    
+    # Deploy HTML files
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp contact.html $DEPLOYPATH
+    - /bin/cp street-view.html $DEPLOYPATH
+    - /bin/cp web-design.html $DEPLOYPATH
+    - /bin/cp google-ads.html $DEPLOYPATH
+    - /bin/cp privacy-policy.html $DEPLOYPATH
+    - /bin/cp README.md $DEPLOYPATH
+    
+    # Deploy root CSS files
+    - /bin/cp styles.css $DEPLOYPATH
+    - /bin/cp mobile.css $DEPLOYPATH
+    
+    # Deploy CSS components
+    - /bin/cp css/components/contact.css $DEPLOYPATH/css/components/
+    - /bin/cp css/components/footer.css $DEPLOYPATH/css/components/
+    - /bin/cp css/components/google-ads.css $DEPLOYPATH/css/components/
+    - /bin/cp css/components/header.css $DEPLOYPATH/css/components/
+    - /bin/cp css/components/hero.css $DEPLOYPATH/css/components/
+    - /bin/cp css/components/privacy-policy.css $DEPLOYPATH/css/components/
+    - /bin/cp css/components/services.css $DEPLOYPATH/css/components/
+    - /bin/cp css/components/statistics.css $DEPLOYPATH/css/components/
+    - /bin/cp css/components/street-view.css $DEPLOYPATH/css/components/
+    - /bin/cp css/components/web-design.css $DEPLOYPATH/css/components/
+    
+    # Deploy root JavaScript files
+    - /bin/cp app.js $DEPLOYPATH
+    
+    # Deploy JavaScript components
+    - /bin/cp js/language-manager.js $DEPLOYPATH/js/
+    - /bin/cp js/components/contact.js $DEPLOYPATH/js/components/
+    - /bin/cp js/components/footer.js $DEPLOYPATH/js/components/
+    - /bin/cp js/components/google-ads.js $DEPLOYPATH/js/components/
+    - /bin/cp js/components/header.js $DEPLOYPATH/js/components/
+    - /bin/cp js/components/hero.js $DEPLOYPATH/js/components/
+    - /bin/cp js/components/projects-slider.js $DEPLOYPATH/js/components/
+    - /bin/cp js/components/services.js $DEPLOYPATH/js/components/
+    - /bin/cp js/components/statistics.js $DEPLOYPATH/js/components/
+    - /bin/cp js/components/street-view.js $DEPLOYPATH/js/components/
+    - /bin/cp js/components/web-design.js $DEPLOYPATH/js/components/
+    
+    # Deploy translation files
+    - /bin/cp js/translations/cz.js $DEPLOYPATH/js/translations/
+    - /bin/cp js/translations/en.js $DEPLOYPATH/js/translations/
+    
+    # Deploy favicon
+    - /bin/cp favicon.png $DEPLOYPATH
+    
+    # Deploy image assets
+    - /bin/cp -R assets/img/* $DEPLOYPATH/assets/img/
+    
+    # Deploy project images
+    - /bin/cp -R assets/projects/* $DEPLOYPATH/assets/projects/
+
