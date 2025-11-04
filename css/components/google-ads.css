@@ -1,5 +1,8 @@
 /* Google Ads Page Styles */
+/* Ensure google-ads block is always visible - override any display:none rules */
+main.google-ads,
 .google-ads {
+    display: block !important;
     background-color: var(--light-gray);
     min-height: calc(100vh - 100px);
     margin-top: 100px;
