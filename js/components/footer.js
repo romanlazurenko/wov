@@ -24,16 +24,28 @@ class Footer {
         const serviceLinks = this.footer.querySelectorAll('.footer__links a');
         serviceLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.handleServiceLinkClick(link);
+                const href = link.getAttribute('href');
+                // Only prevent default for anchor links (internal navigation)
+                // Allow normal navigation for external links (like street-view.html)
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    this.handleServiceLinkClick(link);
+                }
+                // For external links, let the browser handle navigation normally
             });
         });
 
         const socialLinks = this.footer.querySelectorAll('.footer__social-icons a');
         socialLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.handleSocialClick(link);
+                const href = link.getAttribute('href');
+                // Only prevent default for valid external links
+                // Allow default behavior for invalid hrefs like "#"
+                if (href && href !== '#' && href.trim() !== '') {
+                    e.preventDefault();
+                    this.handleSocialClick(link);
+                }
+                // For invalid hrefs, let browser handle it (though it won't do much)
             });
         });
 
@@ -79,7 +91,10 @@ class Footer {
 
         this.emitEvent('socialClicked', { platform, href });
 
-        window.open(href, '_blank');
+        // Only open if href is valid (not empty, not '#')
+        if (href && href !== '#' && href.trim() !== '') {
+            window.open(href, '_blank');
+        }
     }
 
     getTranslation(key) {
