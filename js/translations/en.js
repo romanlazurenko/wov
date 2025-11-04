@@ -124,7 +124,7 @@ const enTranslations = {
 
     // Google Ads Page
     'google-ads.subtitle': 'Professional&nbsp;&nbsp;advertising&nbsp;&nbsp;in&nbsp;&nbsp;Google&nbsp;&nbsp;Ads&nbsp;&nbsp;for&nbsp;&nbsp;your&nbsp;&nbsp;business',
-    'google-ads.middle.title': 'WHO&nbsp;&nbsp;NEEDS&nbsp;&nbsp;GOOGLE&nbsp;&nbsp;ADS&nbsp;&nbsp;ADVERTISING',
+    'google-ads.middle.title': 'WHO NEEDS GOOGLE ADS ADVERTISING',
     'google-ads.benefits.title': 'OUR&nbsp;&nbsp;ADVANTAGES',
     'google-ads.workflow.title': 'HOW&nbsp;&nbsp;WE&nbsp;&nbsp;WORK',
     'google-ads.results.title': 'RESULT&nbsp;&nbsp;FOR<br>YOUR&nbsp;&nbsp;BUSINESS',

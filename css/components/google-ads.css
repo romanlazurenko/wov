@@ -315,7 +315,8 @@ main.wov-google-ads-page,
     animation-delay: 0.2s;
     line-height: 1.1;
     white-space: normal;
-    word-break: break-word;
+    word-break: normal;
+    overflow-wrap: normal;
 }
 
 /* Bottom Section */
@@ -1070,15 +1071,15 @@ main.wov-google-ads-page,
     }
     
     .google-ads__middle {
-        margin-top: 200px;
+        margin-top: 264px;
     }
     
     .google-ads__middle-title {
         font-size: 40px;
-        white-space: normal;      /* allow wrapping */
-        word-break: break-word;   /* break long tokens */
-        overflow-wrap: anywhere;  /* force wrap despite nbsp */
-        padding: 0 20px;          /* reduce side padding on mobile */
+        white-space: normal;      /* allow wrapping at spaces */
+        word-break: normal;       /* prevent word breaking - words stay together */
+        overflow-wrap: normal;    /* wrap only at word boundaries */
+        padding: 0 10px; 
     }
     
     .google-ads__card:nth-child(1) {
@@ -1092,6 +1093,10 @@ main.wov-google-ads-page,
         order: 2;
         position: absolute;
         top: 100px;
+        z-index: 1;
+    }
+    .google-ads__card {
+        z-index: 2;
     }
     .google-ads__card-list {
         font-size: 18px;
@@ -1141,7 +1146,6 @@ main.wov-google-ads-page,
     .google-ads__benefits-title {
         font-size: 32px;
         margin-bottom: 2rem;
-        padding-left: 70px;
     }
     
     .google-ads__benefit-item {
@@ -1243,6 +1247,9 @@ main.wov-google-ads-page,
     
     .google-ads__results-panel {
         height: 200px;
+    }
+    .google-ads__results-panel.google-ads__results-panel--right {
+        height: 100%;
     }
     
     .google-ads__results-title-line {

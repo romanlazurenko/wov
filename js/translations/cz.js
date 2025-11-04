@@ -126,7 +126,7 @@ const czTranslations = {
 
     // Google Ads Page
     'google-ads.subtitle': 'Profesionální&nbsp;&nbsp;reklama&nbsp;&nbsp;v&nbsp;&nbsp;Google&nbsp;&nbsp;Ads&nbsp;&nbsp;pro&nbsp;&nbsp;vaše&nbsp;&nbsp;podnikání',
-    'google-ads.middle.title': 'KOMU&nbsp;&nbsp;SE&nbsp;&nbsp;HODÍ&nbsp;&nbsp;REKLAMA&nbsp;&nbsp;V&nbsp;&nbsp;GOOGLE&nbsp;&nbsp;ADS',
+    'google-ads.middle.title': 'KOMU SE HODÍ REKLAMA V GOOGLE ADS',
     'google-ads.benefits.title': 'NAŠE&nbsp;&nbsp;VÝHODY',
     'google-ads.workflow.title': 'JAK&nbsp;&nbsp;PRACUJEME',
     'google-ads.results.title': 'VÝSLEDEK&nbsp;&nbsp;PRO<br>VAŠE&nbsp;&nbsp;PODNIKÁNÍ',
