@@ -1,7 +1,7 @@
 /* Google Ads Page Styles */
-/* Ensure google-ads block is always visible - override any display:none rules */
-main.google-ads,
-.google-ads {
+/* Main container - renamed from .google-ads to avoid conflicts */
+main.wov-google-ads-page,
+.wov-google-ads-page {
     display: block !important;
     background-color: var(--light-gray);
     min-height: calc(100vh - 100px);
@@ -942,13 +942,13 @@ main.google-ads,
 }
 
 @media (max-width: 768px) {
-    .google-ads {
+    .wov-google-ads-page {
         padding: 0 10px;
         overflow-x: hidden;              /* prevent horizontal scroll */
     }
 
-    /* Ensure inner elements don’t exceed viewport width */
-    .google-ads, .google-ads * {
+    /* Ensure inner elements don't exceed viewport width */
+    .wov-google-ads-page, .wov-google-ads-page * {
         box-sizing: border-box;
     }
 
@@ -1336,4 +1336,10 @@ main.google-ads,
     .google-ads__results-description {
         font-size: 18px;
     }
+}
+
+/* Final override to ensure google-ads page is always visible - must be at the end */
+main.wov-google-ads-page,
+.wov-google-ads-page {
+    display: block !important;
 }
