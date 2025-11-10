@@ -10,6 +10,10 @@ class Services {
         this.services = document.querySelector('.services');
         if (this.services) {
             this.serviceCards = Array.from(this.services.querySelectorAll('.services__card'));
+            // Initialize angle tracking for each card
+            this.cardAngles = new Map();
+            this.cardTargetAngles = new Map();
+            this.animationFrames = new Map();
             this.bindEvents();
         }
     }
@@ -33,7 +37,14 @@ class Services {
 
             card.addEventListener('mouseleave', () => {
                 this.handleCardHover(card, false);
-                // Don't reset gradient position - let it stay where it was
+                // Stop animation and reset to default angle smoothly
+                const frameId = this.animationFrames.get(card);
+                if (frameId) {
+                    cancelAnimationFrame(frameId);
+                    this.animationFrames.delete(card);
+                }
+                this.cardTargetAngles.set(card, 135); // Default angle
+                this.animateGradientAngle(card);
             });
         });
 
@@ -52,15 +63,76 @@ class Services {
     }
 
     handleMouseMove(e, card) {
+        // Throttle mousemove events for better performance
+        if (!this.mouseMoveThrottle) {
+            this.mouseMoveThrottle = new Map();
+        }
+        
+        const lastTime = this.mouseMoveThrottle.get(card) || 0;
+        const now = performance.now();
+        
+        // Throttle to ~60fps (16ms)
+        if (now - lastTime < 16) {
+            return;
+        }
+        
+        this.mouseMoveThrottle.set(card, now);
+        
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
         
-        // Calculate angle from center to mouse position
-        const angle = Math.atan2(y, x) * (100 / Math.PI);
-        const normalizedAngle = (angle + 20 + 60) % 360; // Normalize to 0-360
+        // Calculate angle from center to mouse position (in degrees)
+        const angleRad = Math.atan2(y, x);
+        const angleDeg = angleRad * (180 / Math.PI); // Convert radians to degrees
+        const normalizedAngle = ((angleDeg + 90) % 360 + 360) % 360; // Normalize to 0-360, offset by 90deg for better visual
         
-        card.style.setProperty('--gradient-angle', `${normalizedAngle}deg`);
+        // Set target angle for smooth interpolation
+        this.cardTargetAngles.set(card, normalizedAngle);
+        
+        // Start smooth animation if not already running
+        if (!this.animationFrames.get(card)) {
+            this.animateGradientAngle(card);
+        }
+    }
+
+    animateGradientAngle(card) {
+        const currentAngle = this.cardAngles.get(card) || 135; // Default angle
+        const targetAngle = this.cardTargetAngles.get(card) || currentAngle;
+        
+        // Calculate shortest angular distance (handles wrap-around from 360° to 0°)
+        let angleDiff = targetAngle - currentAngle;
+        
+        // Normalize to shortest path (-180° to 180°)
+        if (angleDiff > 180) {
+            angleDiff -= 360;
+        } else if (angleDiff < -180) {
+            angleDiff += 360;
+        }
+        
+        // Smooth interpolation factor (0.15 = smooth, lower = smoother but slower)
+        const lerpFactor = 0.15;
+        let newAngle = currentAngle + angleDiff * lerpFactor;
+        
+        // Normalize new angle to 0-360 range
+        newAngle = ((newAngle % 360) + 360) % 360;
+        
+        // Check if we're close enough to stop animating (using shortest distance)
+        const finalDiff = Math.abs(angleDiff);
+        if (finalDiff < 0.1) {
+            this.cardAngles.set(card, targetAngle);
+            card.style.setProperty('--gradient-angle', `${targetAngle}deg`);
+            this.animationFrames.delete(card);
+            return;
+        }
+        
+        // Update angle
+        this.cardAngles.set(card, newAngle);
+        card.style.setProperty('--gradient-angle', `${newAngle}deg`);
+        
+        // Continue animation
+        const frameId = requestAnimationFrame(() => this.animateGradientAngle(card));
+        this.animationFrames.set(card, frameId);
     }
 
     resetGradient(card) {

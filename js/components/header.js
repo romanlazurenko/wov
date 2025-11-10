@@ -50,9 +50,16 @@ class Header {
         // Mobile dropdown functionality
         this.setupMobileDropdowns();
 
-        // Header scroll effects for glassmorphism
+        // Header scroll effects for glassmorphism with throttling
+        let scrollTicking = false;
         window.addEventListener('scroll', () => {
-            this.handleScroll();
+            if (!scrollTicking) {
+                window.requestAnimationFrame(() => {
+                    this.handleScroll();
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
         });
 
         // Language selector dropdown
@@ -208,8 +215,9 @@ class Header {
         };
 
         document.addEventListener('languageChanged', languageChangeHandler);
-        // Store handler for cleanup
+        // Store handler reference for cleanup
         modal.dataset.languageHandler = 'active';
+        modal._languageHandler = languageChangeHandler;
     }
 
     setupCustomDropdown(modal) {
@@ -257,13 +265,25 @@ class Header {
         });
 
         // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
+        const dropdownCloseHandler = () => {
             customSelect.classList.remove('footer__custom-select--open');
-        });
+        };
+        document.addEventListener('click', dropdownCloseHandler);
+        modal._dropdownCloseHandler = dropdownCloseHandler;
     }
 
     closeModal(modal) {
         if (modal && modal.parentNode) {
+            // Clean up language change listener to prevent memory leak
+            if (modal._languageHandler) {
+                document.removeEventListener('languageChanged', modal._languageHandler);
+                modal._languageHandler = null;
+            }
+            // Clean up dropdown close handler
+            if (modal._dropdownCloseHandler) {
+                document.removeEventListener('click', modal._dropdownCloseHandler);
+                modal._dropdownCloseHandler = null;
+            }
             document.body.removeChild(modal);
         }
         if (this.currentModal === modal) {

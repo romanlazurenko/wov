@@ -171,20 +171,6 @@
 }
 
 
-/* Touch Effect */
-.hero__touch-effect {
-    position: absolute;
-    top: 65%;
-    left: 59%;
-    transform: translate(-50%, -50%);
-    width: 1500px;
-    height: 1500px;
-    background: radial-gradient(circle, rgba(96, 255, 160, 0.4) 0%, transparent 70%);
-    border-radius: 50%;
-    opacity: 0;
-    animation: touchBurst 1.7s ease-out 4s forwards;
-    pointer-events: none;
-}
 
 /* Phone Screen Animation Container */
 .hero__phone-screen-animation {
@@ -224,7 +210,7 @@
     transform: translate(-50%, -50%);
     width: 20px;
     height: 20px;
-    background: rgba(96, 255, 160, 0.8);
+    background: rgba(96, 255, 160, 0.5);
     border-radius: 50%;
     opacity: 0;
     animation: clickPoint 3s ease-out 2.5s forwards;
@@ -412,12 +398,14 @@
     cursor: pointer;
     border: 1px solid var(--light-gray);
     animation: bounce 2s infinite;
+    z-index: 20;
+    pointer-events: auto;
 }
 
 .hero__scroll-indicator i {
     font-size: 24px;
     color: var(--light-gray);
-   
+    pointer-events: none;
 }
 
 .hero__scroll-indicator:hover i {
@@ -508,13 +496,6 @@
             opacity: 1;
             transform: translateX(0px) rotate(0deg);
         }
-    }
-
-
-
-    .hero__touch-effect {
-        width: 70px;
-        height: 70px;
     }
 
     .hero__phone-screen-animation {
@@ -639,14 +620,6 @@
             transform: translateX(0px) rotate(0deg);
         }
     }
-
-
-
-    .hero__touch-effect {
-        width: 50px;
-        height: 50px;
-    }
-
 
 
     .hero__phone-click-point {

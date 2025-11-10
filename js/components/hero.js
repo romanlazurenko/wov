@@ -16,14 +16,12 @@ class Hero {
             this.rightHandActiveImg = this.rightHand ? this.rightHand.querySelector('.active-hand.desktop-hand') : null;
             this.rightHandDefaultImgMobile = this.rightHand ? this.rightHand.querySelector('.default-hand.mobile-hand') : null;
             this.rightHandActiveImgMobile = this.rightHand ? this.rightHand.querySelector('.active-hand.mobile-hand') : null;
-            this.touchEffect = this.hero.querySelector('.hero__touch-effect');
             this.phoneScreenAnimation = this.hero.querySelector('.hero__phone-screen-animation');
             this.phoneScreenOverlay = this.hero.querySelector('.hero__phone-screen-overlay');
             this.phoneClickPoint = this.hero.querySelector('.hero__phone-click-point');
             this.phoneExpandingCircle = this.hero.querySelector('.hero__phone-expanding-circle');
             this.bindEvents();
             this.setupParallax();
-            this.setupAnimationReplay();
             this.setupHandSwitchAnimation();
             this.optimizeForMobile();
         }
@@ -43,39 +41,6 @@ class Hero {
                 this.handleScrollIndicatorClick();
             }
         });
-
-        // Replay animation on click (only left hand on desktop)
-        const isMobile = window.innerWidth <= 768;
-        if (!isMobile && this.leftHand) {
-            this.leftHand.addEventListener('click', () => {
-                this.replayAnimation();
-            });
-        }
-
-        if (this.rightHand) {
-            this.rightHand.addEventListener('click', () => {
-                this.replayAnimation();
-            });
-        }
-    }
-
-    setupAnimationReplay() {
-        // Set up Intersection Observer to replay animation when hero comes into view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-                    // Only replay if user scrolled away and came back
-                    if (this.hasScrolledAway) {
-                        this.replayAnimation();
-                        this.hasScrolledAway = false;
-                    }
-                } else if (!entry.isIntersecting) {
-                    this.hasScrolledAway = true;
-                }
-            });
-        }, { threshold: 0.5 });
-
-        observer.observe(this.hero);
     }
 
     setupHandSwitchAnimation() {
@@ -201,64 +166,21 @@ class Hero {
         }
     }
 
-    replayAnimation() {
-        // Remove and re-add animation classes to trigger replay
-        const elements = [this.leftHand, this.rightHand, this.touchEffect, this.phoneScreenOverlay, this.phoneClickPoint, this.phoneExpandingCircle];
-        
-        elements.forEach(el => {
-            if (el) {
-                // Clone and replace to restart animation
-                const newEl = el.cloneNode(true);
-                el.parentNode.replaceChild(newEl, el);
-            }
-        });
-
-        // Re-cache the elements
-        this.leftHand = this.hero.querySelector('.hero__left-hand');
-        this.rightHand = this.hero.querySelector('.hero__right-hand');
-        this.rightHandDefaultImg = this.rightHand ? this.rightHand.querySelector('.default-hand.desktop-hand') : null;
-        this.rightHandActiveImg = this.rightHand ? this.rightHand.querySelector('.active-hand.desktop-hand') : null;
-        this.rightHandDefaultImgMobile = this.rightHand ? this.rightHand.querySelector('.default-hand.mobile-hand') : null;
-        this.rightHandActiveImgMobile = this.rightHand ? this.rightHand.querySelector('.active-hand.mobile-hand') : null;
-        this.touchEffect = this.hero.querySelector('.hero__touch-effect');
-        this.phoneScreenAnimation = this.hero.querySelector('.hero__phone-screen-animation');
-        this.phoneScreenOverlay = this.hero.querySelector('.hero__phone-screen-overlay');
-        this.phoneClickPoint = this.hero.querySelector('.hero__phone-click-point');
-        this.phoneExpandingCircle = this.hero.querySelector('.hero__phone-expanding-circle');
-
-        // Reset right hand to default state
-        if (this.rightHand) {
-            this.rightHand.classList.remove('hand-activated');
-        }
-        
-        // Reset left hand to default state
-        if (this.leftHand) {
-            this.leftHand.classList.remove('hand-clicking');
-        }
-
-        // Re-bind click events (only left hand on desktop)
-        const isMobile = window.innerWidth <= 768;
-        if (!isMobile && this.leftHand) {
-            this.leftHand.addEventListener('click', () => this.replayAnimation());
-        }
-        if (this.rightHand) {
-            this.rightHand.addEventListener('click', () => this.replayAnimation());
-        }
-
-        // Re-setup hand switch animation
-        this.setupHandSwitchAnimation();
-
-        // Emit custom event
-        this.emitEvent('animationReplayed', { timestamp: Date.now() });
-    }
 
     setupParallax() {
-        // Add parallax scrolling effect
+        // Add parallax scrolling effect with throttling
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            if (this.isInViewport()) {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.5;
-                // this.hero.style.transform = `translateY(${rate}px)`;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    if (this.isInViewport()) {
+                        const scrolled = window.pageYOffset;
+                        const rate = scrolled * -0.5;
+                        // this.hero.style.transform = `translateY(${rate}px)`;
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
     }
@@ -266,7 +188,12 @@ class Hero {
     handleScrollIndicatorClick() {
         const servicesSection = document.querySelector('.services');
         if (servicesSection) {
-            servicesSection.scrollIntoView({
+            const offset = 112; // Offset in pixels from the top
+            const elementPosition = servicesSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            
+            window.scrollTo({
+                top: offsetPosition,
                 behavior: 'smooth'
             });
         }

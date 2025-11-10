@@ -85,54 +85,83 @@ class Statistics {
     animatePercentage(element, targetValue) {
         const numericValue = parseInt(targetValue.replace('%', ''));
         let currentValue = 0;
-        const increment = numericValue / 60; // 60 frames for smooth animation
         const duration = 2000; // 2 seconds
-        const stepTime = duration / 60;
+        const startTime = performance.now();
 
-        const timer = setInterval(() => {
-            currentValue += increment;
-            if (currentValue >= numericValue) {
-                currentValue = numericValue;
-                clearInterval(timer);
-            }
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function for smooth animation
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            currentValue = numericValue * easedProgress;
+            
             element.textContent = Math.round(currentValue) + '%';
-        }, stepTime);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                element.textContent = numericValue + '%';
+            }
+        };
+
+        requestAnimationFrame(animate);
     }
 
     animateMultiplier(element, targetValue) {
         // For "x2" format, animate from 1 to 2
         const multiplier = parseInt(targetValue.replace('x', ''));
         let currentValue = 1;
-        const increment = (multiplier - 1) / 60;
         const duration = 2000;
-        const stepTime = duration / 60;
+        const startTime = performance.now();
+        const startValue = 1;
+        const endValue = multiplier;
 
-        const timer = setInterval(() => {
-            currentValue += increment;
-            if (currentValue >= multiplier) {
-                currentValue = multiplier;
-                clearInterval(timer);
-            }
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function for smooth animation
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            currentValue = startValue + (endValue - startValue) * easedProgress;
+            
             element.textContent = 'x' + Math.round(currentValue);
-        }, stepTime);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                element.textContent = 'x' + multiplier;
+            }
+        };
+
+        requestAnimationFrame(animate);
     }
 
     animateIncrement(element, targetValue) {
         // For "+100%" format, animate from 0 to target
         const numericValue = parseInt(targetValue.replace('+', '').replace('%', ''));
         let currentValue = 0;
-        const increment = numericValue / 60;
         const duration = 2000;
-        const stepTime = duration / 60;
+        const startTime = performance.now();
 
-        const timer = setInterval(() => {
-            currentValue += increment;
-            if (currentValue >= numericValue) {
-                currentValue = numericValue;
-                clearInterval(timer);
-            }
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function for smooth animation
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            currentValue = numericValue * easedProgress;
+            
             element.textContent = '+' + Math.round(currentValue) + '%';
-        }, stepTime);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                element.textContent = '+' + numericValue + '%';
+            }
+        };
+
+        requestAnimationFrame(animate);
     }
 
     animateAppearance(element) {
