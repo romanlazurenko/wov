@@ -126,7 +126,7 @@ class ContactPage {
     }
 
     handleEmailClick() {
-        const email = 'wayofvisionary@gmail.com';
+        const email = 'info@wov.cz';
         navigator.clipboard.writeText(email).then(() => {
             const message = window.languageManager ? 
                 window.languageManager.getTranslation('contact.notifications.email.copied') : 
