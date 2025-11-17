@@ -63,7 +63,7 @@ class Services {
     }
 
     handleMouseMove(e, card) {
-        // Throttle mousemove events for better performance
+        // Throttle mousemove events more aggressively for smoother performance
         if (!this.mouseMoveThrottle) {
             this.mouseMoveThrottle = new Map();
         }
@@ -71,8 +71,8 @@ class Services {
         const lastTime = this.mouseMoveThrottle.get(card) || 0;
         const now = performance.now();
         
-        // Throttle to ~60fps (16ms)
-        if (now - lastTime < 16) {
+        // Throttle to ~30fps (33ms) for smoother, less jittery updates
+        if (now - lastTime < 33) {
             return;
         }
         
@@ -82,13 +82,47 @@ class Services {
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
         
-        // Calculate angle from center to mouse position (in degrees)
-        const angleRad = Math.atan2(y, x);
-        const angleDeg = angleRad * (180 / Math.PI); // Convert radians to degrees
-        const normalizedAngle = ((angleDeg + 90) % 360 + 360) % 360; // Normalize to 0-360, offset by 90deg for better visual
+        // Calculate distance from center
+        const distance = Math.sqrt(x * x + y * y);
+        const maxDistance = Math.sqrt(Math.pow(rect.width / 2, 2) + Math.pow(rect.height / 2, 2));
+        const normalizedDistance = Math.min(distance / maxDistance, 1);
         
-        // Set target angle for smooth interpolation
-        this.cardTargetAngles.set(card, normalizedAngle);
+        // Large dead zone: if mouse is within 40% of center, don't update angle
+        const deadZoneRadius = 0.4;
+        
+        if (normalizedDistance < deadZoneRadius) {
+            // In dead zone - don't update, let it smoothly return to default
+            return;
+        }
+        
+        // Calculate angle from center to mouse position
+        const angleRad = Math.atan2(y, x);
+        const angleDeg = angleRad * (180 / Math.PI);
+        const normalizedAngle = ((angleDeg + 90) % 360 + 360) % 360;
+        
+        // Get current angle
+        const currentAngle = this.cardAngles.get(card) || 135;
+        
+        // Calculate angle difference and find shortest path
+        let angleDiff = normalizedAngle - currentAngle;
+        if (angleDiff > 180) {
+            angleDiff -= 360;
+        } else if (angleDiff < -180) {
+            angleDiff += 360;
+        }
+        
+        // Only update if the change is significant enough (reduces micro-movements)
+        if (Math.abs(angleDiff) < 2) {
+            return;
+        }
+        
+        // Scale the target angle change based on distance (smoother near center)
+        const scaleFactor = Math.max(0, (normalizedDistance - deadZoneRadius) / (1 - deadZoneRadius));
+        const scaledAngleDiff = angleDiff * scaleFactor;
+        const newTargetAngle = ((currentAngle + scaledAngleDiff) % 360 + 360) % 360;
+        
+        // Set target angle
+        this.cardTargetAngles.set(card, newTargetAngle);
         
         // Start smooth animation if not already running
         if (!this.animationFrames.get(card)) {
@@ -97,10 +131,10 @@ class Services {
     }
 
     animateGradientAngle(card) {
-        const currentAngle = this.cardAngles.get(card) || 135; // Default angle
+        const currentAngle = this.cardAngles.get(card) || 135;
         const targetAngle = this.cardTargetAngles.get(card) || currentAngle;
         
-        // Calculate shortest angular distance (handles wrap-around from 360° to 0°)
+        // Calculate shortest angular distance
         let angleDiff = targetAngle - currentAngle;
         
         // Normalize to shortest path (-180° to 180°)
@@ -110,16 +144,15 @@ class Services {
             angleDiff += 360;
         }
         
-        // Smooth interpolation factor (0.15 = smooth, lower = smoother but slower)
-        const lerpFactor = 0.15;
+        // Very smooth interpolation (low lerp factor = smoother but slower)
+        const lerpFactor = 0.08;
         let newAngle = currentAngle + angleDiff * lerpFactor;
         
         // Normalize new angle to 0-360 range
         newAngle = ((newAngle % 360) + 360) % 360;
         
-        // Check if we're close enough to stop animating (using shortest distance)
-        const finalDiff = Math.abs(angleDiff);
-        if (finalDiff < 0.1) {
+        // Check if we're close enough to stop animating
+        if (Math.abs(angleDiff) < 0.5) {
             this.cardAngles.set(card, targetAngle);
             card.style.setProperty('--gradient-angle', `${targetAngle}deg`);
             this.animationFrames.delete(card);
