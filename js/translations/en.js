@@ -202,6 +202,13 @@ const enTranslations = {
     'projects.7.name': 'Twin Peaks Fan Pages',
     'projects.8.name': 'Speech',
     
+    // Street View Projects
+    'street-view-projects.Gabrelians': 'Gabrieljan\'s womens garden',
+    'street-view-projects.Massovka': 'Massovka',
+    'street-view-projects.Smile Eliska': 'Smile Centrum Eliška',
+    'street-view-projects.Tvoje saty': 'Tvoje šaty-svatební a maturitní šaty',
+    'street-view-projects.Zelva': 'Želva beers & burgers',
+    
     // Privacy Policy
     'privacy.title': 'Privacy Policy',
     'privacy.intro': 'Way of Visionary (hereinafter referred to as "controller" or "we") is committed to protecting your personal data in accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data (GDPR) and Act No. 110/2019 Coll., on the processing of personal data.',

@@ -34,8 +34,10 @@ class App {
             this.components.footer = new Footer();
         }
         
-        if (typeof ProjectsSlider !== 'undefined') {
-            this.components.projectsSlider = new ProjectsSlider();
+        // ProjectsSlider is initialized automatically in projects-slider.js with proper page detection
+        // Don't initialize here to avoid double initialization
+        if (typeof ProjectsSlider !== 'undefined' && window.projectsSlider) {
+            this.components.projectsSlider = window.projectsSlider;
         }
         
         if (typeof StreetViewAnimations !== 'undefined') {

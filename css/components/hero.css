@@ -65,7 +65,6 @@
     margin-bottom: 2rem;
     max-width: 1200px;
     line-height: 1.2;
-    font-size: 65px;
     letter-spacing: -2px;
     text-transform: uppercase;
     font-weight: 900;
@@ -86,7 +85,7 @@
 .hero__left-hand {
     position: absolute;
     left: -25%;
-    bottom: -550px;
+    bottom: -450px;
     width: 60vw;
     height: auto;
     animation: slideInLeft 2s ease-out forwards;
@@ -423,6 +422,35 @@
         transform: translateX(-50%) translateY(-5px);
     }
 }
+
+/* Desktop breakpoints - using min-width for proper cascade */
+/* Base: above 1440px uses default -450px */
+/* These rules apply at their breakpoint and above */
+@media (min-width: 901px) and (max-width: 1024px) {
+    .hero__left-hand {
+        bottom: -320px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .hero__left-hand {
+        bottom: -350px;
+    }
+}
+
+@media (min-width: 1281px) and (max-width: 1440px) {
+    .hero__left-hand {
+        bottom: -380px;
+    }
+}
+
+/* For screens 900px and below, handled by mobile breakpoint at 768px */
+@media (min-width: 769px) and (max-width: 900px) {
+    .hero__left-hand {
+        bottom: -290px;
+    }
+}
+
 
 /* Mobile Hero Styles */
 @media (max-width: 768px) {

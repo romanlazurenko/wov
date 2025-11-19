@@ -204,6 +204,13 @@ const czTranslations = {
     'projects.7.name': 'Fanouškovské stránky Twin Peaks',
     'projects.8.name': 'Speech',
     
+    // Street View Projects
+    'street-view-projects.Gabrelians': 'Gabrieljan\'s womens garden',
+    'street-view-projects.Massovka': 'Massovka',
+    'street-view-projects.Smile Eliska': 'Smile Centrum Eliška',
+    'street-view-projects.Tvoje saty': 'Tvoje šaty-svatební a maturitní šaty',
+    'street-view-projects.Zelva': 'Želva beers & burgers',
+    
     // Privacy Policy
     'privacy.title': 'Zásady ochrany osobních údajů',
     'privacy.intro': 'Společnost Way of Visionary (dále jen "správce" nebo "my") se zavazuje chránit vaše osobní údaje v souladu s Nařízením Evropského parlamentu a Rady (EU) 2016/679 ze dne 27. dubna 2016 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů (GDPR) a zákonem č. 110/2019 Sb., o zpracování osobních údajů.',

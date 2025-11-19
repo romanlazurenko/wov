@@ -10,8 +10,8 @@ class ProjectsSlider {
     }
 
     init() {
-        // Desktop elements
-        this.mainImage = document.getElementById('main-image');
+        // Desktop elements - mainImage will be created dynamically
+        this.mainImage = null;
         this.loadingIndicator = document.getElementById('loading-indicator');
         this.prevButton = document.querySelector('.projects__gallery--desktop .projects__nav .projects__nav-arrow:first-child');
         this.nextButton = document.querySelector('.projects__gallery--desktop .projects__nav .projects__nav-arrow:last-child');
@@ -22,8 +22,8 @@ class ProjectsSlider {
         this.thumbnailSmall1 = document.getElementById('thumbnail-small-1');
         this.thumbnailSmall2 = document.getElementById('thumbnail-small-2');
 
-        // Mobile elements
-        this.mainImageMobile = document.getElementById('main-image-mobile');
+        // Mobile elements - mainImageMobile will be created dynamically
+        this.mainImageMobile = null;
         this.loadingIndicatorMobile = document.getElementById('loading-indicator-mobile');
         this.prevButtonMobile = document.querySelector('.projects__gallery--mobile .projects__nav .projects__nav-arrow:first-child');
         this.nextButtonMobile = document.querySelector('.projects__gallery--mobile .projects__nav .projects__nav-arrow:last-child');
@@ -112,28 +112,46 @@ class ProjectsSlider {
         let endX = 0;
         let endY = 0;
 
-        // Desktop touch support
-        if (this.mainImage) {
-            this.mainImage.addEventListener('touchstart', (e) => {
+        // Desktop touch support - only for image containers, not iframes
+        const mainImageContainer = document.getElementById('main-image-container');
+        if (mainImageContainer) {
+            mainImageContainer.addEventListener('touchstart', (e) => {
+                // Skip if touching an iframe
+                if (e.target.tagName === 'IFRAME' || e.target.closest('.projects__iframe')) {
+                    return;
+                }
                 startX = e.touches[0].clientX;
                 startY = e.touches[0].clientY;
             });
 
-            this.mainImage.addEventListener('touchend', (e) => {
+            mainImageContainer.addEventListener('touchend', (e) => {
+                // Skip if touching an iframe
+                if (e.target.tagName === 'IFRAME' || e.target.closest('.projects__iframe')) {
+                    return;
+                }
                 endX = e.changedTouches[0].clientX;
                 endY = e.changedTouches[0].clientY;
                 this.handleSwipe(startX, startY, endX, endY);
             });
         }
 
-        // Mobile touch support
-        if (this.mainImageMobile) {
-            this.mainImageMobile.addEventListener('touchstart', (e) => {
+        // Mobile touch support - only for image containers, not iframes
+        const mainImageContainerMobile = document.getElementById('main-image-container-mobile');
+        if (mainImageContainerMobile) {
+            mainImageContainerMobile.addEventListener('touchstart', (e) => {
+                // Skip if touching an iframe
+                if (e.target.tagName === 'IFRAME' || e.target.closest('.projects__iframe')) {
+                    return;
+                }
                 startX = e.touches[0].clientX;
                 startY = e.touches[0].clientY;
             });
 
-            this.mainImageMobile.addEventListener('touchend', (e) => {
+            mainImageContainerMobile.addEventListener('touchend', (e) => {
+                // Skip if touching an iframe
+                if (e.target.tagName === 'IFRAME' || e.target.closest('.projects__iframe')) {
+                    return;
+                }
                 endX = e.changedTouches[0].clientX;
                 endY = e.changedTouches[0].clientY;
                 this.handleSwipe(startX, startY, endX, endY);
@@ -159,22 +177,60 @@ class ProjectsSlider {
     async loadProjects() {
         try {
             this.showLoading();
-            
-            // Load 8 project folders (1-8)
             this.projects = [];
             
-            for (let i = 1; i <= 8; i++) {
-                const project = {
-                    id: i,
-                    name: this.getProjectName(i),
-                    images: {
-                        main: `assets/${this.folderName}/${i}/1.jpg`,
-                        large: `assets/${this.folderName}/${i}/2.jpg`,
-                        small1: `assets/${this.folderName}/${i}/3.jpg`,
-                        small2: `assets/${this.folderName}/${i}/4.jpg`
-                    }
+            
+            // Check if using street-view folder (new logic) or projects folder (old logic)
+            if (this.folderName === 'street-view') {
+                // NEW LOGIC: Load from street-view folder with named folders
+                const projectFolders = ['Gabrelians', 'Massovka', 'Smile Eliska', 'Tvoje saty', 'Zelva'];
+                
+                // Manual iframe embed URLs for 3D tours
+                // To add/update: Extract the 'src' URL from your iframe code and paste it here
+                // Format: 'FolderName': 'https://www.google.com/maps/embed?pb=...'
+                const iframeEmbedUrls = {
+                    'Gabrelians': 'https://www.google.com/maps/embed?pb=!4v1763579571206!6m8!1m7!1sCAoSHENJQUJJaEF5c0Q1emdEb1k2WUxZRjVybXNZTjA.!2m2!1d50.10529092543041!2d14.48616939078733!3f193.85!4f-9.200000000000003!5f0.7820865974627469',
+                    'Massovka': 'https://www.google.com/maps/embed?pb=!4v1763579617293!6m8!1m7!1sCAoSHENJQUJJaEJMSjZKdU1OdGNweUhKSHFoTGcxWUY.!2m2!1d50.07513052828875!2d14.43955664209942!3f226.51!4f-13.280000000000001!5f1.0895987545872123',
+                    'Smile Eliska': 'https://www.google.com/maps/embed?pb=!4v1763579639008!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQ2ZpdENnT2c.!2m2!1d50.10530084068235!2d14.50214069167442!3f200.99!4f-6.719999999999999!5f0.7820865974627469',
+                    'Tvoje saty': 'https://www.google.com/maps/embed?pb=!4v1763579664534!6m8!1m7!1sCAoSHENJQUJJaEN6VDNQcl96YjBvNFdTNE5FMU5wcDc.!2m2!1d50.10393529502511!2d14.4435874260284!3f300.02!4f-10.659999999999997!5f0.7820865974627469',
+                    'Zelva': 'https://www.google.com/maps/embed?pb=!4v1763579701904!6m8!1m7!1sCAoSHENJQUJJaEFEeWNPMkVSU2Z5MmVrclM0QUJELVM.!2m2!1d50.08746742992069!2d14.46911704221197!3f57.68!4f-5.170000000000002!5f0.7820865974627469'
                 };
-                this.projects.push(project);
+                
+                // Load each project folder
+                for (let i = 0; i < projectFolders.length; i++) {
+                    const folderName = projectFolders[i];
+                    // Get translated name - will be refreshed after language manager is ready
+                    const project = {
+                        id: i + 1,
+                        folderName: folderName,
+                        name: folderName, // Temporary name, will be updated by refreshProjectNames()
+                        weblink: iframeEmbedUrls[folderName] || null, // Get iframe URL from manual array
+                        images: {
+                            main: `assets/${this.folderName}/${folderName}/1.jpg`,
+                            large: `assets/${this.folderName}/${folderName}/2.jpg`,
+                            small1: `assets/${this.folderName}/${folderName}/3.jpg`
+                        }
+                    };
+                    
+                    this.projects.push(project);
+                }
+            } else {
+                // OLD LOGIC: Load from projects folder with numbered folders (1-8)
+                for (let i = 1; i <= 8; i++) {
+                    // Get translated name - will be refreshed after language manager is ready
+                    const project = {
+                        id: i,
+                        name: `Project ${i}`, // Temporary name, will be updated by refreshProjectNames()
+                        weblink: null, // No weblink for old projects
+                        images: {
+                            main: `assets/${this.folderName}/${i}/1.jpg`,
+                            large: `assets/${this.folderName}/${i}/2.jpg`,
+                            small1: `assets/${this.folderName}/${i}/3.jpg`,
+                            small2: `assets/${this.folderName}/${i}/4.jpg`
+                        }
+                    };
+                    this.projects.push(project);
+                }
             }
 
             if (this.projects.length === 0) {
@@ -184,10 +240,14 @@ class ProjectsSlider {
 
             // Preload images for the first project only
             this.preloadProjectImages(0).then(() => {
+                // Refresh project names after language manager is ready
+                this.refreshProjectNames();
                 this.renderSlider();
                 this.hideLoading();
             }).catch(error => {
                 console.error('Error preloading initial project images:', error);
+                // Refresh project names after language manager is ready
+                this.refreshProjectNames();
                 // Still render the slider even if preloading fails
                 this.renderSlider();
                 this.hideLoading();
@@ -197,6 +257,30 @@ class ProjectsSlider {
             console.error('Error loading projects:', error);
             this.showError('Failed to load projects');
         }
+    }
+
+    parseWeblinkText(text) {
+        const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+        const result = { name: null, link: null };
+        
+        // Look for Google Maps link (contains maps.app.goo.gl or google.com/maps)
+        const linkPattern = /(https?:\/\/[^\s]+)/;
+        const linkMatch = text.match(linkPattern);
+        if (linkMatch) {
+            result.link = linkMatch[1];
+        }
+        
+        // Look for project name - it's usually the longest non-link line
+        for (const line of lines) {
+            if (!linkPattern.test(line) && line.length > 3) {
+                // This might be the project name
+                if (!result.name || line.length > result.name.length) {
+                    result.name = line;
+                }
+            }
+        }
+        
+        return result;
     }
 
     preloadProjectImages(projectIndex) {
@@ -218,6 +302,12 @@ class ProjectsSlider {
     }
 
     getProjectName(projectId) {
+        // First check if we have a project with this ID and use its name
+        const project = this.projects.find(p => p.id === projectId);
+        if (project && project.name) {
+            return project.name;
+        }
+        
         // Get translated project name from language manager
         if (window.languageManager) {
             const translatedName = window.languageManager.getTranslation(`projects.${projectId}.name`);
@@ -233,9 +323,39 @@ class ProjectsSlider {
     refreshProjectNames() {
         if (this.projects.length === 0) return;
         
+        if (!window.languageManager) {
+            console.warn('LanguageManager not available, skipping project name refresh');
+            return;
+        }
+        
+        
         // Update project names with current language
         this.projects.forEach(project => {
-            project.name = this.getProjectName(project.id);
+            if (this.folderName === 'street-view') {
+                // Street-view projects use folder name as key
+                if (project.folderName) {
+                    const translationKey = `street-view-projects.${project.folderName}`;
+                    const translatedName = window.languageManager.getTranslation(translationKey);
+                    
+                    if (translatedName && translatedName !== translationKey) {
+                        project.name = translatedName;
+                    } else {
+                        // Fallback to folder name if translation not found
+                        project.name = project.folderName;
+                    }
+                }
+            } else {
+                // Web-design projects use project ID
+                const translationKey = `projects.${project.id}.name`;
+                const translatedName = window.languageManager.getTranslation(translationKey);
+                
+                if (translatedName && translatedName !== translationKey) {
+                    project.name = translatedName;
+                } else {
+                    // Fallback to default name
+                    project.name = `Project ${project.id}`;
+                }
+            }
         });
         
         // Update the current project title
@@ -269,7 +389,7 @@ class ProjectsSlider {
         const thumbnailSmall2 = isMobile ? this.thumbnailSmall2Mobile : this.thumbnailSmall2;
         
         // Resolve name from current language each time
-        const currentName = this.getProjectName(currentProject.id);
+        const currentName = currentProject.name || this.getProjectName(currentProject.id);
         
         // Clear existing content
         if (thumbnailLarge) thumbnailLarge.innerHTML = '';
@@ -281,29 +401,66 @@ class ProjectsSlider {
         if (thumbnailSmall1) thumbnailSmall1.classList.remove('projects__thumbnail--active');
         if (thumbnailSmall2) thumbnailSmall2.classList.remove('projects__thumbnail--active');
         
-        // Render thumbnails for current project
-        if (thumbnailLarge) {
-            this.renderThumbnail(thumbnailLarge, {
-                src: currentProject.images.large,
-                alt: `${currentName} - Large`,
-                title: currentName
-            }, 'large', isMobile);
-        }
+        // For street-view (3 images): show main, large, small1
+        // For projects (4 images): show large, small1, small2 (main is in main container)
+        const isStreetView = this.folderName === 'street-view';
         
-        if (thumbnailSmall1) {
-            this.renderThumbnail(thumbnailSmall1, {
-                src: currentProject.images.small1,
-                alt: `${currentName} - Small 1`,
-                title: currentName
-            }, 'small1', isMobile);
-        }
-        
-        if (thumbnailSmall2) {
-            this.renderThumbnail(thumbnailSmall2, {
-                src: currentProject.images.small2,
-                alt: `${currentName} - Small 2`,
-                title: currentName
-            }, 'small2', isMobile);
+        if (isStreetView) {
+            // Street-view: Show main (1.jpg), large (2.jpg), small1 (3.jpg) as thumbnails
+            if (thumbnailLarge && currentProject.images.main) {
+                this.renderThumbnail(thumbnailLarge, {
+                    src: currentProject.images.main,
+                    alt: `${currentName} - Main`,
+                    title: currentName
+                }, 'main', isMobile);
+            }
+            
+            if (thumbnailSmall1 && currentProject.images.large) {
+                this.renderThumbnail(thumbnailSmall1, {
+                    src: currentProject.images.large,
+                    alt: `${currentName} - Large`,
+                    title: currentName
+                }, 'large', isMobile);
+            }
+            
+            if (thumbnailSmall2 && currentProject.images.small1) {
+                thumbnailSmall2.style.display = ''; // Show for street-view
+                this.renderThumbnail(thumbnailSmall2, {
+                    src: currentProject.images.small1,
+                    alt: `${currentName} - Small 1`,
+                    title: currentName
+                }, 'small1', isMobile);
+            }
+        } else {
+            // Old logic: Show large (2.jpg), small1 (3.jpg), small2 (4.jpg) as thumbnails
+            if (thumbnailLarge && currentProject.images.large) {
+                this.renderThumbnail(thumbnailLarge, {
+                    src: currentProject.images.large,
+                    alt: `${currentName} - Large`,
+                    title: currentName
+                }, 'large', isMobile);
+            }
+            
+            if (thumbnailSmall1 && currentProject.images.small1) {
+                this.renderThumbnail(thumbnailSmall1, {
+                    src: currentProject.images.small1,
+                    alt: `${currentName} - Small 1`,
+                    title: currentName
+                }, 'small1', isMobile);
+            }
+            
+            if (thumbnailSmall2) {
+                if (currentProject.images.small2) {
+                    thumbnailSmall2.style.display = ''; // Show if image exists
+                    this.renderThumbnail(thumbnailSmall2, {
+                        src: currentProject.images.small2,
+                        alt: `${currentName} - Small 2`,
+                        title: currentName
+                    }, 'small2', isMobile);
+                } else {
+                    thumbnailSmall2.style.display = 'none'; // Hide if no image
+                }
+            }
         }
     }
 
@@ -317,7 +474,14 @@ class ProjectsSlider {
         container.dataset.position = position;
         
         // Map position to image index (0-based)
-        const positionToIndex = {
+        // For street-view: main=0, large=1, small1=2
+        // For projects: large=1, small1=2, small2=3
+        const isStreetView = this.folderName === 'street-view';
+        const positionToIndex = isStreetView ? {
+            'main': 0,    // 1.jpg (index 0)
+            'large': 1,   // 2.jpg (index 1)
+            'small1': 2   // 3.jpg (index 2)
+        } : {
             'large': 1,    // 2.jpg (index 1)
             'small1': 2,   // 3.jpg (index 2)
             'small2': 3    // 4.jpg (index 3)
@@ -342,26 +506,99 @@ class ProjectsSlider {
         if (this.projects.length === 0) return;
         
         const currentProject = this.projects[this.currentProjectIndex];
-        const currentName = this.getProjectName(currentProject.id);
+        const currentName = currentProject.name || this.getProjectName(currentProject.id);
         
-        // Update desktop main image
-        if (this.mainImage) {
-            this.mainImage.src = currentProject.images.main;
-            this.mainImage.alt = `${currentName} - Main`;
+        // Get main image containers
+        const mainImageContainer = document.getElementById('main-image-container');
+        const mainImageContainerMobile = document.getElementById('main-image-container-mobile');
+        
+        // Update desktop main image/iframe
+        if (mainImageContainer) {
+            mainImageContainer.innerHTML = ''; // Clear container
             
-            // Add click event to main image for modal (starts with first image)
-            this.mainImage.addEventListener('click', () => {
-                this.currentImageIndex = 0; // Start with main image (1.jpg)
-                this.openModal();
-            });
+            // Remove any existing click handlers
+            mainImageContainer.onclick = null;
+            
+            if (currentProject.weblink) {
+                // Show iframe for 3D view
+                const iframe = document.createElement('iframe');
+                iframe.src = currentProject.weblink;
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.border = 'none';
+                iframe.style.borderRadius = '12px';
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.setAttribute('loading', 'lazy');
+                iframe.className = 'projects__iframe';
+                mainImageContainer.appendChild(iframe);
+                
+                // Remove click handler - iframe should be interactive
+                mainImageContainer.style.cursor = 'default';
+                mainImageContainer.style.pointerEvents = 'none'; // Container doesn't capture clicks
+                iframe.style.pointerEvents = 'auto'; // Iframe captures clicks
+            } else {
+                // Show image
+                const img = document.createElement('img');
+                img.id = 'main-image';
+                img.src = currentProject.images.main;
+                img.alt = `${currentName} - Main`;
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+                mainImageContainer.appendChild(img);
+                
+                // Store reference and add click event
+                this.mainImage = img;
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.currentImageIndex = 0; // Start with main image (1.jpg)
+                    this.openModal();
+                });
+                mainImageContainer.style.cursor = 'pointer';
+                mainImageContainer.style.pointerEvents = 'auto';
+            }
         }
         
-        // Update mobile main image
-        if (this.mainImageMobile) {
-            this.mainImageMobile.src = currentProject.images.main;
-            this.mainImageMobile.alt = `${currentName} - Main`;
+        // Update mobile main image/iframe
+        if (mainImageContainerMobile) {
+            mainImageContainerMobile.innerHTML = ''; // Clear container
             
-            // Do NOT bind modal open on mobile main image
+            // Remove any existing click handlers
+            mainImageContainerMobile.onclick = null;
+            
+            if (currentProject.weblink) {
+                // Show iframe for 3D view
+                const iframe = document.createElement('iframe');
+                iframe.src = currentProject.weblink;
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.border = 'none';
+                iframe.style.borderRadius = '12px';
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.setAttribute('loading', 'lazy');
+                iframe.className = 'projects__iframe';
+                mainImageContainerMobile.appendChild(iframe);
+                
+                // Remove click handler - iframe should be interactive
+                mainImageContainerMobile.style.cursor = 'default';
+                mainImageContainerMobile.style.pointerEvents = 'none'; // Container doesn't capture clicks
+                iframe.style.pointerEvents = 'auto'; // Iframe captures clicks
+            } else {
+                // Show image
+                const img = document.createElement('img');
+                img.id = 'main-image-mobile';
+                img.src = currentProject.images.main;
+                img.alt = `${currentName} - Main`;
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+                mainImageContainerMobile.appendChild(img);
+                
+                // Store reference (no modal on mobile)
+                this.mainImageMobile = img;
+                mainImageContainerMobile.style.cursor = 'default';
+                mainImageContainerMobile.style.pointerEvents = 'auto';
+            }
         }
         
         // Update titles
@@ -524,8 +761,29 @@ class ProjectsSlider {
         if (this.projects.length === 0) return;
         
         const currentProject = this.projects[this.currentProjectIndex];
-        const imageKeys = ['main', 'large', 'small1', 'small2'];
-        const currentImageKey = imageKeys[this.currentImageIndex];
+        
+        // Allow modal to show images even if project has iframe
+        // The iframe is shown in main image, but thumbnails can still open modal
+        
+        // Determine image keys based on folder type
+        const isStreetView = this.folderName === 'street-view';
+        const imageKeys = isStreetView
+            ? ['main', 'large', 'small1']  // Street-view: 3 images
+            : ['main', 'large', 'small1', 'small2']; // Projects: 4 images (if small2 exists)
+        
+        // Filter out undefined keys
+        const validImageKeys = imageKeys.filter(key => currentProject.images[key]);
+        const maxImages = validImageKeys.length;
+        
+        // Ensure currentImageIndex is within bounds
+        if (this.currentImageIndex >= maxImages) {
+            this.currentImageIndex = maxImages - 1;
+        }
+        if (this.currentImageIndex < 0) {
+            this.currentImageIndex = 0;
+        }
+        
+        const currentImageKey = validImageKeys[this.currentImageIndex];
         
         // Show loading spinner while image loads
         this.modalLoading.classList.remove('hidden');
@@ -552,21 +810,33 @@ class ProjectsSlider {
             this.modalTitle.textContent = currentProject.name;
         }
         if (this.modalCounter) {
-            this.modalCounter.textContent = `${this.currentImageIndex + 1} / 4`;
+            this.modalCounter.textContent = `${this.currentImageIndex + 1} / ${maxImages}`;
         }
     }
 
     updateModalNavigation() {
+        const currentProject = this.projects[this.currentProjectIndex];
+        
+        // Determine max images based on folder type
+        const isStreetView = this.folderName === 'street-view';
+        const maxImages = isStreetView ? 3 : (currentProject.images.small2 ? 4 : 3);
+        
         if (this.modalPrev) {
             this.modalPrev.disabled = this.currentImageIndex === 0;
         }
         if (this.modalNext) {
-            this.modalNext.disabled = this.currentImageIndex === 3; // 4 images per project (0-3)
+            this.modalNext.disabled = this.currentImageIndex >= maxImages - 1;
         }
     }
 
     modalNextProject() {
-        if (this.currentImageIndex < 3) {
+        const currentProject = this.projects[this.currentProjectIndex];
+        
+        // Determine max images based on folder type
+        const isStreetView = this.folderName === 'street-view';
+        const maxImages = isStreetView ? 3 : (currentProject.images.small2 ? 4 : 3);
+        
+        if (this.currentImageIndex < maxImages - 1) {
             this.currentImageIndex++;
             this.updateModalImage();
             this.updateModalNavigation();
@@ -584,8 +854,43 @@ class ProjectsSlider {
 
 // Initialize the slider when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Change 'projects' to your desired folder name
-    window.projectsSlider = new ProjectsSlider('projects');
+    // Prevent double initialization
+    if (window.projectsSlider) {
+        console.warn('ProjectsSlider already initialized, skipping...');
+        return;
+    }
+    
+    // Check if we're on street-view page - check multiple ways for reliability
+    const pathname = window.location.pathname;
+    const href = window.location.href;
+    const filename = pathname.split('/').pop() || '';
+    
+    const isStreetViewPage = pathname.includes('street-view') || 
+                            href.includes('street-view') || 
+                            filename === 'street-view.html' ||
+                            filename.startsWith('street-view');
+    
+    const folderName = isStreetViewPage ? 'street-view' : 'projects';
+    
+    // Wait a bit for language manager to initialize
+    const initSlider = () => {
+        window.projectsSlider = new ProjectsSlider(folderName);
+        
+        // Refresh project names after a short delay to ensure language manager is ready
+        setTimeout(() => {
+            if (window.projectsSlider && window.languageManager) {
+                window.projectsSlider.refreshProjectNames();
+            }
+        }, 100);
+    };
+    
+    // If language manager is already available, initialize immediately
+    if (window.languageManager) {
+        initSlider();
+    } else {
+        // Otherwise wait a bit for it to initialize
+        setTimeout(initSlider, 50);
+    }
     
     // Optional: Start auto-play
     // window.projectsSlider.startAutoPlay(5000);

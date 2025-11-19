@@ -59,6 +59,10 @@
     width: 100%;
 }
 
+.footer__section:nth-child(3) {
+    min-width: 258px;
+}
+
 .footer__links li {
     margin-bottom:30px;
 }
