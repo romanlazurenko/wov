@@ -37,7 +37,7 @@ const enTranslations = {
     'footer.services.title': 'SERVICES',
     'footer.services.street-view': 'Street view',
     'footer.services.web-design': 'Websites & design',
-    'footer.services.seo': 'SEO',
+    'footer.services.google-ads': 'Google Ads',
     'footer.contact.title': 'CONTACT',
     'footer.cta': 'Get Consultation',
     'footer.logo': 'WAY OF VISIONARY',

@@ -37,7 +37,7 @@ const czTranslations = {
     'footer.services.title': 'SLUŽBY',
     'footer.services.street-view': 'Street view',
     'footer.services.web-design': 'Webové stránky a design',
-    'footer.services.seo': 'SEO',
+    'footer.services.google-ads': 'Google Ads',
     'footer.contact.title': 'KONTAKT',
     'footer.cta': 'Získat konzultaci',
     'footer.logo': 'WAY OF <br>VISIONARY',
