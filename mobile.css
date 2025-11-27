@@ -75,10 +75,12 @@
         hyphens: auto;
         letter-spacing: -1px;
         box-sizing: border-box;
+        white-space: normal;
     }
 
     .hero__title br {
-        display: none;
+        display: block;
+        line-height: 1.2;
     }
 
     .hero__tag {

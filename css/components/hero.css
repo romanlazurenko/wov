@@ -79,6 +79,12 @@
     white-space: normal;
     hyphens: none;
     box-sizing: border-box;
+    display: block;
+}
+
+.hero__title br {
+    display: block;
+    line-height: 1.2;
 }
 
 /* Hands Animation Container */
